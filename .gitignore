@@ -3,5 +3,4 @@
 uploads
 __pycache__
 
-**/templates
 app.py
