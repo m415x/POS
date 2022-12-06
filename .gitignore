@@ -4,3 +4,4 @@ uploads
 __pycache__
 Design-POS.pdf
 app.py
+**/assets
