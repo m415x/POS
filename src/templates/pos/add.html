@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+    <title>ADD</title>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="assets/css/bootstrap.css">
+    <!-- <link rel="stylesheet" href="assets/css/ui.css"  type="text/css" /> -->
+    <link rel="stylesheet" href="assets/css/OverlayScrollbars.css" type="text/css" />
+    <link rel="stylesheet" href="assets/css/styles.css">
+
+    <script src="https://kit.fontawesome.com/452988f36c.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+
+    <header>
+
+        <!-- * NAVBAR * -->
+        <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#">
+                    <img src="assets/images/MF.png" width="30" alt="Logo Empresa">
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01"
+                    aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarColor01">
+                    <ul class="navbar-nav me-auto">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="#">POS
+                                <span class="visually-hidden">(current)</span>
+                            </a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
+                                aria-haspopup="true" aria-expanded="false">Productos</a>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" href="#">Agregar</a>
+                                <a class="dropdown-item" href="#">Listar</a>
+                            </div>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Otros</a>
+                        </li>
+                    </ul>
+                    <form class="d-flex">
+                        <input class="form-control me-sm-2" type="text" placeholder="Search">
+                        <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
+                    </form>
+                </div>
+            </div>
+        </nav>
+
+    </header>
+
+    <main class="container">
+
+        <form action="/store" method="post" enctype="multipart/form-data">
+            <div class="card">
+                <div class="card-header">Agregar productos</div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="form-group col-md-3">
+                            <label class="form-label mt-4" for="formType">Tipo</label>
+                            <select class="form-select" name="formType" id="formType">
+                                <option>Ferretería</option>
+                                <option>Electricidad</option>
+                                <option>Plomería</option>
+                                <option>Pinturería</option>
+                                <option>Herramientas</option>
+                                <option>Maquinaria</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label class="form-label mt-4" for="formCode">Código</label>
+                            <input class="form-control" type="text" name="formCode" id="formCode">
+                        </div>
+                        <div class="form-group col-md">
+                            <label class="form-label mt-4" for="formProd">Producto</label>
+                            <input class="form-control" type="text" name="formProd" id="formProd">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-md">
+                            <label class="form-label mt-4" for="formInfo">Descripción</label>
+                            <input class="form-control" type="text" name="formInfo" id="formInfo">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-md-2">
+                            <label class="form-label mt-4" for="formCant">Cantidad</label>
+                            <input class="form-control" type="number" name="formCant" id="formCant">
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label class="form-label mt-4" for="formCost">Costo</label>
+                            <div class="input-group mb-3">
+                                <span class="input-group-text">$</span>
+                                <input class="form-control" type="number" name="formCost" id="formCost">
+                            </div>
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label class="form-label mt-4" for="formPrice">Precio Venta</label>
+                            <div class="input-group mb-3">
+                                <span class="input-group-text">$</span>
+                                <input class="form-control" type="number" name="formPrice" id="formPrice">
+                            </div>
+                        </div>
+                        <div class="form-group col-md">
+                            <label class="form-label mt-4" for="formFile">Foto</label>
+                            <input class="form-control" type="file" name="formFile" id="formFile">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-md">
+                            <input class="btn btn-success mt-4" type="submit" value="Agregar">
+                            <a href="{{url_for('index')}}" class="btn btn-primary mt-4 mx-3">Volver</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br>
+        </form>
+    </main>
+
+    <footer>
+        <!-- place footer here -->
+    </footer>
+
+</body>
+
+</html>
