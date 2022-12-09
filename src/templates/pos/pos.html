@@ -1,63 +1,4 @@
-<!doctype html>
-<html lang="es">
-
-<head>
-    <title>POS</title>
-
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    <link rel="stylesheet" href="assets/css/bootstrap.css">
-    <link rel="stylesheet" href="assets/css/OverlayScrollbars.css" type="text/css" />
-    <link rel="stylesheet" href="assets/css/styles.css">
-
-    <script src="https://kit.fontawesome.com/452988f36c.js" crossorigin="anonymous"></script>
-</head>
-
-<body>
-
-    <header>
-
-        <!-- * NAVBAR * -->
-        <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-            <div class="container-fluid">
-                <a class="navbar-brand" href="#">
-                    <img src="assets/img/logos/MF.png" width="30" alt="Logo Empresa">
-                </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01"
-                    aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarColor01">
-                    <ul class="navbar-nav me-auto">
-                        <li class="nav-item">
-                            <a class="nav-link active" href="#">POS
-                                <span class="visually-hidden">(current)</span>
-                            </a>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
-                                aria-haspopup="true" aria-expanded="false">Productos</a>
-                            <div class="dropdown-menu">
-                                <a class="dropdown-item" href="#">Agregar</a>
-                                <a class="dropdown-item" href="#">Listar</a>
-                            </div>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Otros</a>
-                        </li>
-                    </ul>
-                    <form class="d-flex">
-                        <input class="form-control me-sm-2" type="text" placeholder="Search">
-                        <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
-                    </form>
-                </div>
-            </div>
-        </nav>
-
-    </header>
-
-    <main>
+{% include 'header.html' %}
 
         <!-- ========================= SECTION CONTENT ========================= -->
 
@@ -95,22 +36,24 @@
 
                             <!-- * CARDS * -->
                             <div class="row">
-                                <div class="col-md-8 card overflow__scroll--prod">
+                                <div class="col-md-8 card overflow__scroll">
                                     <div class="row mt-2">
 
 
                                         <!-- * CARD * -->
+                                        {% for product in products %}
+                                        
                                         <div class="col-lg-2 col-md-8 mb-4">
                                             <div class="card">
                                                 <div class="bg-image hover-zoom ripple ripple-surface ripple-surface-light"
                                                     data-mdb-ripple-color="light">
-                                                    <img src="https://mdbcdn.b-cdn.net/img/Photos/Horizontal/E-commerce/Products/belt.webp"
-                                                        class="w-100" />
+                                                    <img src="userpic/{{product[0]}}"
+                                                        class="w-100" alt="Producto" />
                                                     <div class="mask">
                                                         <div
                                                             class="d-flex justify-content-start align-items-start h-100">
                                                             <span class="badge bg-success m-1 card__stock">
-                                                                5
+                                                                {{product[5]}}
                                                             </span>
                                                         </div>
                                                     </div>
@@ -123,21 +66,24 @@
                                                 <div class="card-body">
                                                     <a href="" class="text-reset text-decoration-none">
                                                         <h5 class="card-title mb-2 card__code">
-                                                            #2345567
+                                                            {{product[1]}}
                                                         </h5>
                                                     </a>
                                                     <a href=""
                                                         class="text-reset text-decoration-none card__description">
                                                         <p>
-                                                            Tornillo negro hermoso que sirve para atornillar
+                                                            {{product[3]}} <br> {{product[4]}}
                                                         </p>
                                                     </a>
                                                     <h6 class="mb-1 card__price">
-                                                        $ 61.99
+                                                        $ {{product[7]}}
                                                     </h6>
                                                 </div>
                                             </div>
                                         </div>
+
+                                        {% endfor %}
+
                                     </div>
                                 </div>
 
@@ -207,7 +153,7 @@
                                     <div class="btn-toolbar card" role="toolbar" aria-label="Toolbar with button groups">
                                         <div class="btn-group me-2 calculator-buttons" role="group"
                                             aria-label="First group">
-                                            <button class="btn btn-secondary payment__span"><img src="assets/img/icons/payment.png" alt="Payment" width="100" style="filter: invert();"></button>
+                                            <button class="btn btn-secondary payment__span"><img src="{{url_for('static', filename='img/icons/payment.png')}}" alt="Payment" width="100" style="filter: invert();"></button>
                                             <button class="btn btn-secondary">7</button>
                                             <button class="btn btn-secondary">8</button>
                                             <button class="btn btn-secondary">9</button>
@@ -244,12 +190,4 @@
         </section>
         <!-- ======================= SECTION CONTENT END// ======================= -->
 
-    </main>
-
-    <footer>
-        <!-- place footer here -->
-    </footer>
-
-</body>
-
-</html>
+{% include 'footer.html' %}

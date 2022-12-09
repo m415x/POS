@@ -16,17 +16,15 @@ main {
 
 
 /* * CARDS * */
-.card__code {
-    font-size: x-small;
-    font-style: italic;
-}
-
-.card__description {
-    font-size: x-small;
-}
-
+.card__description,
 .card__price {
     font-size: x-small;
+    letter-spacing: 1px;
+}
+
+.card__code {
+    font-size: x-small;
+    letter-spacing: 2px;
 }
 
 .card__stock {
@@ -55,7 +53,7 @@ main {
     opacity: 1
 }
 
-.overflow__scroll--prod {
+.overflow__scroll {
     height: 507px;
     overflow-x: hidden;
     overflow-y: scroll;

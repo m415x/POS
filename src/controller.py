@@ -5,7 +5,7 @@ import os
 
 
 app = Flask(__name__)
-app.secret_key = ''
+app.secret_key = 'pointofsale'
 mysql = MySQL()
 
 app.config['MYSQL_DATABASE_HOST'] = 'localhost'
@@ -23,14 +23,14 @@ cursor = conn.cursor()
 
 
 # * USERPIC * --------------------------------------------------------------------------------
-@app.route('/userpic/<path:nombreFoto>')
-def uploads(nombreFoto):
+@app.route('/userpic/<path:picName>')
+def uploads(picName):
 
-    return send_from_directory(UPLOADS, nombreFoto)
+    return send_from_directory(UPLOADS, picName)
 
 
 # * POS * ------------------------------------------------------------------------------------
-@app.route('/')
+@app.route('/pos')
 def pos():
 
     sql = "SELECT image, code, type, name, description, stock, cost, price FROM pos.products;"
@@ -49,38 +49,45 @@ def add():
     return render_template('pos/add.html')
 
 
+
 # * STORE * ---------------------------------------------------------------------------------
 @app.route('/store', methods=['POST'])
 def storage():
     
     _file = request.files['formFile']
-    _code = request.form['formCode']
     _type = request.form['formType']
-    _prod = request.form['formProd']
+    _code = f"{_type[0:2].upper()}-{request.form['formCode']}"
+    _name = request.form['formName']
     _info = request.form['formInfo']
     _stock = request.form['formStock']
     _cost = request.form['formCost']
     _price = request.form['formPrice']
-    
-    # if _nombre == '' or _correo == '' or _foto.filename == '':
-    #     flash('¡Recuerde llenar todos los campos!')
-    #     return redirect(url_for('create'))
 
-    now = datetime.now().strftime('%Y%m%d-%H%M%S')
+    picName = f"{_type[0:2].upper()}-{_code}.jpg"
+    _file.save(f"uploads/{picName}")
 
-    if _file.filename != '':
-        _file.save(f"uploads/{now}_{_file.filename}")
-        # nuevoNombreFoto = f"{now}_{_file.filename}"
-        # _file.save('uploads/' + nuevoNombreFoto)
-
-    sql = f"INSERT INTO pos.products (code, type, name, description, stock ,cost, price) VALUES ('{_code}', '{_type}', '{_prod}', '{_info}', {_stock}, {_cost}, {_price});"
+    sql = f"INSERT INTO pos.products (image, code, type, name, description, stock ,cost, price) VALUES ('{picName}', '{_code}', '{_type}', '{_name}', '{_info}', {_stock}, {_cost}, {_price});"
 
     cursor.execute(sql)
     conn.commit()
 
-    return redirect('/')
+    return render_template('pos/add.html')
 
 
+# * INVENTORY * ------------------------------------------------------------------------------
+@app.route('/inventory')
+def inventory():
+
+    sql = "SELECT image, code, type, name, description, stock, cost, price FROM pos.products;"
+    cursor.execute(sql)
+    products = cursor.fetchall()
+    
+    conn.commit()
+
+    return render_template('pos/inventory.html', products=products)
+
+
+'''
 # * DELETE * ---------------------------------------------------------------------------------
 @app.route('/delete/<int:id>')
 def delete(id):
@@ -120,20 +127,18 @@ def modify(id):
 @app.route('/update', methods=['POST'])
 def update():
 
-    _id = request.form['formId']
     _file = request.files['formFile']
-    _code = request.form['formCode']
     _type = request.form['formType']
-    _prod = request.form['formProd']
+    _code = f"{_type[0:2].upper()}-{request.form['formCode']}"
+    _name = request.form['formName']
     _info = request.form['formInfo']
     _stock = request.form['formStock']
     _cost = request.form['formCost']
     _price = request.form['formPrice']
 
     if _file.filename != '':
-        now = datetime.now().strftime('%Y%m%d-%H%M%S')
-        newName = f"{now}_{_file.filename}"
-        _file.save('uploads/' + newName)
+        picName = f"{_type[0:2].upper()}-{_code}.jpg"
+        _file.save(f"uploads/{picName}")
 
         sql = f"SELECT image FROM pos.products WHERE id={id};"
         cursor.execute(sql)
@@ -156,6 +161,6 @@ def update():
 
     return render_template('pos/inventory.html')
 
-
+'''
 if __name__ == '__main__':
     app.run(debug=True)

@@ -1,153 +1,107 @@
-<!doctype html>
-<html lang="es">
+{% include 'header.html' %}
 
-<head>
-    <title>INVENTORY</title>
-
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    <link rel="stylesheet" href="assets/css/bootstrap.css">
-    <link rel="stylesheet" href="assets/css/OverlayScrollbars.css" type="text/css" />
-    <link rel="stylesheet" href="assets/css/styles.css">
-
-    <script src="https://kit.fontawesome.com/452988f36c.js" crossorigin="anonymous"></script>
-</head>
-
-<body>
-
-    <header>
-
-        <!-- * NAVBAR * -->
-        <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-            <div class="container-fluid">
-                <a class="navbar-brand" href="#">
-                    <img src="assets/img/logos/MF.png" width="30" alt="Logo Empresa">
-                </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01"
-                    aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarColor01">
-                    <ul class="navbar-nav me-auto">
-                        <li class="nav-item">
-                            <a class="nav-link active" href="#">POS
-                                <span class="visually-hidden">(current)</span>
-                            </a>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
-                                aria-haspopup="true" aria-expanded="false">Productos</a>
-                            <div class="dropdown-menu">
-                                <a class="dropdown-item" href="#">Agregar</a>
-                                <a class="dropdown-item" href="#">Listar</a>
-                            </div>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Otros</a>
-                        </li>
-                    </ul>
-                    <form class="d-flex">
-                        <input class="form-control me-sm-2" type="text" placeholder="Search">
-                        <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
-                    </form>
-                </div>
-            </div>
-        </nav>
-
-    </header>
-
-    <main>
-        <div class="container inventory__cont">
-            <div class="card">
-                <table class="table table-hover align-middle mb-0">
-                    <thead class="card-header">
-                        <tr>
-                            <th>Imagen</th>
-                            <th>Código</th>
-                            <th>Tipo</th>
-                            <th>Producto</th>
-                            <th>Descripción</th>
-                            <th>Stock</th>
-                            <th>Costo</th>
-                            <th>Precio Venta</th>
-                            <th></th>
-                            <th></th>
-                        </tr>
-                    </thead>
+<div class="container inventory__cont">
+    <div class="card">
+        <table class="table table-hover align-middle mb-0" id="table">
+            <thead class="card-header">
+                <tr>
+                    <th></th>
+                    <th>Código</th>
+                    <th>Tipo</th>
+                    <th>Producto</th>
+                    <th>Descripción</th>
+                    <th>Stock</th>
+                    <th>Costo</th>
+                    <th>Precio Venta</th>
+                    <th colspan="2">
+                        <button type="button" class="btn btn-outline-warning btn-sm"
+                            style="letter-spacing: 1.8px;">EDITAR TODO</button>
+                    </th>
+                </tr>
+            </thead>
+            <!-- <div class="col-md-12 card overflow__scroll">
+                <div class="row mt-2"> -->
                     <tbody>
+
+
+                        {% for product in products %}
+
                         <tr>
                             <form action="/update" method="post" enctype="multipart/form-data">
                                 <td class="col-1">
                                     <a href="#"> <!-- Click para cambiar la imagen -->
-                                        <img src="assets/img/items/01.jfif" alt="" style="width: 45px; height: 45px"
+                                        <img src="userpic/{{product[0]}}" style="width: 45px; height: 45px"
                                             class="rounded-circle" />
                                     </a>
                                 </td>
                                 <td class="col-1">
                                     <!-- <input class="form-control" id="readOnlyInput" type="text"
                                                 placeholder="Readonly input here..." readonly=""> -->
-                                    <input type="text" readonly class="form-control-plaintext" id="staticEmail"
-                                        value="F123456">
+                                    <input type="text" readonly="readonly" class="form-control-plaintext edit__input" id="staticEmail"
+                                        value="{{product[1]}}">
                                 </td>
                                 <td class="col-1">
                                     <!-- <input class="form-control" id="readOnlyInput" type="text"
                                                 placeholder="Readonly input here..." readonly=""> -->
-                                    <input type="text" readonly class="form-control-plaintext" id="staticEmail"
-                                        value="Ferretería">
+                                    <input type="text" readonly="readonly" class="form-control-plaintext edit__input" id="staticEmail"
+                                        value="{{product[2]}}">
                                 </td>
                                 <td class="col-2">
                                     <!-- <input class="form-control" id="readOnlyInput" type="text"
                                                 placeholder="Readonly input here..." readonly=""> -->
-                                    <input type="text" readonly class="form-control-plaintext" id="staticEmail"
-                                        value="Tornillo">
+                                    <input type="text" readonly="readonly" class="form-control-plaintext edit__input" id="staticEmail"
+                                        value="{{product[3]}}">
                                 </td>
                                 <td class="col-4">
                                     <!-- <input class="form-control" id="readOnlyInput" type="text"
                                     placeholder="Readonly input here..." readonly=""> -->
-                                    <input type="text" readonly class="form-control-plaintext" id="staticEmail"
-                                        value="Tornillo que sirve para atornillar">
+                                    <input type="text" readonly="readonly" class="form-control-plaintext edit__input" id="staticEmail"
+                                        value="{{product[4]}}">
                                 </td>
                                 <td class="col-1">
                                     <!-- <input class="form-control" id="readOnlyInput" type="text"
                                                 placeholder="Readonly input here..." readonly=""> -->
-                                    <input type="text" readonly class="form-control-plaintext" id="staticEmail"
-                                        value="100">
+                                    <input type="text" readonly="readonly" class="form-control-plaintext edit__input" id="staticEmail"
+                                        value="{{product[5]}}">
                                 </td>
                                 <td class="col-1">
                                     <!-- <input class="form-control" id="readOnlyInput" type="text"
                                                 placeholder="Readonly input here..." readonly=""> -->
-                                    <input type="text" readonly class="form-control-plaintext" id="staticEmail"
-                                        value="$100">
+                                    <input type="text" readonly="readonly" class="form-control-plaintext edit__input" id="staticEmail"
+                                        value="{{product[6]}}">
                                 </td>
                                 <td class="col-1">
                                     <!-- <input class="form-control" id="readOnlyInput" type="text"
                                                 placeholder="Readonly input here..." readonly=""> -->
-                                    <input type="text" readonly class="form-control-plaintext" id="staticEmail"
-                                        value="$150">
+                                    <input type="text" readonly="readonly" class="form-control-plaintext edit__input" id="staticEmail"
+                                        value="{{product[7]}}">
                                 </td>
                                 <td class="col-1">
-                                    <button type="button" class="btn btn-outline-warning btn-sm">Editar</button>
+
+                                    <button  class="btn btn-outline-warning btn-sm" id="btn__edit">Editar</button> <!--onclick="readonlyOff()"-->
+
+
                                     <button type="button"
                                         class="btn btn-outline-success btn-sm visually-hidden">Aceptar</button>
                                 </td>
                                 <td class="col-1">
                                     <button type="button" class="btn btn-outline-danger btn-sm">Borrar</button>
+
+                                    <!-- <a id="btn-borrar" onclick="confirm('¿Desea borrar al empleado {{product[1]}}?')" class="btn btn-danger" href="/delete/{empleado[0]}}">Borrar</a> -->
+
+
                                     <button type="button"
                                         class="btn btn-outline-danger btn-sm visually-hidden">Cancelar</button>
                                 </td>
                             </form>
                         </tr>
+
+                        {% endfor %}
                     </tbody>
-                </table>
-            </div>
-        </div>
-    </main>
+                <!-- </div>
+            </div> -->
+        </table>
+    </div>
+</div>
 
-    <footer>
-        <!-- place footer here -->
-    </footer>
-
-</body>
-
-</html>
+{% include 'footer.html' %}
