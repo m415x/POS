@@ -127,9 +127,8 @@ def modify(id):
 @app.route('/update', methods=['POST'])
 def update():
 
-    # _code = int(request.form['formCode'][3:])
-    # _code = request.form.get('formCode')
     _code = request.form['formCode']
+    # print(_code)
     _type = request.form['formType']
     _name = request.form['formName']
     _info = request.form['formInfo']
@@ -137,7 +136,6 @@ def update():
     _cost = request.form['formCost']
     _price = request.form['formPrice']
     _file = request.files['formFile']
-    # _file = request.files.get('formFile')
 
     if _file.filename != '':
         

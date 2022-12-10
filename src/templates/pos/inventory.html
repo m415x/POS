@@ -16,14 +16,10 @@
                     <th>
                         <button class="btn btn-outline-warning btn-sm" id="btn__edit"><i
                                 class="fa-solid fa-pen-to-square"></i></button>
-                        <!-- BOTONES OCULTOS CONFIRMAR EDICIÓN-->
-                        <button type="submit" form="formInventory"
-                            class="btn btn-outline-success btn-sm visually-hidden btn__confirm"><i
-                                class="fa-solid fa-check"></i></button>
                     </th>
-                    <th>
-                        <a class="btn btn-outline-danger btn-sm visually-hidden btn__confirm" href="/inventory"><i
-                                class="fa-solid fa-ban"></i></a>
+                    <th class="visually-hidden btn__confirm">
+                        <button class="btn btn-outline-success btn-sm" id="btn__cancel"><i
+                            class="fa-solid fa-pen-to-square"></i></button>
                     </th>
                 </tr>
             </thead>
@@ -69,12 +65,20 @@
                             <input type="text" readonly class="form-control-plaintext edit__input"
                                 value="{{product[6]}}" name="formPrice">
                         </td>
-                        <td class="col-1">
+                        <td>
                             <a type="button" onclick="confirm('¿Desea borrar {{product[2]}} - {{product[3]}}?')"
                                 class="btn btn-outline-danger btn-sm btn__delete" href="/delete/{{product[0]}}"><i
                                     class="fa-solid fa-trash"></i></a>
+                            <!-- BOTON OCULTO CONFIRMAR EDICIÓN-->
+                            <button type="submit" form="formInventory"
+                            class="btn btn-outline-success btn-sm visually-hidden btn__confirm"><i
+                            class="fa-solid fa-check"></i></button>
                         </td>
-                        <td class="visually-hidden btn__confirm"></td>
+                        <td class="visually-hidden btn__confirm">
+                            <!-- BOTON OCULTO CANCELAR EDICIÓN-->
+                            <a class="btn btn-outline-danger btn-sm visually-hidden btn__confirm" href="/inventory"><i
+                                class="fa-solid fa-ban"></i></a>
+                        </td>
                     </tr>
 
                     {% endfor %}

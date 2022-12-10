@@ -96,12 +96,12 @@ main {
     font-size: 12px;
 }
 
-td#div_file {
+#div_file {
 	position:relative;
 	width:45px;
 }
 
-input#formFile {
+#formFile {
 	position:absolute;
 	top:0px;
 	left:0px;
@@ -110,4 +110,8 @@ input#formFile {
 	width:100%;
 	height:100%;
 	opacity: 0;
+}
+
+#formInfo {
+    width: 100%;
 }
