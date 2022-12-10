@@ -33,7 +33,7 @@ def uploads(picName):
 @app.route('/pos')
 def pos():
 
-    sql = "SELECT image, code, type, name, description, stock, cost, price FROM pos.products;"
+    sql = "SELECT code, type, name, info, stock, cost, price, img FROM pos.products;"
     cursor.execute(sql)
     products = cursor.fetchall()
     
@@ -54,19 +54,19 @@ def add():
 @app.route('/store', methods=['POST'])
 def storage():
     
-    _file = request.files['formFile']
     _type = request.form['formType']
-    _code = f"{_type[0:2].upper()}-{request.form['formCode']}"
     _name = request.form['formName']
     _info = request.form['formInfo']
     _stock = request.form['formStock']
     _cost = request.form['formCost']
     _price = request.form['formPrice']
+    _file = request.files['formFile']
 
-    picName = f"{_type[0:2].upper()}-{_code}.jpg"
+    now = datetime.now().strftime('%Y%m%d%H%M%S')    
+    picName = f"{now}.jpg"
     _file.save(f"uploads/{picName}")
 
-    sql = f"INSERT INTO pos.products (image, code, type, name, description, stock ,cost, price) VALUES ('{picName}', '{_code}', '{_type}', '{_name}', '{_info}', {_stock}, {_cost}, {_price});"
+    sql = f"INSERT INTO pos.products (type, name, info, stock ,cost, price, img) VALUES ('{_type}', '{_name}', '{_info}', {_stock}, {_cost}, {_price}, '{picName}');"
 
     cursor.execute(sql)
     conn.commit()
@@ -78,7 +78,7 @@ def storage():
 @app.route('/inventory')
 def inventory():
 
-    sql = "SELECT image, code, type, name, description, stock, cost, price FROM pos.products;"
+    sql = "SELECT code, type, name, info, stock, cost, price, img FROM pos.products;"
     cursor.execute(sql)
     products = cursor.fetchall()
     
@@ -87,12 +87,12 @@ def inventory():
     return render_template('pos/inventory.html', products=products)
 
 
-'''
+
 # * DELETE * ---------------------------------------------------------------------------------
 @app.route('/delete/<int:id>')
 def delete(id):
 
-    sql = f"SELECT image FROM pos.products WHERE id={id};"
+    sql = f"SELECT img FROM pos.products WHERE code={id};"
     cursor.execute(sql)
 
     pic = cursor.fetchone()[0]
@@ -102,14 +102,14 @@ def delete(id):
     except:
         pass
 
-    sql = f"DELETE FROM pos.products WHERE id={id};"
+    sql = f"DELETE FROM pos.products WHERE code={id};"
     cursor.execute(sql)
 
     conn.commit()
 
-    return redirect('/')
+    return redirect('/inventory')
 
-
+'''
 # * MODIFY * ---------------------------------------------------------------------------------Cambiar para que edite desde el mismo inventario, quizas no lo necesite
 @app.route('/modify/<int:id>')
 def modify(id):
@@ -121,26 +121,31 @@ def modify(id):
     conn.commit()
 
     return render_template('pos/inventory.html', product=product)
-
+'''
 
 # * UPDATE * ---------------------------------------------------------------------------------
 @app.route('/update', methods=['POST'])
 def update():
 
-    _file = request.files['formFile']
+    # _code = int(request.form['formCode'][3:])
+    # _code = request.form.get('formCode')
+    _code = request.form['formCode']
     _type = request.form['formType']
-    _code = f"{_type[0:2].upper()}-{request.form['formCode']}"
     _name = request.form['formName']
     _info = request.form['formInfo']
     _stock = request.form['formStock']
     _cost = request.form['formCost']
     _price = request.form['formPrice']
+    _file = request.files['formFile']
+    # _file = request.files.get('formFile')
 
     if _file.filename != '':
-        picName = f"{_type[0:2].upper()}-{_code}.jpg"
+        
+        now = datetime.now().strftime('%Y%m%d%H%M%S')    
+        picName = f"{now}.jpg"
         _file.save(f"uploads/{picName}")
 
-        sql = f"SELECT image FROM pos.products WHERE id={id};"
+        sql = f"SELECT img FROM pos.products WHERE code={_code};"
         cursor.execute(sql)
         conn.commit()
 
@@ -151,16 +156,16 @@ def update():
         except:
             pass
 
-        sql = f"UPDATE pos.products SET image='{newName}' WHERE id={id};"
+        sql = f"UPDATE pos.products SET img='{picName}' WHERE code={_code};"
         cursor.execute(sql)
         conn.commit()
 
-    sql = f"UPDATE pos.products SET code='{_code}', type='{_type}', name='{_prod}', description='{_info}', stock={_stock}, cost={_cost}, price={_price} WHERE id={id};"
+    sql = f"UPDATE pos.products SET name='{_name}', info='{_info}', stock={_stock}, cost={_cost}, price={_price} WHERE code={_code};"
     cursor.execute(sql)
     conn.commit()
 
     return render_template('pos/inventory.html')
 
-'''
+
 if __name__ == '__main__':
     app.run(debug=True)

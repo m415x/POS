@@ -13,92 +13,75 @@
                     <th>Stock</th>
                     <th>Costo</th>
                     <th>Precio Venta</th>
-                    <th colspan="2">
-                        <button type="button" class="btn btn-outline-warning btn-sm"
-                            style="letter-spacing: 1.8px;">EDITAR TODO</button>
+                    <th>
+                        <button class="btn btn-outline-warning btn-sm" id="btn__edit"><i
+                                class="fa-solid fa-pen-to-square"></i></button>
+                        <!-- BOTONES OCULTOS CONFIRMAR EDICIÓN-->
+                        <button type="submit" form="formInventory"
+                            class="btn btn-outline-success btn-sm visually-hidden btn__confirm"><i
+                                class="fa-solid fa-check"></i></button>
+                    </th>
+                    <th>
+                        <a class="btn btn-outline-danger btn-sm visually-hidden btn__confirm" href="/inventory"><i
+                                class="fa-solid fa-ban"></i></a>
                     </th>
                 </tr>
             </thead>
             <!-- <div class="col-md-12 card overflow__scroll">
                 <div class="row mt-2"> -->
-                    <tbody>
+            <tbody>
+                <form id="formInventory" action="/update" method="post" enctype="multipart/form-data">
 
+                    {% for product in products %}
 
-                        {% for product in products %}
+                    <tr>
+                        <td class="col-1" id="div_file">
+                            <!-- <input type="file"> Click para cambiar la imagen -->
+                            <img src="userpic/{{product[7]}}" style="width: 45px; height: 45px"
+                                class="rounded-circle" id="pic_file"/>
+                            <input type="file" class="visually-hidden btn__file" name="formFile" id="formFile">
+                        </td>
+                        <td class="col-1">
+                            <input type="text" disabled class="form-control-plaintext" value="{{product[0]}}"
+                                name="formCode" id="formCode">
+                        </td>
+                        <td class="col-1">
+                            <input type="text" disabled class="form-control-plaintext" value="{{product[1]}}"
+                                name="formType">
+                        </td>
+                        <td class="col-2">
+                            <input type="text" readonly class="form-control-plaintext edit__input"
+                                value="{{product[2]}}" name="formName">
+                        </td>
+                        <td class="col-4">
+                            <input type="text" readonly class="form-control-plaintext edit__input"
+                                value="{{product[3]}}" name="formInfo">
+                        </td>
+                        <td class="col-1">
+                            <input type="text" readonly class="form-control-plaintext edit__input"
+                                value="{{product[4]}}" name="formStock">
+                        </td>
+                        <td class="col-1">
+                            <input type="text" readonly class="form-control-plaintext edit__input"
+                                value="{{product[5]}}" name="formCost">
+                        </td>
+                        <td class="col-1">
+                            <input type="text" readonly class="form-control-plaintext edit__input"
+                                value="{{product[6]}}" name="formPrice">
+                        </td>
+                        <td class="col-1">
+                            <a type="button" onclick="confirm('¿Desea borrar {{product[2]}} - {{product[3]}}?')"
+                                class="btn btn-outline-danger btn-sm btn__delete" href="/delete/{{product[0]}}"><i
+                                    class="fa-solid fa-trash"></i></a>
+                        </td>
+                        <td class="visually-hidden btn__confirm"></td>
+                    </tr>
 
-                        <tr>
-                            <form action="/update" method="post" enctype="multipart/form-data">
-                                <td class="col-1">
-                                    <a href="#"> <!-- Click para cambiar la imagen -->
-                                        <img src="userpic/{{product[0]}}" style="width: 45px; height: 45px"
-                                            class="rounded-circle" />
-                                    </a>
-                                </td>
-                                <td class="col-1">
-                                    <!-- <input class="form-control" id="readOnlyInput" type="text"
-                                                placeholder="Readonly input here..." readonly=""> -->
-                                    <input type="text" readonly="readonly" class="form-control-plaintext edit__input" id="staticEmail"
-                                        value="{{product[1]}}">
-                                </td>
-                                <td class="col-1">
-                                    <!-- <input class="form-control" id="readOnlyInput" type="text"
-                                                placeholder="Readonly input here..." readonly=""> -->
-                                    <input type="text" readonly="readonly" class="form-control-plaintext edit__input" id="staticEmail"
-                                        value="{{product[2]}}">
-                                </td>
-                                <td class="col-2">
-                                    <!-- <input class="form-control" id="readOnlyInput" type="text"
-                                                placeholder="Readonly input here..." readonly=""> -->
-                                    <input type="text" readonly="readonly" class="form-control-plaintext edit__input" id="staticEmail"
-                                        value="{{product[3]}}">
-                                </td>
-                                <td class="col-4">
-                                    <!-- <input class="form-control" id="readOnlyInput" type="text"
-                                    placeholder="Readonly input here..." readonly=""> -->
-                                    <input type="text" readonly="readonly" class="form-control-plaintext edit__input" id="staticEmail"
-                                        value="{{product[4]}}">
-                                </td>
-                                <td class="col-1">
-                                    <!-- <input class="form-control" id="readOnlyInput" type="text"
-                                                placeholder="Readonly input here..." readonly=""> -->
-                                    <input type="text" readonly="readonly" class="form-control-plaintext edit__input" id="staticEmail"
-                                        value="{{product[5]}}">
-                                </td>
-                                <td class="col-1">
-                                    <!-- <input class="form-control" id="readOnlyInput" type="text"
-                                                placeholder="Readonly input here..." readonly=""> -->
-                                    <input type="text" readonly="readonly" class="form-control-plaintext edit__input" id="staticEmail"
-                                        value="{{product[6]}}">
-                                </td>
-                                <td class="col-1">
-                                    <!-- <input class="form-control" id="readOnlyInput" type="text"
-                                                placeholder="Readonly input here..." readonly=""> -->
-                                    <input type="text" readonly="readonly" class="form-control-plaintext edit__input" id="staticEmail"
-                                        value="{{product[7]}}">
-                                </td>
-                                <td class="col-1">
+                    {% endfor %}
 
-                                    <button  class="btn btn-outline-warning btn-sm" id="btn__edit">Editar</button> <!--onclick="readonlyOff()"-->
-
-
-                                    <button type="button"
-                                        class="btn btn-outline-success btn-sm visually-hidden">Aceptar</button>
-                                </td>
-                                <td class="col-1">
-                                    <button type="button" class="btn btn-outline-danger btn-sm">Borrar</button>
-
-                                    <!-- <a id="btn-borrar" onclick="confirm('¿Desea borrar al empleado {{product[1]}}?')" class="btn btn-danger" href="/delete/{empleado[0]}}">Borrar</a> -->
-
-
-                                    <button type="button"
-                                        class="btn btn-outline-danger btn-sm visually-hidden">Cancelar</button>
-                                </td>
-                            </form>
-                        </tr>
-
-                        {% endfor %}
-                    </tbody>
-                <!-- </div>
+                </form>
+            </tbody>
+            <!-- </div>
             </div> -->
         </table>
     </div>
