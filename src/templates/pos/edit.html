@@ -1,0 +1,85 @@
+{% extends 'pos/inventory.html' %}
+
+{% block edit %}
+
+<div class="modal" id="modalEdit">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Modal title</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true"></span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Modal body text goes here.</p>
+            </div>
+            <div class="modal-footer">
+                <!-- <a href="{url_for('index')}}" class="btn btn-outline-success">Close</a> -->
+                <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+                <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> -->
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock edit %}
+
+<!-- {% block script %}
+
+    <script>
+        $(document).ready(function() {
+            console.log('windows is loaded')
+            $('#modalEdit').modal('show')
+        })
+    </script>
+
+{% endblock script %} -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <form id="formInventory" action="/update" method="post" enctype="multipart/form-data"> -->
+
+<!-- <td class="col-1" id="div_file">
+    <img src="userpic/{{product[7]}}" style="width: 45px; height: 45px" class="rounded-circle"
+        id="pic_file" />
+</td>
+<td class="col-1">
+    <input type="text" disabled class="form-control-plaintext" value="{{product[0]}}"
+        name="formCode" id="formCode">
+</td>
+<td class="col-1">
+    <input type="text" disabled class="form-control-plaintext" value="{{product[1]}}"
+        name="formType">
+</td>
+<td class="col-2">
+    <input type="text" disabled class="form-control-plaintext edit__input" value="{{product[2]}}"
+        name="formName">
+</td>
+<td class="col-4">
+    <input type="text" disabled class="form-control-plaintext edit__input" value="{{product[3]}}"
+        name="formInfo">
+</td>
+<td class="col-1">
+    <input type="text" disabled class="form-control-plaintext edit__input" value="{{product[4]}}"
+        name="formStock">
+</td>
+<td class="col-1">
+    <input type="text" disabled class="form-control-plaintext edit__input" value="{{product[5]}}"
+        name="formCost">
+</td>
+<td class="col-1">
+    <input type="text" disabled class="form-control-plaintext edit__input" value="{{product[6]}}"
+        name="formPrice">
+</td> -->

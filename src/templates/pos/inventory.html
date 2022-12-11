@@ -13,82 +13,49 @@
                     <th>Stock</th>
                     <th>Costo</th>
                     <th>Precio Venta</th>
-                    <th>
-                        <button class="btn btn-outline-warning btn-sm" id="btn__edit"><i
-                                class="fa-solid fa-pen-to-square"></i></button>
-                    </th>
-                    <th class="visually-hidden btn__confirm">
-                        <button class="btn btn-outline-success btn-sm" id="btn__cancel"><i
-                            class="fa-solid fa-pen-to-square"></i></button>
-                    </th>
+                    <th></th>
+                    <th></th>
                 </tr>
             </thead>
             <!-- <div class="col-md-12 card overflow__scroll">
                 <div class="row mt-2"> -->
             <tbody>
-                <form id="formInventory" action="/update" method="post" enctype="multipart/form-data">
 
-                    {% for product in products %}
+                {% for product in products %}
 
-                    <tr>
-                        <td class="col-1" id="div_file">
-                            <!-- <input type="file"> Click para cambiar la imagen -->
-                            <img src="userpic/{{product[7]}}" style="width: 45px; height: 45px"
-                                class="rounded-circle" id="pic_file"/>
-                            <input type="file" class="visually-hidden btn__file" name="formFile" id="formFile">
-                        </td>
-                        <td class="col-1">
-                            <input type="text" disabled class="form-control-plaintext" value="{{product[0]}}"
-                                name="formCode" id="formCode">
-                        </td>
-                        <td class="col-1">
-                            <input type="text" disabled class="form-control-plaintext" value="{{product[1]}}"
-                                name="formType">
-                        </td>
-                        <td class="col-2">
-                            <input type="text" readonly class="form-control-plaintext edit__input"
-                                value="{{product[2]}}" name="formName">
-                        </td>
-                        <td class="col-4">
-                            <input type="text" readonly class="form-control-plaintext edit__input"
-                                value="{{product[3]}}" name="formInfo">
-                        </td>
-                        <td class="col-1">
-                            <input type="text" readonly class="form-control-plaintext edit__input"
-                                value="{{product[4]}}" name="formStock">
-                        </td>
-                        <td class="col-1">
-                            <input type="text" readonly class="form-control-plaintext edit__input"
-                                value="{{product[5]}}" name="formCost">
-                        </td>
-                        <td class="col-1">
-                            <input type="text" readonly class="form-control-plaintext edit__input"
-                                value="{{product[6]}}" name="formPrice">
-                        </td>
-                        <td>
-                            <a type="button" onclick="confirm('¿Desea borrar {{product[2]}} - {{product[3]}}?')"
-                                class="btn btn-outline-danger btn-sm btn__delete" href="/delete/{{product[0]}}"><i
-                                    class="fa-solid fa-trash"></i></a>
-                            <!-- BOTON OCULTO CONFIRMAR EDICIÓN-->
-                            <button type="submit" form="formInventory"
-                            class="btn btn-outline-success btn-sm visually-hidden btn__confirm"><i
-                            class="fa-solid fa-check"></i></button>
-                        </td>
-                        <td class="visually-hidden btn__confirm">
-                            <!-- BOTON OCULTO CANCELAR EDICIÓN-->
-                            <a class="btn btn-outline-danger btn-sm visually-hidden btn__confirm" href="/inventory"><i
-                                class="fa-solid fa-ban"></i></a>
-                        </td>
-                    </tr>
+                <tr>
+                    <td class="col-1">
+                        <img src="userpic/{{product[7]}}" style="width: 45px; height: 45px" class="rounded-circle">
+                    </td>
+                    <td class="col-1"><div>{{product[1][0:2].upper()}}-{{product[0]}}</div></td>
+                    <td class="col-2"><div>{{product[1]}}</div></td>
+                    <td class="col-1"><div>{{product[2]}}</div></td>
+                    <td class="col-4"><div>{{product[3]}}</div></td>
+                    <td class="col-1"><div>{{product[4]}}</div></td>
+                    <td class="col-1"><div>{{product[5]}}</div></td>
+                    <td class="col-1"><div>{{product[6]}}</div></td>
+                    <td class="btn__confirm">
+                        <a href="{{url_for('edit')}}" class="btn btn-outline-warning btn-sm" id="btn__edit"><i
+                                class="fa-solid fa-pen-to-square"></i></a>
+                    </td>
+                    <td>
+                        <a type="button" onclick="confirm('¿Desea borrar {{product[2]}} - {{product[3]}}?')"
+                            class="btn btn-outline-danger btn-sm btn__delete" href="/delete/{{product[0]}}"><i
+                                class="fa-solid fa-trash"></i></a>
+                    </td>
+                </tr>
 
-                    {% endfor %}
+                {% endfor %}
 
-                </form>
             </tbody>
             <!-- </div>
             </div> -->
         </table>
     </div>
 </div>
+
+{% block edit %}
+        
+{% endblock edit %}
 
 {% include 'footer.html' %}

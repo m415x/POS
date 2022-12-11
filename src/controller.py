@@ -87,6 +87,18 @@ def inventory():
     return render_template('pos/inventory.html', products=products)
 
 
+# * EDIT * ---------------------------------------------------------------------------------
+@app.route('/edit')
+def edit():
+
+    sql = "SELECT code, type, name, info, stock, cost, price, img FROM pos.products;"
+    cursor.execute(sql)
+    products = cursor.fetchall()
+    
+    conn.commit()
+
+    return render_template('pos/edit.html', products=products)
+
 
 # * DELETE * ---------------------------------------------------------------------------------
 @app.route('/delete/<int:id>')
@@ -128,7 +140,6 @@ def modify(id):
 def update():
 
     _code = request.form['formCode']
-    # print(_code)
     _type = request.form['formType']
     _name = request.form['formName']
     _info = request.form['formInfo']

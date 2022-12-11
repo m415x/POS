@@ -95,23 +95,3 @@ main {
 .inventory__cont {
     font-size: 12px;
 }
-
-#div_file {
-	position:relative;
-	width:45px;
-}
-
-#formFile {
-	position:absolute;
-	top:0px;
-	left:0px;
-	right:0px;
-	bottom:0px;
-	width:100%;
-	height:100%;
-	opacity: 0;
-}
-
-#formInfo {
-    width: 100%;
-}
