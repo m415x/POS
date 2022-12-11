@@ -117,3 +117,21 @@ main {
     width: 100px;
     height: 100px;
 }
+
+/* #inventory__body {
+    display: block;
+    height: 590px;
+    overflow: auto;
+}
+
+#inventory__body tr {
+    display: table;
+    table-layout: fixed;
+}
+
+.card-header {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+    width: calc( 100% - 1em )
+} */
