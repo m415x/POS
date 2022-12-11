@@ -5,21 +5,23 @@
         <table class="table table-hover align-middle mb-0" id="table">
             <thead class="card-header">
                 <tr>
+                    <th class="col-1"></th>
+                    <th class="col-1">Código</th>
+                    <th class="col-2">Tipo</th>
+                    <th class="col-1">Producto</th>
+                    <th class="col-4">Descripción</th>
+                    <th class="col-1">Stock</th>
+                    <th class="col-1">Costo</th>
+                    <th class="col-1">Precio Venta</th>
                     <th></th>
-                    <th>Código</th>
-                    <th>Tipo</th>
-                    <th>Producto</th>
-                    <th>Descripción</th>
-                    <th>Stock</th>
-                    <th>Costo</th>
-                    <th>Precio Venta</th>
-                    <th></th>
-                    <th></th>
+                    <th class="btn__confirm">
+                        <a href="" class="btn btn-outline-success btn-sm" id="btn__add"><i class="fa-solid fa-file-circle-plus"></i></a>
+                    </th>
                 </tr>
             </thead>
-            <!-- <div class="col-md-12 card overflow__scroll">
-                <div class="row mt-2"> -->
-            <tbody>
+            <tbody id="inventory__body">
+                <!-- <div class="overflow__scroll--inventory"> -->
+                    <!-- <div class="row mt-2"> -->
 
                 {% for product in products %}
 
@@ -35,8 +37,8 @@
                     <td class="col-1"><div>{{product[5]}}</div></td>
                     <td class="col-1"><div>{{product[6]}}</div></td>
                     <td class="btn__confirm">
-                        <a href="/edit/{{product[0]}}" class="btn btn-outline-warning btn-sm" id="btn__edit"><i
-                                class="fa-solid fa-pen-to-square"></i></a>
+                        <a href="{{product[0],product[1],product[2],product[3],product[4],product[5],product[6],product[7]}}" class="btn btn-outline-warning btn-sm btn__edit"><i
+                            class="fa-solid fa-pen-to-square"></i></a>
                     </td>
                     <td>
                         <a type="button" onclick="confirm('¿Desea borrar {{product[2]}} - {{product[3]}}?')"
@@ -47,15 +49,15 @@
 
                 {% endfor %}
 
+                <!-- </div> -->
+                <!-- </div> -->
             </tbody>
-            <!-- </div>
-            </div> -->
         </table>
     </div>
 </div>
 
-{% block edit %}
-        
-{% endblock edit %}
+{% include 'pos/edit.html' %}
+
+{% include 'pos/add.html' %}
 
 {% include 'footer.html' %}

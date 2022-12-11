@@ -34,16 +34,15 @@
                                 <span class="visually-hidden">(current)</span>
                             </a>
                         </li>
-                        <li class="nav-item dropdown">
+                        <li class="nav-item dropdown" hidden>
                             <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
                                 aria-haspopup="true" aria-expanded="false">Productos</a>
                             <div class="dropdown-menu">
-                                <a class="dropdown-item" href="{{url_for('add')}}">Agregar</a>
-                                <a class="dropdown-item" href="{{url_for('inventory')}}">Inventario</a>
+                                <!-- <a class="dropdown-item" href="{url_for('add')}}">Agregar</a> -->
                             </div>
                         </li>
-                        <li class="nav-item" hidden>
-                            <a class="nav-link" href="#">Otros</a>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{url_for('inventory')}}">Inventario</a>
                         </li>
                     </ul>
                     <form class="d-flex visually-hidden"> <!-- Barra de busqueda oculta -->

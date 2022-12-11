@@ -1,6 +1,6 @@
-{% extends 'pos/inventory.html' %}
+<!-- % extends 'pos/inventory.html' %} -->
 
-{% block edit %}
+<!-- % block edit %} -->
 
 <div class="modal" id="modalEdit" tabindex="-1" aria-labelledby="modalEditLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
@@ -17,79 +17,79 @@
                             <div class="row">
                                 <div class="form-group col-md-3">
                                     <label class="form-label mt-4" for="formCode">Código</label>
-                                    <div class="input-group mb-3">
-                                        <span class="input-group-text">{{product[1][0:2].upper()}}</span>
-                                        <input class="form-control disabled" type="text" name="formCode" id="formCode" value="{{product[0]}}" readonly>
+                                    <div class="input-group">
+                                        <span class="input-group-text" id="formLetter"></span>
+                                        <input class="form-control disabled" type="text" name="formCode" id="formCode"
+                                            value="" readonly>
                                     </div>
                                 </div>
                                 <div class="form-group col-md-3">
                                     <label class="form-label mt-4" for="formType">Tipo</label>
                                     <select class="form-select" name="formType" id="formType">
-                                        <option>Ferretería</option>
-                                        <option>Electricidad</option>
-                                        <option>Plomería</option>
-                                        <option>Pinturería</option>
-                                        <option>Herramientas</option>
-                                        <option>Maquinaria</option>
+                                        <option value="Ferretería">Ferretería</option>
+                                        <option value="Electricidad">Electricidad</option>
+                                        <option value="Plomería">Plomería</option>
+                                        <option value="Pinturería">Pinturería</option>
+                                        <option value="Herramientas">Herramientas</option>
+                                        <option value="Maquinaria">Maquinaria</option>
                                     </select>
                                 </div>
                                 <div class="form-group col-md">
                                     <label class="form-label mt-4" for="formName">Producto</label>
-                                    <input class="form-control" type="text" name="formName" id="formName" value="{{product[2]}}" required>
+                                    <input class="form-control" type="text" name="formName" id="formName" value=""
+                                        required>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="form-group col-md">
                                     <label class="form-label mt-4" for="formInfo">Descripción</label>
-                                    <input class="form-control" type="text" name="formInfo" id="formInfo" value="{{product[3]}}" required>
+                                    <input class="form-control" type="text" name="formInfo" id="formInfo" value=""
+                                        required>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="form-group col-md-3">
                                     <label class="form-label mt-4" for="formStock">Cantidad</label>
-                                    <input class="form-control" type="number" step=".5" name="formStock" id="formStock" value="{{product[4]}}"
+                                    <input class="form-control" type="number" step=".5" name="formStock" id="formStock""
                                         required>
                                 </div>
-                                <div class="form-group col-md-3">
+                                <div class=" form-group col-md-3">
                                     <label class="form-label mt-4" for="formCost">Costo</label>
-                                    <div class="input-group mb-3">
+                                    <div class="input-group">
                                         <span class="input-group-text">$</span>
                                         <input class="form-control" type="number" step=".01" name="formCost"
-                                            id="formCost" value="{{product[5]}}" required>
+                                            id="formCost" value="" required>
                                     </div>
                                 </div>
                                 <div class="form-group col-md-3">
                                     <label class="form-label mt-4" for="formPrice">Precio Venta</label>
-                                    <div class="input-group mb-3">
+                                    <div class="input-group">
                                         <span class="input-group-text">$</span>
                                         <input class="form-control" type="number" step=".01" name="formPrice"
-                                            id="formPrice" value="{{product[6]}}" required>
+                                            id="formPrice" value="" required>
                                     </div>
                                 </div>
-                                <div class="form-group col-md-3" id="div_file">
-                                    <!-- <label class="form-label mt-4" for="formFile">Foto</label> -->
-                                    <!-- <input class="form-control" type="file" name="formFile" id="formFileCreate"> -->
-                                    <img src="{{url_for('uploads', picName=product[7])}}" class="rounded img-thumbnail" alt="foto producto" id="pic_file">
-                                    <input type="file" name="formFile" id="formFile">
-                                </div>
-                                <div class="form-group col-md-3" id="div_up">
-                                    <img src="#" class="rounded img-thumbnail" alt="foto nueva" id="pic_up" />
+                                <div class="row">
+                                    <div class="form-group col-md-3" id="div_file">
+                                        <label class="form-label mt-4" for="pic_file">Foto actual</label>
+                                        <img src="" class="rounded img-thumbnail" alt="foto producto" id="pic_file">
+                                        <input type="file" name="formFile" id="formFile">
+                                    </div>
+                                    <div class="form-group col-md-3" id="div_up">
+                                        <label class="form-label mt-4" for="pic_up" id="pic_label">Foto nueva</label>
+                                        <img src="" class="rounded img-thumbnail" alt="" id="pic_up" />
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <br>
-                </div>
-                <div class="modal-footer">
-                    <input class="btn btn-outline-success mt-4" type="submit" value="Agregar">
-                    <a href="{{url_for('inventory')}}" class="btn btn-outline-primary mt-4 mx-3">Cancelar</a>
-                </div>
+            </div>
+            <div class="modal-footer">
+                <input class="btn btn-outline-success" type="submit" value="Aceptar">
+            </div>
             </form>
         </div>
     </div>
 </div>
 
-{% endblock edit %}
-
-
-
+<!-- % endblock edit %} -->

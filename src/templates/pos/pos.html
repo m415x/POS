@@ -14,9 +14,9 @@
                         <!-- Número de cliente-->
                         1
                     </span>
-                    <span class="tab__hour">
+                    <span class="tab__clock">
                         <!-- Hora de comienzo de atención-->
-                        12:15
+                        00:00
                     </span>
                 </a>
             </li>
@@ -46,10 +46,28 @@
                                     <div class="card">
                                         <div class="bg-image hover-zoom ripple ripple-surface ripple-surface-light"
                                             data-mdb-ripple-color="light">
-                                            <img src="userpic/{{product[7]}}" class="w-100" alt="Producto" /> <!-- img -->
+                                            <img src="userpic/{{product[7]}}" class="w-100" alt="Producto" />
+                                            <!-- img -->
                                             <div class="mask">
                                                 <div class="d-flex justify-content-start align-items-start h-100">
+                                                    {% if product[4] >= 10 %}
+
                                                     <span class="badge bg-success m-1 card__stock">
+
+                                                    {% elif product[4] >= 5 %}
+
+                                                    <span class="badge bg-warning m-1 card__stock">
+
+                                                    {% elif product[4] > 0 %}
+
+                                                    <span class="badge bg-danger m-1 card__stock">
+
+                                                    {% else %}
+
+                                                    <span class="badge bg-light m-1 card__stock">
+
+                                                    {% endif %}
+
                                                         {{product[4]}} <!-- stock -->
                                                     </span>
                                                 </div>
@@ -64,9 +82,9 @@
                                         </div>
                                         <div class="card-body">
                                             <a href="" class="text-reset text-decoration-none">
-                                            <h5 class="card-title mb-2 card__code">
-                                                {{product[1][0:2].upper()}}-{{ '%05d' % product[0] }} <!-- code -->
-                                            </h5>
+                                                <h5 class="card-title mb-2 card__code">
+                                                    {{product[1][0:2].upper()}}-{{ '%05d' % product[0] }} <!-- code -->
+                                                </h5>
                                             </a>
                                             <a href="" class="text-reset text-decoration-none card__description">
                                                 <p>
