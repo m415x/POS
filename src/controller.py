@@ -87,19 +87,6 @@ def inventory():
     return render_template('pos/inventory.html', products=products)
 
 
-# * EDIT * ---------------------------------------------------------------------------------
-@app.route('/edit')
-def edit():
-
-    sql = "SELECT code, type, name, info, stock, cost, price, img FROM pos.products;"
-    cursor.execute(sql)
-    products = cursor.fetchall()
-    
-    conn.commit()
-
-    return render_template('pos/edit.html', products=products)
-
-
 # * DELETE * ---------------------------------------------------------------------------------
 @app.route('/delete/<int:id>')
 def delete(id):
@@ -121,25 +108,32 @@ def delete(id):
 
     return redirect('/inventory')
 
-'''
-# * MODIFY * ---------------------------------------------------------------------------------Cambiar para que edite desde el mismo inventario, quizas no lo necesite
-@app.route('/modify/<int:id>')
-def modify(id):
 
-    sql = f"SELECT * FROM pos.products WHERE id={id};"
+# * EDIT * -----------------------------------------------------------------------------------
+@app.route('/edit/<int:id>')
+def edit(id):
+
+    sql = "SELECT code, type, name, info, stock, cost, price, img FROM pos.products;"
+    cursor.execute(sql)
+    products = cursor.fetchall()
+    
+    conn.commit()
+    
+    sql = f"SELECT * FROM pos.products WHERE code={id};"
     cursor.execute(sql)
     product = cursor.fetchone() # Trae un solo producto
 
     conn.commit()
 
-    return render_template('pos/inventory.html', product=product)
-'''
+    return render_template('pos/edit.html', products=products, product=product)
+
 
 # * UPDATE * ---------------------------------------------------------------------------------
 @app.route('/update', methods=['POST'])
 def update():
 
-    _code = request.form['formCode']
+    # id = request.form.get('formCode')
+    id = request.form['formCode']
     _type = request.form['formType']
     _name = request.form['formName']
     _info = request.form['formInfo']
@@ -147,6 +141,7 @@ def update():
     _cost = request.form['formCost']
     _price = request.form['formPrice']
     _file = request.files['formFile']
+    print(id)
 
     if _file.filename != '':
         
@@ -154,7 +149,7 @@ def update():
         picName = f"{now}.jpg"
         _file.save(f"uploads/{picName}")
 
-        sql = f"SELECT img FROM pos.products WHERE code={_code};"
+        sql = f"SELECT img FROM pos.products WHERE code={id};"
         cursor.execute(sql)
         conn.commit()
 
@@ -165,11 +160,11 @@ def update():
         except:
             pass
 
-        sql = f"UPDATE pos.products SET img='{picName}' WHERE code={_code};"
+        sql = f"UPDATE pos.products SET img='{picName}' WHERE code={id};"
         cursor.execute(sql)
         conn.commit()
 
-    sql = f"UPDATE pos.products SET name='{_name}', info='{_info}', stock={_stock}, cost={_cost}, price={_price} WHERE code={_code};"
+    sql = f"UPDATE pos.products SET type='{_type}', name='{_name}', info='{_info}', stock={_stock}, cost={_cost}, price={_price} WHERE code={id};"
     cursor.execute(sql)
     conn.commit()
 

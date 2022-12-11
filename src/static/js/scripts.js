@@ -1,32 +1,19 @@
-// $(document).ready(function(){
-//     $("#btn__edit").click(function(){
-//         $(".edit__input")
-//         .removeAttr('readonly')
-//         .removeAttr('disabled')
-//         // .removeClass('form-control-plaintext')
-//         .addClass('border-bottom');
-//         $("#btn__edit").hide();
-//         $(".btn__confirm").removeClass('visually-hidden');
-
-//         $(".btn__file").removeClass('visually-hidden');
-//     })
-// })
-
-// $(document).ready(function(){
-//     $("#btn__cancel").click(function(){
-//         $(".edit__input")
-//         .attr('readonly', true)
-//         .attr('disabled', true)
-//         // .addClass('form-control-plaintext')
-//         .removeClass('border-bottom');
-//         $("#btn__edit").show();
-//         $(".btn__confirm").addClass('visually-hidden');
-//         $(".btn__delete").removeClass('visually-hidden');
-//         $(".btn__file").addClass('visually-hidden');
-//     })
-// })
-
-$(document).ready(function() {
-    console.log('windows is loaded')
+//* FUNCIÓN MOSTRAR MODAL EDIT
+$(document).ready(function () {
     $('#modalEdit').modal('show')
 })
+
+
+//* FUNCIÓN PREVISUALIZAR IMAGEN A CARGAR
+function readURL(input) {
+    if (input.files && input.files[0]) { //Revisamos que el input tenga contenido
+        var reader = new FileReader(); //Leemos el contenido
+        reader.onload = function (e) { //Al cargar el contenido lo pasamos como atributo de la imagen de arriba
+            $('#pic_up').attr('src', e.target.result);
+        }
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+$("#formFile").change(function () { //Cuando el input cambie (se cargue un nuevo archivo) se va a ejecutar de nuevo el cambio de imagen y se verá reflejado.
+    readURL(this);
+});

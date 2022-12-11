@@ -2,84 +2,94 @@
 
 {% block edit %}
 
-<div class="modal" id="modalEdit">
-    <div class="modal-dialog" role="document">
+<div class="modal" id="modalEdit" tabindex="-1" aria-labelledby="modalEditLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Modal title</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true"></span>
-                </button>
+                <h1 class="modal-title fs-5" id="modalEditLabel">Editar producto</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <p>Modal body text goes here.</p>
-            </div>
-            <div class="modal-footer">
-                <!-- <a href="{url_for('index')}}" class="btn btn-outline-success">Close</a> -->
-                <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
-                <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> -->
-            </div>
+                <form action="/update" method="post" enctype="multipart/form-data">
+                    <div class="card">
+                        <!-- <div class="card-header">Agregar productos</div> -->
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="form-group col-md-3">
+                                    <label class="form-label mt-4" for="formCode">Código</label>
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text">{{product[1][0:2].upper()}}</span>
+                                        <input class="form-control disabled" type="text" name="formCode" id="formCode" value="{{product[0]}}" readonly>
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <label class="form-label mt-4" for="formType">Tipo</label>
+                                    <select class="form-select" name="formType" id="formType">
+                                        <option>Ferretería</option>
+                                        <option>Electricidad</option>
+                                        <option>Plomería</option>
+                                        <option>Pinturería</option>
+                                        <option>Herramientas</option>
+                                        <option>Maquinaria</option>
+                                    </select>
+                                </div>
+                                <div class="form-group col-md">
+                                    <label class="form-label mt-4" for="formName">Producto</label>
+                                    <input class="form-control" type="text" name="formName" id="formName" value="{{product[2]}}" required>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-md">
+                                    <label class="form-label mt-4" for="formInfo">Descripción</label>
+                                    <input class="form-control" type="text" name="formInfo" id="formInfo" value="{{product[3]}}" required>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-md-3">
+                                    <label class="form-label mt-4" for="formStock">Cantidad</label>
+                                    <input class="form-control" type="number" step=".5" name="formStock" id="formStock" value="{{product[4]}}"
+                                        required>
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <label class="form-label mt-4" for="formCost">Costo</label>
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text">$</span>
+                                        <input class="form-control" type="number" step=".01" name="formCost"
+                                            id="formCost" value="{{product[5]}}" required>
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <label class="form-label mt-4" for="formPrice">Precio Venta</label>
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text">$</span>
+                                        <input class="form-control" type="number" step=".01" name="formPrice"
+                                            id="formPrice" value="{{product[6]}}" required>
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-3" id="div_file">
+                                    <!-- <label class="form-label mt-4" for="formFile">Foto</label> -->
+                                    <!-- <input class="form-control" type="file" name="formFile" id="formFileCreate"> -->
+                                    <img src="{{url_for('uploads', picName=product[7])}}" class="rounded img-thumbnail" alt="foto producto" id="pic_file">
+                                    <input type="file" name="formFile" id="formFile">
+                                </div>
+                                <div class="form-group col-md-3" id="div_up">
+                                    <img src="#" class="rounded img-thumbnail" alt="foto nueva" id="pic_up" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                </div>
+                <div class="modal-footer">
+                    <input class="btn btn-outline-success mt-4" type="submit" value="Agregar">
+                    <a href="{{url_for('inventory')}}" class="btn btn-outline-primary mt-4 mx-3">Cancelar</a>
+                </div>
+            </form>
         </div>
     </div>
 </div>
 
 {% endblock edit %}
 
-<!-- {% block script %}
-
-    <script>
-        $(document).ready(function() {
-            console.log('windows is loaded')
-            $('#modalEdit').modal('show')
-        })
-    </script>
-
-{% endblock script %} -->
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-<!-- <form id="formInventory" action="/update" method="post" enctype="multipart/form-data"> -->
-
-<!-- <td class="col-1" id="div_file">
-    <img src="userpic/{{product[7]}}" style="width: 45px; height: 45px" class="rounded-circle"
-        id="pic_file" />
-</td>
-<td class="col-1">
-    <input type="text" disabled class="form-control-plaintext" value="{{product[0]}}"
-        name="formCode" id="formCode">
-</td>
-<td class="col-1">
-    <input type="text" disabled class="form-control-plaintext" value="{{product[1]}}"
-        name="formType">
-</td>
-<td class="col-2">
-    <input type="text" disabled class="form-control-plaintext edit__input" value="{{product[2]}}"
-        name="formName">
-</td>
-<td class="col-4">
-    <input type="text" disabled class="form-control-plaintext edit__input" value="{{product[3]}}"
-        name="formInfo">
-</td>
-<td class="col-1">
-    <input type="text" disabled class="form-control-plaintext edit__input" value="{{product[4]}}"
-        name="formStock">
-</td>
-<td class="col-1">
-    <input type="text" disabled class="form-control-plaintext edit__input" value="{{product[5]}}"
-        name="formCost">
-</td>
-<td class="col-1">
-    <input type="text" disabled class="form-control-plaintext edit__input" value="{{product[6]}}"
-        name="formPrice">
-</td> -->
