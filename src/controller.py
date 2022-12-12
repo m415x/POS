@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for, send_from_directory, flash, jsonify
+from flask import Flask, render_template, request, redirect, url_for, send_from_directory, flash
 from flaskext.mysql import MySQL
 from datetime import datetime
 import os
@@ -41,13 +41,6 @@ def pos():
     conn.commit()
 
     return render_template('pos/pos.html', products=products)
-
-
-# * ADD * -----------------------------------------------------------------------------------
-# @app.route('/add')
-# def add():
-
-#     return render_template('pos/inventory.html')
 
 
 # * STORE * ---------------------------------------------------------------------------------
@@ -118,25 +111,6 @@ def delete(id):
     return redirect('/inventory')
 
 
-# * EDIT * -----------------------------------------------------------------------------------
-# @app.route('/edit/<int:id>')
-# def edit(id):
-
-#     sql = "SELECT code, type, name, info, stock, cost, price, img FROM pos.products;"
-#     cursor.execute(sql)
-#     products = cursor.fetchall()
-    
-#     conn.commit()
-    
-#     sql = f"SELECT * FROM pos.products WHERE code={id};"
-#     cursor.execute(sql)
-#     product = cursor.fetchone() # Trae un solo producto
-
-#     conn.commit()
-
-#     return render_template('pos/edit.html', products=products, product=product)
-
-
 # * UPDATE * ---------------------------------------------------------------------------------
 @app.route('/update', methods=['POST'])
 def update():
@@ -180,5 +154,33 @@ def update():
     return redirect('/inventory')
 
 
+# * ADD * -----------------------------------------------------------------------------------
+# @app.route('/add')
+# def add():
+
+#     return render_template('pos/inventory.html')
+
+
+# * EDIT * -----------------------------------------------------------------------------------
+# @app.route('/edit/<int:id>')
+# def edit(id):
+
+#     sql = "SELECT code, type, name, info, stock, cost, price, img FROM pos.products;"
+#     cursor.execute(sql)
+#     products = cursor.fetchall()
+    
+#     conn.commit()
+    
+#     sql = f"SELECT * FROM pos.products WHERE code={id};"
+#     cursor.execute(sql)
+#     product = cursor.fetchone() # Trae un solo producto
+
+#     conn.commit()
+
+#     return render_template('pos/edit.html', products=products, product=product)
+
+
+
+# * RUN * ------------------------------------------------------------------------------------
 if __name__ == '__main__':
     app.run(debug=True)

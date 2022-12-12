@@ -54,7 +54,7 @@ main {
 }
 
 .overflow__scroll {
-    height: 507px;
+    height: 590px;
     overflow-x: hidden;
     overflow-y: scroll;
 }
@@ -67,7 +67,7 @@ main {
 }
 
 .overflow__scroll--cart {
-    height: 296px;
+    height: 377px;
     overflow-x: hidden;
     overflow-y: scroll;
 }
