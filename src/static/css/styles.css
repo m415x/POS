@@ -61,7 +61,7 @@ main {
 
 
 
-/* * CARDS * */
+/* * CART * */
 .cart__prod>* {
     font-size: small;
 }
@@ -116,6 +116,13 @@ main {
 #pic_up {
     width: 100px;
     height: 100px;
+}
+
+.list__group{
+    max-height: 300px;
+    margin-bottom: 10px;
+    overflow:scroll;
+    -webkit-overflow-scrolling: touch;
 }
 
 /* #inventory__body {
