@@ -67,7 +67,7 @@ main {
 }
 
 .overflow__scroll--cart {
-    height: 377px;
+    height: 434px;
     overflow-x: hidden;
     overflow-y: scroll;
 }
@@ -118,7 +118,7 @@ main {
     height: 100px;
 }
 
-.list__group{
+.list__group{ /**  */
     max-height: 300px;
     margin-bottom: 10px;
     overflow:scroll;
