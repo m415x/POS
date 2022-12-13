@@ -73,7 +73,7 @@
                                                 </div>
                                             </div>
                                             <div class="hover-overlay">
-                                                <a href="#" class="p{{product[0]}} text-reset text-decoration-none">
+                                                <a href="#{{product[0]}}" class="text-reset text-decoration-none">
                                                     <div class="mask"
                                                         style="background-color: rgba(253, 253, 253, 0.15);">
                                                     </div>
@@ -110,20 +110,21 @@
                                     <table class="table table-hover shopping-cart-wrap">
                                         <thead class="text-muted">
                                             <tr>
-                                                <th scope="col">Item</th>
+                                                <th scope="col">Producto</th>
                                                 <th scope="col" width="80">Cant</th>
                                                 <th scope="col" width="80">Precio</th>
                                                 <th scope="col" class="text-right" width="80">Borrar</th>
                                             </tr>
                                         </thead>
+                                    </table>
 
 
                                         <!-- * LISTA DE PRODUCTOS * -->
-                                        <tbody class="overflow__scroll--cart">
+                                        <!-- <tbody class="overflow__scroll--cart"> -->
 
 
                                             <!-- * PRODUCTO * -->
-                                            <tr class="cart__prod">
+                                            <!-- <tr class="cart__prod">
                                                 <td>
                                                     <div class="d-flex align-items-center">
                                                         <div class="flex-grow-0 ms-3 title text-truncate">
@@ -150,15 +151,22 @@
                                                             $145
                                                         </var>
                                                     </div> <!-- price-wrap .// -->
-                                                </td>
+                                                <!-- </td>
                                                 <td class="text-right">
                                                     <a href="" class="btn btn-outline-danger"> <i
                                                             class="fa fa-trash"></i></a>
                                                 </td>
-                                            </tr>
+                                            </tr> -->
 
-                                        </tbody>
-                                    </table>
+                                        <!-- </tbody> -->
+                                    <div class="overflow__scroll--cart">
+                                        <ul id="carrito" class="list-group"></ul>
+                                        <hr>
+                                        <!-- Precio total -->
+                                        <p class="text-right">Total: <span id="total"></span>&dollar;</p>
+                                        <button id="boton-vaciar" class="btn btn-danger">Vaciar</button>
+
+                                    </div>
                                 </span>
                             </div> <!-- card.// -->
 
@@ -166,7 +174,7 @@
 
                             <!-- * CALC * -->
                             <div class="btn-toolbar card" role="toolbar" aria-label="Toolbar with button groups">
-                                <div class="btn-group me-2 calculator-buttons" role="group" aria-label="First group">
+                                <div class="btn-group calculator-buttons" role="group" aria-label="First group">
                                     <button class="btn btn-secondary payment__span"><img
                                             src="{{url_for('static', filename='img/icons/payment.png')}}" alt="Payment"
                                             width="100" style="filter: invert();"></button>
@@ -204,6 +212,7 @@
         </div>
     </div>
 </section>
+
 <!-- ======================= SECTION CONTENT END// ======================= -->
 
 {% include 'footer.html' %}
