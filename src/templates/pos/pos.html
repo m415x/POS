@@ -54,17 +54,13 @@
 
                                                     <span class="badge bg-success m-1 card__stock">
 
-                                                    {% elif product[4] >= 5 %}
+                                                    {% elif product[4] > 0 %}
 
                                                     <span class="badge bg-warning m-1 card__stock">
 
-                                                    {% elif product[4] > 0 %}
-
-                                                    <span class="badge bg-danger m-1 card__stock">
-
                                                     {% else %}
 
-                                                    <span class="badge bg-light m-1 card__stock">
+                                                    <span class="badge bg-danger m-1 card__stock">
 
                                                     {% endif %}
 
@@ -216,3 +212,4 @@
 <!-- ======================= SECTION CONTENT END// ======================= -->
 
 {% include 'footer.html' %}
+
