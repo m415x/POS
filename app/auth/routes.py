@@ -61,7 +61,7 @@ def signup_superadmin():
             # Comprobamos si recibimos el parámetro 'next', cuando el usuario ha intentado acceder a una página protegida pero no estaba autenticado
             next_page = request.args.get('next', None)
             if not next_page or url_parse(next_page).netloc != '':
-                next_page = url_for('auth.pos')
+                next_page = url_for('auth.show_pos')
                 
             return redirect(next_page)
         
@@ -76,18 +76,59 @@ def logout():
     return redirect(url_for('public.login'))
 
 
-#* POS ----------------------------------------------------------------------------
-@auth_bp.route("/pos")
-def pos():
-    logger.info('Mostrando el POS')
+#* SHOW POS -----------------------------------------------------------------------
+# @auth_bp.route("/pos")
+# def show_pos():
+#     logger.info('Mostrando el POS')
     # page = int(request.args.get('page', 1))
     # per_page = current_app.config['ITEMS_PER_PAGE']
     # post_pagination = Post.all_paginated(page, per_page)
     
-    return render_template("auth/pos.html", post_pagination=post_pagination)
+    # return render_template("auth/pos.html", post_pagination=post_pagination)
 
 
+
+# def pos():
+
+#     sql = "SELECT code, type, name, info, stock, cost, price, img FROM pos.products;"
+#     cursor.execute(sql)
+#     products = cursor.fetchall()
+
+#     conn.commit()
+
+#     return render_template('pos/pos.html', products=products)
+
+
+
+# @public_bp.route("/p/<string:slug>/", methods=['GET', 'POST'])
+# def show_post(slug):
+    
+#     logger.info('Mostrando un post')
+#     logger.debug(f'Slug: {slug}')
+#     post = Post.get_by_slug(slug)
+    
+#     if not post:
+#         logger.info(f'El post {slug} no existe')
+#         abort(404)
+        
+#     form = CommentForm()
+    
+#     if current_user.is_authenticated and form.validate_on_submit():
+#         content = form.content.data
+#         comment = Comment(content=content,
+#                           user_id=current_user.id,
+#                           user_name=current_user.name,
+#                           post_id=post.id)
+#         comment.save()
+        
+#         return redirect(url_for('public.show_post', slug=post.title_slug))
+    
+#     return render_template("public/post_view.html", post=post, form=form)
+
+
+
+
+#* SHOW POS -----------------------------------------------------------------------
 @login_manager.user_loader
 def load_user(user_id):
-    
     return User.get_by_id(int(user_id))

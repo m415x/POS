@@ -7,7 +7,8 @@ from flask_mail import Mail
 from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
 
-from app.common.filters import format_datetime
+# from app.common.filters import format_datetime
+
 
 
 login_manager = LoginManager()
@@ -17,7 +18,6 @@ mail = Mail()
 
 
 def create_app(settings_module):
-    
     app = Flask(__name__, instance_relative_config=True)
     
     # Carga los parámetros de configuración según el entorno
@@ -43,7 +43,7 @@ def create_app(settings_module):
     mail.init_app(app)
 
     # Registro de los filtros
-    register_filters(app)
+    # register_filters(app)
     
     # Registro de los Blueprints
     from .auth import auth_bp
@@ -60,11 +60,10 @@ def create_app(settings_module):
     
     return app
 
-def register_filters(app):
-    app.jinja_env.filters['datetime'] = format_datetime
+# def register_filters(app):
+#     app.jinja_env.filters['datetime'] = format_datetime
 
 def register_error_handlers(app):
-
     @app.errorhandler(500)
     def base_error_handler(e):
         return render_template('500.html'), 500
