@@ -1,0 +1,219 @@
+{% extends "base_template.html" %}
+
+{% block title %}POS{% endblock %}
+
+<!-- ========================= SECTION CONTENT ========================= -->
+{% block content %}
+
+<section class="section-content padding-y-sm bg-default ">
+    <div class="text-center container-fluid py-1">
+
+
+        <!-- * TABS * -->
+        <ul class="nav nav-tabs" role="tablist">
+            <li class="nav-item" role="presentation">
+                <a class="nav-link active" data-bs-toggle="tab" href="#prod" aria-selected="true" role="tab">
+                    <span class="badge rounded-pill bg-primary mx-1">
+                        <!-- Número de cliente-->
+                        1
+                    </span>
+                    <span class="tab__clock">
+                        <!-- Hora de comienzo de atención-->
+                        00:00
+                    </span>
+                </a>
+            </li>
+            <li class="nav-item" role="presentation">
+                <a class="nav-link" data-bs-toggle="tab" href="#add" aria-selected="false" tabindex="-1" role="tab">
+                    <span class="tab__plus">
+                        <i class="fa-solid fa-plus"></i>
+                    </span>
+                </a>
+            </li>
+        </ul>
+        <div id="myTabContent" class="tab-content">
+            <div class="tab-pane fade show active" id="prod" role="tabpanel">
+                <div class="mt-1 mx-2">
+
+
+                    <!-- * CARDS * -->
+                    <div class="row">
+                        <div class="col-md-8 card overflow__scroll">
+                            <div class="row mt-2">
+
+
+                                <!-- * CARD * -->
+                                {% for product in products %}
+
+                                <div class="col-lg-2 col-md-8 mb-4">
+                                    <div class="card">
+                                        <div class="bg-image hover-zoom ripple ripple-surface ripple-surface-light"
+                                            data-mdb-ripple-color="light">
+                                            <img src="userpic/{{product[7]}}" class="w-100" alt="Producto" />
+                                            <!-- img -->
+                                            <div class="mask">
+                                                <div class="d-flex justify-content-start align-items-start h-100">
+                                                    {% if product[4] >= 10 %}
+
+                                                    <span class="badge bg-success m-1 card__stock">
+
+                                                    {% elif product[4] > 0 %}
+
+                                                    <span class="badge bg-warning m-1 card__stock">
+
+                                                    {% else %}
+
+                                                    <span class="badge bg-danger m-1 card__stock">
+
+                                                    {% endif %}
+
+                                                        {{product[4]}} <!-- stock -->
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <div class="hover-overlay">
+                                                <a href="#{{product[0]}}" class="text-reset text-decoration-none">
+                                                    <div class="mask"
+                                                        style="background-color: rgba(253, 253, 253, 0.15);">
+                                                    </div>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="card-body">
+                                            <a href="" class="text-reset text-decoration-none">
+                                                <h5 class="card-title mb-2 card__code">
+                                                    {{product[1][0:2].upper()}}-{{ '%05d' % product[0] }} <!-- code -->
+                                                </h5>
+                                            </a>
+                                            <a href="" class="text-reset text-decoration-none card__description">
+                                                <p>
+                                                    {{product[2]}} <br> {{product[3]}} <!-- name & info -->
+                                                </p>
+                                            </a>
+                                            <h6 class="mb-1 card__price">
+                                                $ {{product[6]}} <!-- price -->
+                                            </h6>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                {% endfor %}
+
+                            </div>
+                        </div>
+
+                        <!-- * SHOPPING CART * -->
+                        <div class="col-4">
+                            <div class="card">
+                                <span id="cart">
+                                    <!-- <table class="table table-hover shopping-cart-wrap"> -->
+                                        <!-- <thead class="text-muted">
+                                            <tr>
+                                                <th scope="col">Producto</th>
+                                                <th scope="col" width="80">Cant</th>
+                                                <th scope="col" width="80">Precio</th>
+                                                <th scope="col" class="text-right" width="80"></th>
+                                            </tr>
+                                        </thead> -->
+                                    </table>
+
+
+                                        <!-- * LISTA DE PRODUCTOS * -->
+                                        <!-- <tbody class="overflow__scroll--cart"> -->
+
+
+                                            <!-- * PRODUCTO * -->
+                                            <!-- <tr class="cart__prod">
+                                                <td>
+                                                    <div class="d-flex align-items-center">
+                                                        <div class="flex-grow-0 ms-3 title text-truncate">
+                                                            Product
+                                                        </div>
+                                                    </div>
+
+                                                </td>
+                                                <td class="text-center">
+                                                    <div class="m-btn-group m-btn-group--pill btn-group mr-2"
+                                                        role="group" aria-label="...">
+                                                        <button type="button" class="m-btn btn btn-default"><i
+                                                                class="fa fa-minus"></i></button>
+                                                        <button type="button" class="m-btn btn btn-default" disabled>
+                                                            3
+                                                        </button>
+                                                        <button type="button" class="m-btn btn btn-default"><i
+                                                                class="fa fa-plus"></i></button>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="price-wrap">
+                                                        <var class="price">
+                                                            $145
+                                                        </var>
+                                                    </div> <!-- price-wrap .// -->
+                                                <!-- </td>
+                                                <td class="text-right">
+                                                    <a href="" class="btn btn-outline-danger"> <i
+                                                            class="fa fa-trash"></i></a>
+                                                </td>
+                                            </tr> -->
+
+                                        <!-- </tbody> -->
+                                    <div class="overflow__scroll--cart">
+                                        <!-- <ul id="carrito" class="list-group"></ul> -->
+                                        <!-- <hr> -->
+                                        <!-- Precio total -->
+                                        <!-- <p class="text-right">Total: <span id="total"></span>&dollar;</p>
+                                        <button id="boton-vaciar" class="btn btn-danger">Vaciar</button> -->
+
+                                    </div>
+                                </span>
+                            </div> <!-- card.// -->
+
+
+
+                            <!-- * CALC * -->
+                            <div class="btn-toolbar card" role="toolbar" aria-label="Toolbar with button groups">
+                                <div class="btn-group calculator-buttons" role="group" aria-label="First group">
+                                    <button class="btn btn-secondary payment__span"><img
+                                            src="{{url_for('static', filename='img/icons/payment.png')}}" alt="Payment"
+                                            width="100" style="filter: invert();"></button>
+                                    <button class="btn btn-secondary">7</button>
+                                    <button class="btn btn-secondary">8</button>
+                                    <button class="btn btn-secondary">9</button>
+                                    <button class="btn btn-secondary">Cant</button>
+                                    <button class="btn btn-secondary">4</button>
+                                    <button class="btn btn-secondary">5</button>
+                                    <button class="btn btn-secondary">6</button>
+                                    <button class="btn btn-secondary">Desc</button>
+                                    <button class="btn btn-secondary">1</button>
+                                    <button class="btn btn-secondary">2</button>
+                                    <button class="btn btn-secondary">3</button>
+                                    <button class="btn btn-secondary">Precio</button>
+                                    <button class="btn btn-secondary">+/-</button>
+                                    <button class="btn btn-secondary">0</button>
+                                    <button class="btn btn-secondary">.</button>
+                                    <button class="btn btn-secondary">
+                                        <i class="fa-solid fa-delete-left"></i>
+                                    </button>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="add" role="tabpanel">
+                <p>
+                    FUNCION AGREGAR CLIENTE
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}
+<!-- ======================= SECTION CONTENT END// ======================= -->
+
+
+

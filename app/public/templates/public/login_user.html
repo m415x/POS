@@ -1,0 +1,47 @@
+{% extends "user_template.html" %}
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+
+    <div class="wrapper fadeInDown">
+        <div id="formContent">
+
+            <form class="mt-2" action="" method="post" novalidate>
+
+                <h1>Login</h1>
+                {{ form.hidden_tag() }}
+                <div>
+                    {{ form.user_name(class="fadeIn first", placeholder="usuario") }}<br>
+                    {% for error in form.user_name.errors %}
+                        {% if error == 'This field is required.' %}
+                            <span style="color: red;">Campo Requerido</span>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+                <div>
+                    {{ form.password(class="fadeIn second", placeholder="contraseña") }}<br>
+                    {% for error in form.password.errors %}
+                        {% if error == 'This field is required.' %}
+                            <span style="color: red;">Campo Requerido</span>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+                <div>
+                    {{ form.submit(class="btn btn-success fadeIn third") }}
+                </div>
+                <!-- <input type="text" id="login" class="fadeIn second" name="login" placeholder="usuario">
+                <input type="text" id="password" class="fadeIn third" name="login" placeholder="contraseña">
+                <input type="submit" class="btn btn-success fadeIn fourth" value="Entrar"> -->
+                
+            </form>
+
+            <div id="formFooter">
+                <!-- Redirigir a form recuperar contraseña -->
+                <a class="underlineHover text-decoration-none" href="#">¿Olvidaste tu contraseña?</a>
+            </div>
+
+        </div>
+    </div>
+
+{% endblock %}

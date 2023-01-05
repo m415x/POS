@@ -1,0 +1,144 @@
+main {
+    background-color: #222222;
+}
+
+
+
+/* * TABS * */
+.tab__hour {
+    font-size: small;
+}
+
+.tab__plus {
+    font-size: large;
+}
+
+
+
+/* * CARDS * */
+.card__description,
+.card__price {
+    font-size: x-small;
+    letter-spacing: 1px;
+}
+
+.card__code {
+    font-size: x-small;
+    letter-spacing: 2px;
+}
+
+.card__stock {
+    font-size: small;
+}
+
+.mask {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background-attachment: fixed
+}
+
+.hover-overlay .mask {
+    --mdb-image-hover-transition: all 0.3s ease-in-out;
+    opacity: 0;
+    transition: var(--mdb-image-hover-transition)
+}
+
+.hover-overlay .mask:hover {
+    opacity: 1
+}
+
+.overflow__scroll {
+    height: 590px;
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
+
+
+
+/* * CART * */
+.cart__prod>* {
+    font-size: small;
+}
+
+.overflow__scroll--cart {
+    height: 434px;
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
+
+
+
+/* * CALC * */
+.calculator-buttons {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+}
+
+.payment__span {
+    grid-row: span 4;
+    grid-column: span 3;
+}
+
+.calculator-buttons > button {
+    border-radius: 0;
+}
+
+
+
+/* * INVENTORY * */
+.inventory__cont {
+    font-size: 12px;
+}
+
+#div_file,
+#div_up {
+	position:relative;
+}
+
+#formFile {
+	position:absolute;
+	top:0px;
+	left:0px;
+	right:0px;
+	bottom:0px;
+	width:100%;
+	height:100%;
+	opacity: 0;
+}
+
+#pic_file,
+#pic_up {
+    width: 100px;
+    height: 100px;
+}
+
+.list__group{ /**  */
+    max-height: 300px;
+    margin-bottom: 10px;
+    overflow:scroll;
+    -webkit-overflow-scrolling: touch;
+}
+
+/* #inventory__body {
+    display: block;
+    height: 590px;
+    overflow: auto;
+}
+
+#inventory__body tr {
+    display: table;
+    table-layout: fixed;
+}
+
+.card-header {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+    width: calc( 100% - 1em )
+} */

@@ -1,0 +1,64 @@
+{% extends "user_template.html" %}
+
+{% block title %}Registro de Administrador{% endblock %}
+
+{% block content %}
+
+    <div class="wrapper fadeInDown">
+        <div id="formContent">
+
+            {% if error %}
+                <p style="color: red;"><strong>Error:</strong> {{ error }}</p>
+            {% endif %}
+
+            <form class="mt-2" action="" method="post" novalidate>
+                
+                <h1>Registro de Administrador</h1>
+                {{ form.hidden_tag() }}
+                <div>
+                    {{ form.name(class="fadeIn first", placeholder="nombre", size=80) }}<br>
+                    {% for error in form.name.errors %}
+                        {% if error == 'This field is required.' %}
+                            <span style="color: red;">Campo Requerido</span>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+                <div>
+                    {{ form.email(class="fadeIn second", placeholder="email") }}<br>
+                    {% for error in form.email.errors %}
+                        {% if error == 'This field is required.' %}
+                            <span style="color: red;">Campo requerido</span>
+                        {% else %}
+                            <span style="color: red;">Email inválido</span>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+                <div>
+                    {{ form.user_name(class="fadeIn third", placeholder="nombre de usuario", size=12) }}<br>
+                    {% for error in form.user_name.errors %}
+                        {% if error == 'This field is required.' %}
+                            <span style="color: red;">Campo Requerido</span>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+                <div>
+                    {{ form.password(class="fadeIn fourth", placeholder="contraseña") }}<br>
+                    {% for error in form.password.errors %}
+                        {% if error == 'This field is required.' %}
+                            <span style="color: red;">Campo Requerido</span>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+                <div>
+                    {{ form.submit(class="btn btn-success fadeIn fifth") }}
+                </div>
+                <!-- <input type="text" id="login" class="fadeIn second" name="login" placeholder="usuario">
+                <input type="text" id="password" class="fadeIn third" name="login" placeholder="contraseña">
+                <input type="submit" class="btn btn-success fadeIn fourth" value="Entrar"> -->
+
+            </form>
+
+        </div>
+    </div>
+
+{% endblock %}
