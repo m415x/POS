@@ -37,8 +37,12 @@
             </form>
 
             <div id="formFooter">
-                <!-- Redirigir a form recuperar contraseña -->
-                <a class="underlineHover text-decoration-none" href="#">¿Olvidaste tu contraseña?</a>
+                {% if users|length == 0 %}
+                    <a class="underlineHover text-decoration-none" href="{{ url_for('super_admin.signup_superadmin') }}">CREAR SUPERADMIN</a>
+                {% else %}
+                    <!--Redirigir a form recuperar contraseña -->
+                    <a class="underlineHover text-decoration-none" href="#">¿Olvidaste tu contraseña?</a>
+                {% endif %}
             </div>
 
         </div>

@@ -76,7 +76,7 @@ main {
 
 /* * CALC * */
 .calculator-buttons {
-    display: grid;
+    display: grid !important;
     grid-template-columns: repeat(7, 1fr);
 }
 

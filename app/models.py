@@ -1,5 +1,6 @@
 from flask_login import UserMixin
 from werkzeug.security import generate_password_hash, check_password_hash
+from sqlalchemy.inspection import inspect
 
 from app import db
 
@@ -38,6 +39,9 @@ class User(db.Model, UserMixin):
         self.is_superadmin = superadmin
         return self.is_superadmin
 
+    def get_superadmin(self):
+        return self.is_superadmin
+
     def save(self):
         if not self.id:
             db.session.add(self)
@@ -54,8 +58,15 @@ class User(db.Model, UserMixin):
     @staticmethod
     def get_by_user_name(user_name):
         return User.query.filter_by(user_name=user_name).first()
+    
+    @staticmethod
+    def get_by_super_admin():
+        return User.query.filter_by(is_superadmin=True).first()
 
     @staticmethod
     def get_all():
         return User.query.all()
     
+    @staticmethod
+    def table_exist(table):
+        return inspect(db.engine).has_table(table)

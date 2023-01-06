@@ -1,7 +1,19 @@
 from flask_wtf import FlaskForm
-from flask_wtf.file import FileField, FileAllowed
-from wtforms import (StringField, SubmitField, TextAreaField, BooleanField)
-from wtforms.validators import DataRequired, Length
+# from flask_wtf.file import FileField, FileAllowed
+from wtforms import (StringField, SubmitField, PasswordField)
+from wtforms.validators import (DataRequired, Length, Email, Regexp)
+
+
+
+class SignupSuperadminForm(FlaskForm):
+    '''
+    Campos formulario: Creacion/edición de superadmin
+    '''
+    name = StringField('nombre', validators=[DataRequired(), Length(max=64)])
+    email = StringField('email', validators=[DataRequired(), Email()])
+    user_name = StringField('nombre de usuario', validators=[DataRequired(), Length(min=5, max=12)])
+    password = PasswordField('contraseña', validators=[DataRequired()])
+    submit = SubmitField('Crear')
 
 
 # class PostForm(FlaskForm):

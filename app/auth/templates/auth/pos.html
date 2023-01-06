@@ -4,7 +4,7 @@
 
 <!-- ========================= SECTION CONTENT ========================= -->
 {% block content %}
-
+<main>
 <section class="section-content padding-y-sm bg-default ">
     <div class="text-center container-fluid py-1">
 
@@ -175,7 +175,7 @@
                             <div class="btn-toolbar card" role="toolbar" aria-label="Toolbar with button groups">
                                 <div class="btn-group calculator-buttons" role="group" aria-label="First group">
                                     <button class="btn btn-secondary payment__span"><img
-                                            src="{{url_for('static', filename='img/icons/payment.png')}}" alt="Payment"
+                                            src="{{url_for('media_icons', filename='payment.png')}}" alt="Payment"
                                             width="100" style="filter: invert();"></button>
                                     <button class="btn btn-secondary">7</button>
                                     <button class="btn btn-secondary">8</button>
@@ -211,7 +211,7 @@
         </div>
     </div>
 </section>
-
+</main>
 {% endblock %}
 <!-- ======================= SECTION CONTENT END// ======================= -->
 

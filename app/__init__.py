@@ -1,4 +1,5 @@
 import logging
+
 from logging.handlers import SMTPHandler
 
 from flask import Flask, render_template
@@ -32,7 +33,7 @@ def create_app(settings_module):
     configure_logging(app)
 
     login_manager.init_app(app)
-    login_manager.login_view = "auth.login"
+    login_manager.login_view = "public.login"
 
     db.init_app(app)
     
@@ -51,6 +52,9 @@ def create_app(settings_module):
 
     from .admin import admin_bp
     app.register_blueprint(admin_bp)
+    
+    from .super_admin import superadmin_bp
+    app.register_blueprint(superadmin_bp)
 
     from .public import public_bp
     app.register_blueprint(public_bp)
