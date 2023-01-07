@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileField, FileAllowed
-from wtforms import StringField, SubmitField, PasswordField, FloatField
+from wtforms import StringField, SubmitField, PasswordField, FloatField, SelectField
 from wtforms.validators import DataRequired, Email, Length
 
 
@@ -24,16 +24,16 @@ class CategoryForm(FlaskForm):
     submit = SubmitField('Guardar')
 
 
-class ProductForm(FlaskForm):
+class ItemForm(FlaskForm):
     '''
-    Campos formulario: Creacion/edición de productos
+    Campos formulario: Creacion/edición de items
     '''
-    name = StringField('nombre', validators=[DataRequired(), Length(max=20)])
+    category = SelectField('Categoría', choices=[])
+    name = StringField('Nombre', validators=[DataRequired(), Length(max=20)])
     info = StringField('Descripción', validators=[DataRequired(), Length(max=256)])
     stock = FloatField('Stock')
     cost = FloatField('Costo')
     price = FloatField('Precio')
-    email = StringField('email', validators=[DataRequired(), Email()])
     img_name = FileField('Imagen',
                            validators=[FileAllowed(['jpg','png'],
                                                    'Solo se permiten imágenes')])

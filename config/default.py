@@ -8,7 +8,7 @@ BASE_DIR = dirname(dirname(abspath(__file__)))
 MEDIA_DIR = join(BASE_DIR, 'media')
 ICONS_IMAGES_DIR = join(MEDIA_DIR, 'icons')
 LOGOS_IMAGES_DIR = join(MEDIA_DIR, 'logos')
-PRODUCTS_IMAGES_DIR = join(MEDIA_DIR, 'products')
+ITEMS_IMAGES_DIR = join(MEDIA_DIR, 'items')
 
 SECRET_KEY = '6dca48775e39cabec10b45c19b1f43bcc0708ce9ab64e5c12b885174c0a957bff2fb624174ea15aa'
 

@@ -8,7 +8,7 @@ from werkzeug.urls import url_parse
 
 
 # from app.auth.decorators import admin_required
-from app.models import User
+from app.models import Users
 from . import superadmin_bp
 from .forms import SignupSuperadminForm
 from app.common.mail import send_email
@@ -22,9 +22,9 @@ logger = logging.getLogger(__name__)
 @superadmin_bp.route("/signup-superadmin/", methods=["GET", "POST"])
 def signup_superadmin():
     # Validamos existencia de usuario super-admin para bloquear acceso a ruta
-    super_admin = User.get_by_super_admin()
+    super_admin = Users.get_by_super_admin()
     if super_admin:
-        return redirect(url_for('auth.pos'))
+        return redirect(url_for('auth.show_pos'))
         
     # Creamos el objeto form
     form = SignupSuperadminForm()
@@ -39,14 +39,14 @@ def signup_superadmin():
         password = form.password.data
         
         # Comprobamos que no existe ese usuario
-        user = User.get_by_user_name(user_name)
+        user = Users.get_by_user_name(user_name)
         if user is not None:
             error = f'El nombre {user_name} ya está siendo utilizado por otro usuario'
         
         else:
             
             # Creamos el usuario super-admin y lo guardamos
-            user = User(name=name, email=email, user_name=user_name)
+            user = Users(name=name, email=email, user_name=user_name)
             user.set_password(password)
             user.set_admin(True)
             user.set_superadmin(True)

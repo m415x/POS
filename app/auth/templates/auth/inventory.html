@@ -1,0 +1,75 @@
+{% extends "base_template.html" %}
+
+{% block title %}Inventario{% endblock %}
+
+{% block content %}
+<div class="container inventory__cont">
+    <div class="card">
+        <table class="table table-hover align-middle mb-0" id="table">
+            <thead class="card-header">
+                <tr>
+                    <th class="col-1"></th>
+                    <th class="col-1">Código</th>
+                    <th class="col-1">Categoría</th>
+                    <th class="col-2">Artículo</th>
+                    <th class="col-4">Descripción</th>
+                    <th class="col-1">Stock</th>
+                    <th class="col-1">Costo</th>
+                    <th class="col-1">Precio Venta</th>
+                    <th>
+                        <a href="#" class="btn btn-outline-success btn-sm" id="btn__add"><i class="fa-solid fa-plus"></i></a>
+                    </th>
+                    <th class="btn__confirm">
+                        <a href="#" class="btn btn-outline-success btn-sm" id="btn__add"><i class="fa-solid fa-file-circle-plus"></i></a>
+                    </th>
+                </tr>
+            </thead>
+            <tbody id="inventory__body">
+                <!-- <div class="overflow__scroll--inventory"> -->
+                    <!-- <div class="row mt-2"> -->
+                {% for item in items %}
+
+                <tr>
+                    <td class="col-1">
+                        {% if item.img_name != None %}
+                        <img src="{{ url_for('media_items', filename=item.img_name) }}" style="width: 45px; height: 45px" class="rounded-circle">
+                        <!-- img -->
+                        {% endif %}
+                    </td>
+                    <td class="col-1"><div>{{item.category.category[0:3].upper()}}-{{ '%05d' % item.id }}</div></td>
+                    <td class="col-1"><div>{{item.category.category.capitalize()}}</div></td>
+                    <td class="col-2"><div>{{item.name.upper()}}</div></td>
+                    <td class="col-4"><div>{{item.info.capitalize()}}</div></td>
+
+                    {% if item.stock >= 10 %}
+                        <td class="col-1"><div class="text-success">{{item.stock}}</div></td>
+                    {% elif item.stock > 0 %}
+                        <td class="col-1"><div class="text-warning">{{item.stock}}</div></td>
+                    {% else %}
+                        <td class="col-1"><div class="text-danger">SIN STOCK</div></td>
+                    {% endif %}
+
+                    <td class="col-1"><div>{{item.cost}}</div></td>
+                    <td class="col-1"><div>{{item.price}}</div></td>
+                    <td class="btn__confirm">
+                        <!-- Referencia para editar item -->
+                        <a href="{product[0],product[1],product[2],product[3],product[4],product[5],product[6],product[7]}}" class="btn btn-outline-warning btn-sm btn__edit"><i
+                            class="fa-solid fa-pen-to-square"></i></a>
+                    </td>
+                    <td>
+                        <!-- Referencia para borrar item -->
+                        <a type="button" onclick="if(!confirm('¿Desea borrar {product[2]}} {product[3]}}?')) event.preventDefault()"
+                            class="btn btn-outline-danger btn-sm btn__delete" href="/delete/{product[0]}}"><i
+                                class="fa-solid fa-trash"></i></a>
+                    </td>
+                </tr>
+
+                {% endfor %}
+
+                <!-- </div> -->
+                <!-- </div> -->
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

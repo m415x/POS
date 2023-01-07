@@ -30,10 +30,10 @@ def media_logos(filename):
     return send_from_directory(dir_path, filename)
 
 
-@app.route('/media/products/<filename>')
-def media_products(filename):
+@app.route('/media/items/<filename>')
+def media_items(filename):
     dir_path = os.path.join(app.config['MEDIA_DIR'],
-                            app.config['PRODUCTS_IMAGES_DIR'])
+                            app.config['ITEMS_IMAGES_DIR'])
     
     return send_from_directory(dir_path, filename)
 

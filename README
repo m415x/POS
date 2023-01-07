@@ -1,0 +1,13 @@
+# FLASK-MIGRATE
+
+## Crear carpeta migrations
+
+>>>flask db init
+
+## Creamos fichero versiones
+
+>>>flask db migrate -m ""
+
+## Ejecutamos la migración
+
+>>>flask db upgrade

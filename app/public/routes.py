@@ -5,7 +5,7 @@ from flask_login import current_user, login_user
 from werkzeug.urls import url_parse
 
 
-from app.models import User
+from app.models import Users
 from . import public_bp
 from .forms import LoginForm
 
@@ -18,8 +18,8 @@ logger = logging.getLogger(__name__)
 @public_bp.route('/', methods=['GET', 'POST'])
 def login():
     # Comprobamos que la tabla users exite
-    exist = User.table_exist('users')
-    if exist == False:
+    exist = Users.table_exist('users')
+    if exist == False: #! agregar comprobacion de existencia de superadmin
         return redirect(url_for('super_admin.signup_superadmin'))
     
     # Comprobamos si el usuario está autenticado, si es así, lo redirigimos
@@ -29,11 +29,11 @@ def login():
     # Creamos el objeto form
     form = LoginForm()
     
-    users = User.get_all()
+    users = Users.get_all()
     
     # Comprobamos si los datos enviados en el formulario son válidos
     if form.validate_on_submit():
-        user = User.get_by_user_name(form.user_name.data)
+        user = Users.get_by_user_name(form.user_name.data)
 
         # Autenticamos (si existe dicho usuario y la contraseña coincide)
         if user is not None and user.check_password(form.password.data):

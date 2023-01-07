@@ -1,21 +1,25 @@
 from flask_login import UserMixin
 from werkzeug.security import generate_password_hash, check_password_hash
 from sqlalchemy.inspection import inspect
+from datetime import datetime
 
 from app import db
 
 
 
-class User(db.Model, UserMixin):
+class Users(db.Model, UserMixin):
     __tablename__ = 'users'
 
     id = db.Column(db.Integer, primary_key=True)
+    created = db.Column(db.DateTime, default=datetime.utcnow)
     name = db.Column(db.String(80), nullable=False)
     email = db.Column(db.String(256), nullable=False)
     user_name = db.Column(db.String(12), unique=True, nullable=False)
     password = db.Column(db.String(128), nullable=False)
     is_admin = db.Column(db.Boolean, default=False)
     is_superadmin = db.Column(db.Boolean, default=False)
+    is_active = db.Column(db.Boolean, default=True)
+    discharge_date = db.Column(db.DateTime)
 
     def __init__(self, name, email, user_name):
         self.name = name
@@ -38,6 +42,14 @@ class User(db.Model, UserMixin):
     def set_superadmin(self, superadmin):
         self.is_superadmin = superadmin
         return self.is_superadmin
+    
+    def set_active(self, active):
+        self.is_active = active
+        return self.is_active
+    
+    def set_discharge(self, date):
+        self.discharge_date = date
+        return self.discharge_date
 
     def get_superadmin(self):
         return self.is_superadmin
@@ -53,19 +65,19 @@ class User(db.Model, UserMixin):
 
     @staticmethod
     def get_by_id(id):
-        return User.query.get(id)
+        return Users.query.get(id)
 
     @staticmethod
     def get_by_user_name(user_name):
-        return User.query.filter_by(user_name=user_name).first()
+        return Users.query.filter_by(user_name=user_name).first()
     
     @staticmethod
     def get_by_super_admin():
-        return User.query.filter_by(is_superadmin=True).first()
+        return Users.query.filter_by(is_superadmin=True).first()
 
     @staticmethod
     def get_all():
-        return User.query.all()
+        return Users.query.all()
     
     @staticmethod
     def table_exist(table):

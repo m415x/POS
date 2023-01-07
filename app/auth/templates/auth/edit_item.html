@@ -1,0 +1,95 @@
+<!-- % extends 'pos/inventory.html' %} -->
+
+<!-- % block edit %} -->
+
+<div class="modal" id="modalEdit" tabindex="-1" aria-labelledby="modalEditLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="modalEditLabel">Editar producto</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="/update" method="post" enctype="multipart/form-data">
+                    <div class="card">
+                        <!-- <div class="card-header">Agregar productos</div> -->
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="form-group col-md-3">
+                                    <label class="form-label mt-4" for="formCode">Código</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text" id="formLetter"></span>
+                                        <input class="form-control disabled" type="text" name="formCode" id="formCode"
+                                            value="" readonly>
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <label class="form-label mt-4" for="formType">Rubro</label>
+                                    <select class="form-select" name="formType" id="formType">
+                                        <option value="Ferretería">Ferretería</option>
+                                        <option value="Electricidad">Electricidad</option>
+                                        <option value="Plomería">Plomería</option>
+                                        <option value="Pinturería">Pinturería</option>
+                                        <option value="Herramientas">Herramientas</option>
+                                        <option value="Maquinaria">Maquinaria</option>
+                                    </select>
+                                </div>
+                                <div class="form-group col-md">
+                                    <label class="form-label mt-4" for="formName">Producto</label>
+                                    <input class="form-control" type="text" name="formName" id="formName" value=""
+                                        required>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-md">
+                                    <label class="form-label mt-4" for="formInfo">Descripción</label>
+                                    <input class="form-control" type="text" name="formInfo" id="formInfo" value=""
+                                        required>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-md-3">
+                                    <label class="form-label mt-4" for="formStock">Cantidad</label>
+                                    <input class="form-control" type="number" step=".5" name="formStock" id="formStock""
+                                        required>
+                                </div>
+                                <div class=" form-group col-md-3">
+                                    <label class="form-label mt-4" for="formCost">Costo</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text">$</span>
+                                        <input class="form-control" type="number" step=".01" name="formCost"
+                                            id="formCost" value="" required>
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <label class="form-label mt-4" for="formPrice">Precio Venta</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text">$</span>
+                                        <input class="form-control" type="number" step=".01" name="formPrice"
+                                            id="formPrice" value="" required>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group col-md-3" id="div_file">
+                                        <label class="form-label mt-4" for="pic_file">Foto actual</label>
+                                        <img src="" class="rounded img-thumbnail" alt="foto producto" id="pic_file">
+                                        <input type="file" name="formFile" id="formFile">
+                                    </div>
+                                    <div class="form-group col-md-3" id="div_up">
+                                        <label class="form-label mt-4" for="pic_up" id="pic_label">Foto nueva</label>
+                                        <img src="" class="rounded img-thumbnail" alt="" id="pic_up" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+            <div class="modal-footer">
+                <input class="btn btn-outline-success" type="submit" value="Aceptar">
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- % endblock edit %} -->
