@@ -29,7 +29,7 @@ class ItemForm(FlaskForm):
     Campos formulario: Creacion/edición de items
     '''
     category = SelectField('Categoría', choices=[])
-    name = StringField('Nombre', validators=[DataRequired(), Length(max=20)])
+    name = StringField('Artículo', validators=[DataRequired(), Length(max=20)])
     info = StringField('Descripción', validators=[DataRequired(), Length(max=256)])
     stock = FloatField('Stock')
     cost = FloatField('Costo')

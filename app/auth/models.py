@@ -19,8 +19,6 @@ class Items(db.Model):
     img_name = db.Column(db.String)
     user = db.relationship('Users', backref='items', lazy=True)
     category = db.relationship('Categories', backref='items', lazy=True)
-    # history = db.relationship('PriceHistory', backref='item', lazy=True, order_by='desc(PriceHistory.created)')
-    # details = db.relationship('SalesDetails', backref='item', lazy=True, order_by='desc(SalesDetails.created)')
     
     def __init__(self, name, info, stock, cost, price, img_name, user_id=None, category_id=None):
         self.user_id = user_id
@@ -33,7 +31,7 @@ class Items(db.Model):
         self.img_name = img_name
         
     def __repr__(self):
-        return f'<Items {self.name}>'
+        return self.id
     
     def save(self):
         if not self.id:
@@ -52,14 +50,21 @@ class Items(db.Model):
                 "cost": self.cost,
                 "price": self.price,
                 "img_name": self.img_name}
+        
+    def get_img_name(self):
+        return self.img_name
 
     @staticmethod
     def get_all():
-        return Items.query.all()
+        return Items.query.order_by(Items.id).all()
         
     @staticmethod
     def get_by_id(id):
         return Items.query.get(id)
+    
+    @staticmethod
+    def get_order_by(field, order):
+        return Items.query.order_by(Items.field.order()).all()
 
 
 class SalesDetails(db.Model):
@@ -231,7 +236,7 @@ class Categories(db.Model):
         self.payment_surcharge = payment_surcharge
 
     def __repr__(self):
-        return f'<Categories {self.name}>'
+        return f'<Categories {self.category}>'
     
     def save(self):
         if not self.id:

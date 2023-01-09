@@ -1,30 +1,48 @@
-//* READY
-$(document).ready(function () {
+// $(document).ready(function () {
+$(function () {
     // MOSTRAR EDIT
-    $(".btn__edit").click(function(event){
+    $(".btn__edit").on('click', function (event) {
+        let item = $(this)
         event.preventDefault()
-        var value1 = $(this).attr('href')
-        const value2 = value1.replaceAll("'", "")
-        const value3 = value2.replace("(", "")
-        const values = value3.replace(")", "")
-        const listVal = values.split(", ")
-        console.log(listVal)
+        const item_id = item.data('item_id')
+        const item_category = item.data('item_category')
+        const item_name = item.data('item_name')
+        const item_info = item.data('item_info')
+        const item_stock = item.data('item_stock')
+        const item_cost = item.data('item_cost')
+        const item_price = item.data('item_price')
+        const item_img = item.data('item_img')
+        console.log(item_id)
+        console.log(item_category)
+        console.log(item_name)
+        console.log(item_info)
+        console.log(item_stock)
+        console.log(item_cost)
+        console.log(item_price)
+        console.log(item_img)
+        // var value1 = $(this).attr('href')
+        // const value2 = value1.replaceAll("'", "")
+        // const value3 = value2.replace("(", "")
+        // const values = value3.replace(")", "")
+        // const listVal = values.split(", ")
+        // console.log(listVal)
         $('#modalEdit').modal('show')
-        $('#formCode').val(parseFloat(listVal[0]))
-        var slice = listVal[1].slice(0, 2).toLocaleUpperCase()
-        $('#formLetter').html(slice)
-        $('#formType').val(listVal[1]).change()
-        $('#formName').val(listVal[2])
-        $('#formInfo').val(listVal[3])
-        $('#formStock').val(parseFloat(listVal[4]))
-        $('#formCost').val(parseFloat(listVal[5]))
-        $('#formPrice').val(parseFloat(listVal[6]))
-        const src = `userpic/${listVal[7]}`
+        $('#editCode').val(parseInt(item_id))
+        // var slice = item.slice(0, 3).toLocaleUpperCase()////////////////////////////////
+        // $('#editLetter').html(slice)
+        $('#editcategory').val(item_category).change()
+        // $('#editName').val(item_name)
+        $('#editName').attr('value', item_name)
+        $('#editInfo').val(item_info)
+        $('#editStock').val(parseFloat(item_stock))
+        $('#editCost').val(parseFloat(item_cost))
+        $('#editPrice').val(parseFloat(item_price))
+        const src = `../../../media/items/${item_img}`
         $('#pic_file').attr("src", src)
         console.log(src)
     })
     // MOSTRAR ADD
-    $("#btn__add").click(function(event){
+    $("#btn__add").click(function (event) {
         event.preventDefault()
         $('#modalAdd').modal('show')
     })
@@ -33,8 +51,8 @@ $(document).ready(function () {
     if (src == '') {
         $('#pic_up').attr('hidden', true)
         $('#pic_label').attr('hidden', true)
-    // } else {
-    //     $('#pic_up').attr('hidden', false)
+        // } else {
+        //     $('#pic_up').attr('hidden', false)
     }
     // MOSTRAR HORA DE CARGA POS
     var date = new Date()
@@ -53,40 +71,9 @@ function readURL(input) {
         reader.readAsDataURL(input.files[0]);
     }
 }
-$("#formFile").change(function () { //Cuando el input cambie (se cargue un nuevo archivo) se va a ejecutar de nuevo el cambio de imagen y se verá reflejado.
+$("#editFile").change(function () { //Cuando el input cambie (se cargue un nuevo archivo) se va a ejecutar de nuevo el cambio de imagen y se verá reflejado.
     readURL(this);
     $('#pic_up').attr('hidden', false)
     $('#pic_label').attr('hidden', false)
 
 });
-
-
-
-
-// $(document).ready(function(){
-//     $("#btn__edit").click(function(){
-//         $(".edit__input")
-//         .removeAttr('readonly')
-//         .removeAttr('disabled')
-
-//         .addClass('border-bottom');
-//         $("#btn__edit").hide();
-//         $(".btn__confirm").removeClass('visually-hidden');
-
-//         $(".btn__file").removeClass('visually-hidden');
-//     })
-// })
-
-// $(document).ready(function(){
-//     $("#btn__cancel").click(function(){
-//         $(".edit__input")
-//         .attr('readonly', true)
-//         .attr('disabled', true)
-
-//         .removeClass('border-bottom');
-//         $("#btn__edit").show();
-//         $(".btn__confirm").addClass('visually-hidden');
-//         $(".btn__delete").removeClass('visually-hidden');
-//         $(".btn__file").addClass('visually-hidden');
-//     })
-// })

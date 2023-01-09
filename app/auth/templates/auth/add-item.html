@@ -6,59 +6,57 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form action="/store" method="post" enctype="multipart/form-data">
+                <form action="/inventory/add" method="post" enctype="multipart/form-data" novalidate>
                     <div class="card">
-                        <!-- <div class="card-header">Agregar productos</div> -->
                         <div class="card-body">
                             <div class="row">
                                 <div class="form-group col-md-3">
-                                    <label class="form-label mt-4" for="formType">Rubro</label>
-                                    <select class="form-select" name="formType" id="formType">
-                                        <option>Ferretería</option>
-                                        <option>Electricidad</option>
-                                        <option>Plomería</option>
-                                        <option>Pinturería</option>
-                                        <option>Herramientas</option>
-                                        <option>Maquinaria</option>
+                                    <label class="form-label mt-4" for="addCategory">Categoría</label>
+                                    <select class="form-select" name="addCategory" id="addCategory">
+
+                                        {% for category in categories %}
+                                            <option value="{{category.id}}">{{category.category}}</option>
+                                        {% endfor %}
+
                                     </select>
                                 </div>
                                 <div class="form-group col-md">
-                                    <label class="form-label mt-4" for="formName">Producto</label>
-                                    <input class="form-control" type="text" name="formName" id="formName" required>
+                                    <label class="form-label mt-4" for="addName">Nombre</label>
+                                    <input class="form-control" type="text" name="addName" id="addName" required>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="form-group col-md">
-                                    <label class="form-label mt-4" for="formInfo">Descripción</label>
-                                    <input class="form-control" type="text" name="formInfo" id="formInfo" required>
+                                    <label class="form-label mt-4" for="addInfo">Descripción</label>
+                                    <input class="form-control" type="text" name="addInfo" id="addInfo" required>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="form-group col-md-3">
-                                    <label class="form-label mt-4" for="formStock">Cantidad</label>
-                                    <input class="form-control" type="number" step=".5" name="formStock" id="formStock"
+                                    <label class="form-label mt-4" for="addStock">Cantidad</label>
+                                    <input class="form-control" type="number" step=".5" name="addStock" id="addStock" value="0"
                                         required>
                                 </div>
                                 <div class="form-group col-md-3">
-                                    <label class="form-label mt-4" for="formCost">Costo</label>
+                                    <label class="form-label mt-4" for="addCost">Costo</label>
                                     <div class="input-group">
                                         <span class="input-group-text">$</span>
-                                        <input class="form-control" type="number" step=".01" name="formCost"
-                                            id="formCost" required>
+                                        <input class="form-control" type="number" step=".01" name="addCost"
+                                            id="addCost" value="0" required>
                                     </div>
                                 </div>
                                 <div class="form-group col-md-3">
-                                    <label class="form-label mt-4" for="formPrice">Precio Venta</label>
+                                    <label class="form-label mt-4" for="addPrice">Precio Venta</label>
                                     <div class="input-group">
                                         <span class="input-group-text">$</span>
-                                        <input class="form-control" type="number" step=".01" name="formPrice"
-                                            id="formPrice" required>
+                                        <input class="form-control" type="number" step=".01" name="addPrice"
+                                            id="addPrice" value="0" required>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="form-group col-md">
-                                        <label class="form-label mt-4" for="formFile">Foto</label>
-                                        <input class="form-control" type="file" name="formFile" id="formFileCreate"
+                                        <label class="form-label mt-4" for="addFile">Foto</label>
+                                        <input class="form-control" type="file" name="addFile" id="addFileCreate"
                                             required>
                                     </div>
                                 </div>
@@ -66,7 +64,8 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <input class="btn btn-outline-success" type="submit" value="Agregar">
+                        <!-- <input class="btn btn-outline-success" type="submit" value="Agregar"> -->
+                        <button class="btn btn-outline-success" type="submit">Agregar</button>
                     </div>
                 </form>
             </div>
