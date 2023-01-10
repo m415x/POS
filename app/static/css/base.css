@@ -16,6 +16,31 @@ main {
 
 
 /* * CARDS * */
+/* .card__img-container {
+    width: 130px;
+    height: 130px;
+    overflow: hidden;
+    margin: 10px;
+    position: relative;
+}
+
+.card__img-container > .card__img-crop {
+    position:absolute;
+    left: -100%;
+    right: -100%;
+    top: -100%;
+    bottom: -100%;
+    margin: auto;
+    min-height: 100%;
+    min-width: 100%;
+} */
+.card__img > img{
+	width: 130 px;
+	height: 130px;
+	object-fit: cover;
+	/* border: 3px solid #ff9daa; */
+}
+
 .card__description,
 .card__price {
     font-size: x-small;

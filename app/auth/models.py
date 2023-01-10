@@ -42,14 +42,18 @@ class Items(db.Model):
         db.session.delete(self)
         db.session.commit()
     
-    def serialize(self):
-        return {"id": self.id,
-                "name": self.name,
-                "info": self.info,
-                "stock": self.stock,
-                "cost": self.cost,
-                "price": self.price,
-                "img_name": self.img_name}
+    def json(self):
+        return {
+            "id": self.id,
+            "category_id": self.category_id,
+            "category": self.category.category,
+            "name": self.name,
+            "info": self.info,
+            "stock": self.stock,
+            "cost": self.cost,
+            "price": self.price,
+            "img_name": self.img_name
+        }
         
     def get_img_name(self):
         return self.img_name

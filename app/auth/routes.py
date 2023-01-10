@@ -23,10 +23,14 @@ logger = logging.getLogger(__name__)
 @login_required
 def show_pos():
     items = Items.get_all()
-    # jitems = jsonify(Item.get_all())
-    # print(jitems.serialize())
     
-    return render_template("auth/pos.html", items=items)
+    # Serializamos los items y los convertimos a json
+    json_items = [ item.json() for item in Items.get_all() ]
+    
+    # Almacenamos los items en el objeto items
+    json_items = {'items': json_items }
+    
+    return render_template("auth/pos.html", json_items=json_items, items=items)
 
 
 #* SHOW INVENTORY -----------------------------------------------------------------
