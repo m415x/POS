@@ -38,6 +38,14 @@ def media_items(filename):
     return send_from_directory(dir_path, filename)
 
 
+# @app.route('/media/items/')
+# def media_path():
+#     dir_path = os.path.join(app.config['MEDIA_DIR'],
+#                             app.config['ITEMS_IMAGES_DIR'])
+    
+#     return send_from_directory(dir_path)
+
+
 
 #* UTILIZAR >>> flask run
 # if __name__ == '__main__':

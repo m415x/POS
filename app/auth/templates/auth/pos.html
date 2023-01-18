@@ -37,18 +37,22 @@
                     <!-- * CARDS * -->
                     <div class="row">
                         <div class="col-md-8 card overflow__scroll">
-                            <div class="row mt-2" id="app"> <!--Mount VUE-->
 
-                                <!-- * CARD * -->
+                            <!--* Mount VUE *-->
+
+                            <div class="row mt-2" id="app"> 
+
+                                <!-- * CARD v-for * -->
 
                                 <div class="col-lg-2 col-md-8 mb-4" v-for="item in items" :key="item.id"> 
+                                    
                                     <div class="card">
                                         <div class="bg-image hover-zoom ripple ripple-surface ripple-surface-light"
                                             data-mdb-ripple-color="light">
 
                                             <div class="card__img">
 
-                                                    <img src="" class="card-img-top" alt="Item"/>
+                                                    <img :src="'../../../../media/items/' + [[ item.img_name ]]" class="card-img-top" alt="Item"/>
 
                                             </div>
 
@@ -64,7 +68,7 @@
                                                 </div>
                                             </div>
                                             <div class="hover-overlay">
-                                                <a :href="[[ item.id ]]" class="text-reset text-decoration-none">
+                                                <a :href="'#' + [[ item.id ]]" class="text-reset text-decoration-none">
                                                     <div class="mask"
                                                         style="background-color: rgba(253, 253, 253, 0.15);">
                                                     </div>
@@ -201,8 +205,6 @@
 <script>
 
     const array_items = JSON.parse('{{ json_items|tojson }}')
-
-    console.log(array_items)
 
     var app = Vue.createApp({
             data() {
