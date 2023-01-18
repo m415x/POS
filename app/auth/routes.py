@@ -1,7 +1,7 @@
 import logging
 import os
 
-from flask import (render_template, redirect, url_for, request, current_app, abort, jsonify)
+from flask import (render_template, redirect, url_for, request, current_app, abort)
 from flask_login import (login_required, logout_user, current_user)
 from werkzeug.utils import secure_filename
 from datetime import datetime
@@ -22,15 +22,11 @@ logger = logging.getLogger(__name__)
 @auth_bp.route("/pos/")
 @login_required
 def show_pos():
-    items = Items.get_all()
     
     # Serializamos los items y los convertimos a json
     json_items = [ item.json() for item in Items.get_all() ]
-    
-    # Almacenamos los items en el objeto items
-    json_items = {'items': json_items }
-    
-    return render_template("auth/pos.html", json_items=json_items, items=items)
+
+    return render_template("auth/pos.html",  json_items=json_items) #!Retornar url_for con path de imagenes
 
 
 #* SHOW INVENTORY -----------------------------------------------------------------

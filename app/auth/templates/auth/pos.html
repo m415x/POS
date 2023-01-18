@@ -37,46 +37,34 @@
                     <!-- * CARDS * -->
                     <div class="row">
                         <div class="col-md-8 card overflow__scroll">
-                            <div class="row mt-2" v-for="item in items">
-
+                            <div class="row mt-2" id="app"> <!--Mount VUE-->
 
                                 <!-- * CARD * -->
-                                {% for item in items %}
 
-                                <div class="col-lg-2 col-md-8 mb-4">
+                                <div class="col-lg-2 col-md-8 mb-4" v-for="item in items" :key="item.id"> 
                                     <div class="card">
                                         <div class="bg-image hover-zoom ripple ripple-surface ripple-surface-light"
                                             data-mdb-ripple-color="light">
 
                                             <div class="card__img">
-                                                {% if item.img_name != None %}
-                                                    <img src="{{ url_for('media_items', filename=item.img_name) }}" class="card-img-top" alt="Item"/>
-                                                    <!-- img -->
-                                                {% endif %}
+
+                                                    <img src="" class="card-img-top" alt="Item"/>
+
                                             </div>
 
                                             <div class="mask">
                                                 <div class="d-flex justify-content-start align-items-start h-100">
-                                                    {% if item.stock >= 10 %}
 
-                                                    <span class="badge bg-success m-1 card__stock">
+                                                    <span v-if="item.stock >= 10" class="badge bg-success m-1 card__stock">[[ item.stock ]]</span>
 
-                                                    {% elif item.stock > 0 %}
+                                                    <span v-else-if="item.stock > 0" class="badge bg-warning m-1 card__stock">[[ item.stock ]]</span>
 
-                                                    <span class="badge bg-warning m-1 card__stock">
+                                                    <span v-else class="badge bg-danger m-1 card__stock">SIN STOCK</span>
 
-                                                    {% else %}
-
-                                                    <span class="badge bg-danger m-1 card__stock">
-
-                                                    {% endif %}
-
-                                                        {{item.stock}} <!-- stock -->
-                                                    </span>
                                                 </div>
                                             </div>
                                             <div class="hover-overlay">
-                                                <a href="#{{item.id}}" class="text-reset text-decoration-none">
+                                                <a :href="[[ item.id ]]" class="text-reset text-decoration-none">
                                                     <div class="mask"
                                                         style="background-color: rgba(253, 253, 253, 0.15);">
                                                     </div>
@@ -84,24 +72,18 @@
                                             </div>
                                         </div>
                                         <div class="card-body">
-                                            <a href="" class="text-reset text-decoration-none">
-                                                <h5 class="card-title mb-2 card__code">
-                                                    {{item.category.category[0:3].upper()}}-{{ '%05d' % item.id }} <!-- code -->
-                                                </h5>
-                                            </a>
-                                            <a href="" class="text-reset text-decoration-none card__description">
-                                                <p>
-                                                    {{item.name.upper()}} <br> {{item.info.capitalize()}} <!-- name & info -->
-                                                </p>
-                                            </a>
-                                            <h6 class="mb-1 card__price">
-                                                $ {{item.price}} <!-- price -->
-                                            </h6>
+                                            
+                                            <h5 class="card-title mb-2 card__code">
+                                                [[ item.category.toUpperCase().slice(0, 3) ]]-[[ item.id.toString().padStart(5, 0) ]]
+                                            </h5>
+
+                                            <p class="text-reset text-decoration-none card__description">[[ item.name.toUpperCase() ]] <br> [[ item.info ]]</p>
+
+                                            <h6 class="mb-1 card__price">$ [[ item.price ]]</h6>
+
                                         </div>
                                     </div>
                                 </div>
-
-                                {% endfor %}
 
                             </div>
                         </div>
@@ -217,15 +199,19 @@
 </section>
 
 <script>
-    const json_items = {{ json_items|tojson }}
-    console.log(json_items)
-    const { createApp } = Vue
-        createApp({
+
+    const array_items = JSON.parse('{{ json_items|tojson }}')
+
+    console.log(array_items)
+
+    var app = Vue.createApp({
             data() {
                 return {
-                    items = json_items,
+                    items: array_items
                 }
-            }
+            },
+            delimiters: ['[[', ']]']
         }).mount('#app')
+
 </script>
 {% endblock %}

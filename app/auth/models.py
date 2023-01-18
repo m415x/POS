@@ -23,8 +23,8 @@ class Items(db.Model):
     def __init__(self, name, info, stock, cost, price, img_name, user_id=None, category_id=None):
         self.user_id = user_id
         self.category_id = category_id
-        self.name = name
-        self.info = info
+        self.name = name.capitalize()
+        self.info = info.capitalize()
         self.stock = stock
         self.cost = cost
         self.price = price
@@ -92,8 +92,8 @@ class SalesDetails(db.Model):
         self.sale_id = sales_id
         self.category_id = category_id
         self.item_id = item_id
-        self.name = name
-        self.info = info
+        self.name = name.capitalize()
+        self.info = info.capitalize()
         self.quantity = quantity
         self.cost = cost
         self.price = price
@@ -171,9 +171,8 @@ class PayMethods(db.Model):
     card_id = db.Column(db.Integer, db.ForeignKey('cards.id'))
     card = db.relationship('Cards', backref='pay_methods', lazy=True)
     
-    def __init__(self, method, payment_surcharge):
-        self.method = method
-        self.payment_surcharge = payment_surcharge
+    def __init__(self, method):
+        self.method = method.capitalize()
 
     def __repr__(self):
         return f'<PayMethods {self.name}>'
@@ -204,8 +203,8 @@ class Cards(db.Model):
     entity = db.Column(db.String(30), nullable=False)
     payment_surcharge = db.Column(db.Float)
     
-    def __init__(self, method, payment_surcharge):
-        self.method = method
+    def __init__(self, entity, payment_surcharge):
+        self.entity = entity.capitalize()
         self.payment_surcharge = payment_surcharge
 
     def __repr__(self):
@@ -235,9 +234,8 @@ class Categories(db.Model):
     created = db.Column(db.DateTime, default=datetime.utcnow)
     category = db.Column(db.String(20), nullable=False)
     
-    def __init__(self, method, payment_surcharge):
-        self.method = method
-        self.payment_surcharge = payment_surcharge
+    def __init__(self, category):
+        self.category = category.capitalize()
 
     def __repr__(self):
         return f'<Categories {self.category}>'
@@ -278,8 +276,8 @@ class PriceHistory(db.Model):
     def __init__(self, name, info, stock, cost, price, item_id=None, user_id=None):
         self.item_id = item_id
         self.user_id = user_id
-        self.name = name
-        self.info = info
+        self.name = name.capitalize()
+        self.info = info.capitalize()
         self.stock = stock
         self.cost = cost
         self.price = price
