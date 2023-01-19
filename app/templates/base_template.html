@@ -23,9 +23,7 @@
         <!-- * NAVBAR * -->
         <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
             <div class="container-fluid">
-                <a class="navbar-brand" href="#">
-                    <img src="{{ url_for('media_logos', filename='logo.png') }}" width="30" alt="Logo Empresa"/>
-                </a>
+                <img src="{{ url_for('media_logos', filename='logo.png') }}" class="navbar-brand" width="30" alt="Logo Empresa"/>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01"
                     aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -38,7 +36,9 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{{url_for('auth.show_inventory')}}" target="_blank">Inventario</a>
                         </li>
-                        <li class="nav-item">Desplegable o varios items</li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Desplegable o varios items</a>
+                        </li>
                     </ul>
                     <ul class="navbar-nav navbar-right">
                         {% if current_user.is_admin %}
@@ -72,5 +72,6 @@
     <script src="{{ url_for('static', filename='js/jquery-3.6.1.min.js') }}"></script>
     <script src="{{ url_for('static', filename='js/scripts.js') }}"></script>    
     <script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/vue.js') }}"></script>
 </body>
 </html>

@@ -35,17 +35,18 @@
 
 
                     <!-- * CARDS * -->
+
                     <div class="row">
                         <div class="col-md-8 card overflow__scroll">
 
                             <!--* Mount VUE *-->
 
-                            <div class="row mt-2" id="app"> 
+                            <div class="row mt-2" id="app_pos"> 
 
                                 <!-- * CARD v-for * -->
 
                                 <div class="col-lg-2 col-md-8 mb-4" v-for="item in items" :key="item.id"> 
-                                    
+
                                     <div class="card">
                                         <div class="bg-image hover-zoom ripple ripple-surface ripple-surface-light"
                                             data-mdb-ripple-color="light">
@@ -203,17 +204,6 @@
 </section>
 
 <script>
-
     const array_items = JSON.parse('{{ json_items|tojson }}')
-
-    var app = Vue.createApp({
-            data() {
-                return {
-                    items: array_items
-                }
-            },
-            delimiters: ['[[', ']]']
-        }).mount('#app')
-
 </script>
 {% endblock %}

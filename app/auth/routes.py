@@ -26,14 +26,14 @@ def show_pos():
     # Serializamos los items y los convertimos a json
     json_items = [ item.json() for item in Items.get_all() ]
 
-    return render_template("auth/pos.html",  json_items=json_items) #!Retornar url_for con path de imagenes
+    return render_template("auth/pos.html", json_items=json_items)
 
 
 #* SHOW INVENTORY -----------------------------------------------------------------
 @auth_bp.route("/inventory/")
 @login_required
 def show_inventory():
-    
+    #! Idem POS
     # Guardamos los datos de la petición en una variable
     items = Items.get_all()
     
@@ -74,7 +74,8 @@ def add_item():
         file_path = os.path.join(images_dir, image_name)
         file.save(file_path)
     else:
-        image_name = 'no_image.jpg'
+        # Si no tiene fichero, se le asigna esta imagen
+        image_name = 'no_image.png'
     
     # Si algun campo está vacío, no se crea
     if name == '' or info == '' or stock == '' or cost == '' or price == '':
@@ -124,6 +125,9 @@ def edit_item():
     # Comprueba si la petición contiene la parte del fichero
     if file:
         image_name = secure_filename(file.filename)
+        print('='*50)
+        print(image_name)
+        print('='*50)
         images_dir = current_app.config['ITEMS_IMAGES_DIR']
         os.makedirs(images_dir, exist_ok=True)
         now = datetime.now().strftime('%Y%m%d%H%M%S%f')
@@ -132,8 +136,11 @@ def edit_item():
         file.save(file_path)
         
         # Evitamos eliminar el archivo 'no_image.jpg'
-        if image_name != 'no_image.jpg': #! Borra la imagen igualmente
+        if item.img_name != 'no_image.png': #! Borra la imagen igualmente
             try:
+                print('='*50)
+                print('File DELETE')
+                print('='*50)
                 os.remove(os.path.join(images_dir, item.img_name))
             except:
                 pass
