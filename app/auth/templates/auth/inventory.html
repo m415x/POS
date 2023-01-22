@@ -16,11 +16,15 @@
                     <th class="col-1">Stock</th>
                     <th class="col-1">Costo</th>
                     <th class="col-1">Precio Venta</th>
-                    <th>
-                        <a href="#" class="btn btn-outline-success btn-sm" id="btn__add"><i class="fa-solid fa-plus"></i></a>
+                    <th class="col-1">
+                        <div class="">
+                            <a href="#" class="btn btn-outline-success btn-sm" id="btn__add--item"><i class="fa-solid fa-plus"></i></a>
+                        </div>
                     </th>
-                    <th class="btn__confirm">
-                        <a href="{ url_for(auth.add_item) }}" class="btn btn-outline-success btn-sm" id="btn__add"><i class="fa-solid fa-file-circle-plus"></i></a>
+                    <th class="col-1">
+                        <div class="ratio ratio-1x1">
+                            <a href="{ url_for(auth.add_item) }}" class="btn btn-outline-primary btn-sm" id="btn__add--items"><i class="fa-solid fa-file-circle-plus"></i></a>
+                        </div>
                     </th>
                 </tr>
             </thead>
@@ -49,15 +53,18 @@
                 
                     <td class="col-1"><div>{{item.cost}}</div></td>
                     <td class="col-1"><div>{{item.price}}</div></td>
-                    <td class="btn__confirm">
-                        <a href="{{ url_for('auth.edit_item', item_id=item.id) }}" class="btn btn-outline-warning btn-sm btn__edit" data-item_id="{{item.id}}" data-item_category="{{item.category.category}}" data-item_name="{{item.name}}" data-item_info="{{item.info}}" data-item_stock="{{item.stock}}" data-item_cost="{{item.cost}}" data-item_price="{{item.price}}" data-item_img="{{item.img_name}}"><i
+                    <td>
+                        <!-- <div class="ratio ratio-1x1"> -->
+                            <a href="{{ url_for('auth.edit_item', item_id=item.id) }}" class="btn btn-outline-warning btn-sm btn__edit" data-item_id="{{item.id}}" data-item_category="{{item.category.category}}" data-item_name="{{item.name}}" data-item_info="{{item.info}}" data-item_stock="{{item.stock}}" data-item_cost="{{item.cost}}" data-item_price="{{item.price}}" data-item_img="{{item.img_name}}"><i
                             class="fa-solid fa-pen-to-square"></i></a>
+                        <!-- </div> -->
                     </td>
                     <td>
-                        <a type="button" onclick="if(!confirm('¿Desea borrar {{item.category.category[0:3].upper()}}-{{'%05d'%item.id}} -> {{item.name.upper()}}?')) event.preventDefault()"
+                        <!-- <div class="ratio ratio-1x1"> -->
+                            <a type="button" onclick="if(!confirm('¿Desea borrar {{item.category.category[0:3].upper()}}-{{'%05d'%item.id}} -> {{item.name.upper()}}?')) event.preventDefault()"
                             class="btn btn-outline-danger btn-sm btn__delete" href="{{ url_for('auth.delete_item', item_id=item.id)}}"><i
                                 class="fa-solid fa-trash"></i></a>
-                                
+                        <!-- </div>        -->
                     </td>
                 </tr>
                 {% endfor %}

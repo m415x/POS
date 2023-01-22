@@ -2,7 +2,7 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="modalAddLabel">Agregar producto</h1>
+                <h1 class="modal-title fs-5" id="modalAddLabel">Agregar Artículo</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -15,7 +15,7 @@
                                     <select class="form-select" name="addCategory" id="addCategory">
 
                                         {% for category in categories %}
-                                            <option value="{{category.id}}">{{category.category}}</option>
+                                            <option value="{{category.id}}">{{category.category}}</option> <!--CAMBIAR A VUE-->
                                         {% endfor %}
 
                                     </select>
@@ -64,7 +64,6 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <!-- <input class="btn btn-outline-success" type="submit" value="Agregar"> -->
                         <button class="btn btn-outline-success" type="submit">Agregar</button>
                     </div>
                 </form>

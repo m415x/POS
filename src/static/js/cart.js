@@ -39,9 +39,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Funciones
 
-    /**
-    * Dibuja todos los productos a partir de la base de datos. No confundir con el carrito
-    */
+    /* Dibuja todos los productos a partir de la base de datos. No confundir con el carrito */
     function renderizarProductos() {
         baseDeDatos.forEach((info) => {
             // Estructura
@@ -61,7 +59,7 @@ document.addEventListener('DOMContentLoaded', () => {
             // Precio
             const miNodoPrecio = document.createElement('p');
             miNodoPrecio.classList.add('card-text');
-            miNodoPrecio.textContent = `${info.precio}${divisa}`;
+            miNodoPrecio.textContent = `${divisa} ${info.precio}`;
             // Boton 
             const miNodoBoton = document.createElement('button');
             miNodoBoton.classList.add('btn', 'btn-primary');
@@ -113,7 +111,7 @@ document.addEventListener('DOMContentLoaded', () => {
             // Creamos el nodo del item del carrito
             const miNodo = document.createElement('li');
             miNodo.classList.add('list-group-item', 'text-right', 'mx-2');
-            miNodo.textContent = `${numeroUnidadesItem} x ${miItem[0].nombre} - ${miItem[0].precio}${divisa}`;
+            miNodo.textContent = `${numeroUnidadesItem} x ${miItem[0].nombre} - ${divisa} ${miItem[0].precio}`;
             // Boton de borrar
             const miBoton = document.createElement('button');
             miBoton.classList.add('btn', 'btn-danger', 'mx-5');

@@ -2,7 +2,7 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="modalEditLabel">Editar producto</h1>
+                <h1 class="modal-title fs-5" id="modalEditLabel">Editar Artículo</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -23,7 +23,7 @@
                                     <select class="form-select" name="editCategory" id="editCategory">
 
                                         {% for category in categories %}
-                                            <option value="{{category.id}}">{{category.category}}</option>
+                                            <option value="{{category.id}}">{{category.category}}</option> <!--CAMBIAR A VUE-->
                                         {% endfor %}
 
                                     </select>

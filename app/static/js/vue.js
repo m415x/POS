@@ -2,7 +2,8 @@
 var app = Vue.createApp({
     data() {
         return {
-            items: array_items
+            items: array_items,
+            cart_items: cart_items,
         }
     },
     delimiters: ['[[', ']]']
@@ -10,11 +11,11 @@ var app = Vue.createApp({
 
 
 // * INVENTORY ----------------------------------
-var app = Vue.createApp({
-    data() {
-        return {
-            items: array_items
-        }
-    },
-    delimiters: ['[[', ']]']
-}).mount('#app_inv')
+// var app = Vue.createApp({
+//     data() {
+//         return {
+//             items: array_items
+//         }
+//     },
+//     delimiters: ['[[', ']]']
+// }).mount('#app_inv')
