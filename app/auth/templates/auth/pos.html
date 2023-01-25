@@ -56,10 +56,9 @@
                                         </div>
                                         <div class="hover-overlay">
                                             <a href="#ID"
-                                                class="text-reset text-decoration-none add__cart"
-                                                data-item_id='ID'>
-                                                <div class="mask"
-                                                    style="background-color: rgba(253, 253, 253, 0.15);">
+                                                class="text-reset text-decoration-none add__cart">
+                                                <div class="mask add__cart-mask"
+                                                    style="background-color: rgba(253, 253, 253, 0.15);" data-item_id='ID' data-item_category_id="CATEGORY_ID" data-item_category="CATEGORY" data-item_name="NAME" data-item_info="INFO" data-item_stock="STOCK" data-item_cost="COST" data-item_price="PRICE">
                                                 </div>
                                             </a>
                                         </div>
@@ -168,6 +167,6 @@
 
 <script>
     const array_items = JSON.parse('{{ json_items|tojson }}')
-    //console.log(array_items)
+    console.log(array_items)
 </script>
 {% endblock %}
