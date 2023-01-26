@@ -87,7 +87,8 @@ const renderItems_cart = () => {
         templateItemCart.querySelector('.cart_info').textContent = item.info
         templateItemCart.querySelector('.cart_price-unit').textContent = `${badge} ${item.price} / ${item.unit}`
         templateItemCart.querySelector('.btn_minus').dataset.id = item.id
-        templateItemCart.querySelector('.cart_quantity').setAttribute('value', item.quantity)
+        templateItemCart.querySelector('.cart_quantity').textContent = item.quantity
+        // templateItemCart.querySelector('.cart_quantity').setAttribute('value', item.quantity)
         templateItemCart.querySelector('.btn_plus').dataset.id = item.id
         templateItemCart.querySelector('.cart_ppq').textContent = `${badge} ${item.price*item.quantity}`
 
@@ -95,6 +96,9 @@ const renderItems_cart = () => {
         fragment.appendChild(clone)
     })
     itemsCart.appendChild(fragment)
+
+    renderHeaderCart()
+    renderFooterCart()
 }
 
 // function selectText(id) {
@@ -102,3 +106,31 @@ const renderItems_cart = () => {
 //     input.focus()
 //     input.select()
 // }
+
+const renderHeaderCart = () => {
+    headerCart.innerHTML = ''
+    if(Object.keys(cart).length === 0) {
+        headerCart.innerHTML = ''
+    }
+    const cartQuantity = Object.values(cart).reduce((acc, {quantity}) => acc + quantity, 0)
+
+    templateHeaderCart.querySelector('.cart_quantity').textContent = cartQuantity
+
+    const clone = templateHeaderCart.cloneNode(true)
+    fragment.appendChild(clone)
+    headerCart.appendChild(fragment)
+}
+
+const renderFooterCart = () => {
+    footerCart.innerHTML = ''
+    if(Object.keys(cart).length === 0) {
+        footerCart.innerHTML = ''
+    }
+    const cartTotal = Object.values(cart).reduce((acc, {quantity, price}) => acc + quantity * price, 0)
+
+    templateFooterCart.querySelector('.cart_total').textContent = `${badge} ${Math.round(cartTotal * 100) / 100}`
+
+    const clone = templateFooterCart.cloneNode(true)
+    fragment.appendChild(clone)
+    footerCart.appendChild(fragment)
+}

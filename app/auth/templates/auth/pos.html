@@ -79,7 +79,7 @@
 
 
                         <!--* SHOPPING CART *-->
-                        <div class="row col-4 ">
+                        <div class="col-4 ">
                             <div class="card">
                                 <span id="cart">
                                     <div class="overflow__scroll--cart">
@@ -94,7 +94,7 @@
                             <template id="template-header_cart">
                                 <div class="d-flex justify-content-between align-items-center mb-4">
                                     <div>
-                                        <p class="mb-0">Tienes 1 item en el carrito</p>
+                                        <p class="mb-0">Tienes <span class="cart_quantity">ITEMS QUANTITY</span> item en el carrito</p>
                                     </div>
                                     <div>
                                         <p class="mb-0"><span class="text-muted">Ordenar por:</span> <a href="#!"
@@ -121,10 +121,10 @@
                                                 <button class="btn btn-link px-2 btn_minus">
                                                     <i class="fas fa-minus"></i>
                                                 </button>
-                                                <!-- <div type="number" class="fw-normal mb-0 px-2 cart_quantity"
-                                                    contenteditable="true">QUANTITY</div> -->
-                                                <input type="number" class="fw-normal mb-0 px-2 cart_quantity"
-                                                value="QUANTITY">
+                                                <div type="number" class="fw-normal mb-0 px-2 cart_quantity"
+                                                    contenteditable="true">QUANTITY</div>
+                                                <!-- <input type="number" class="fw-normal mb-0 px-2 cart_quantity"
+                                                value="QUANTITY"> -->
                                                 <button class="btn btn-link px-2 btn_plus">
                                                     <i class="fas fa-plus"></i>
                                                 </button>
@@ -152,13 +152,12 @@
                             <template id="template-footer_cart">
                                 <hr class="mb-4" style="height: 2px; background-color: #1266f1; opacity: 1;">
 
-                                <div class="d-flex justify-content-between px-x">
-                                    <p class="fw-bold">Discount:</p>
-                                    <p class="fw-bold">95$</p>
+                                <div class="d-flex justify-content-between px-x visually-hidden" hidden> <!--DESCUENTO OCULTO, FALTA FUNCION-->
+                                    <p class="fw-bold">Descuento: </p>
+                                    <p class="fw-bold cart_discount">DISCOUNT</p>
                                 </div>
-                                <div class="d-flex justify-content-between p-2 mb-2" style="background-color: #e1f5fe;">
-                                    <h5 class="fw-bold mb-0">Total:</h5>
-                                    <h5 class="fw-bold mb-0">2261$</h5>
+                                <div class="d-flex justify-content-end p-2 mb-2">
+                                    <h6 class="fw-bold mb-0">Total: <span class="cart_total">TOTAL</span></h6>
                                 </div>
                             </template>
 
