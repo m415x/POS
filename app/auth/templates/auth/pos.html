@@ -40,7 +40,7 @@
                             </div>
                         </div>
 
-                        <!--* CARD TEMPLATE *-->
+                        <!--TEMPLATE ITEM POS-->
                         <template id="template-item_pos">
                             <div class="text-center col-lg-2 col-md-8 mb-4">
                                 <div class="card">
@@ -55,10 +55,13 @@
                                             </div>
                                         </div>
                                         <div class="hover-overlay">
-                                            <a href="#ID"
-                                                class="text-reset text-decoration-none add__cart">
+                                            <a href="#ID" class="text-reset text-decoration-none add__cart">
                                                 <div class="mask add__cart-mask"
-                                                    style="background-color: rgba(253, 253, 253, 0.15);" data-item_id='ID' data-item_category_id="CATEGORY_ID" data-item_category="CATEGORY" data-item_name="NAME" data-item_info="INFO" data-item_stock="STOCK" data-item_cost="COST" data-item_price="PRICE">
+                                                    style="background-color: rgba(253, 253, 253, 0.15);"
+                                                    data-item_id='ID' data-item_category_id="CATEGORY_ID"
+                                                    data-item_category="CATEGORY" data-item_name="NAME"
+                                                    data-item_info="INFO" data-item_stock="STOCK" data-item_cost="COST"
+                                                    data-item_price="PRICE">
                                                 </div>
                                             </a>
                                         </div>
@@ -73,56 +76,91 @@
                                 </div>
                             </div>
                         </template>
-                            
+
 
                         <!--* SHOPPING CART *-->
                         <div class="row col-4 ">
                             <div class="card">
                                 <span id="cart">
                                     <div class="overflow__scroll--cart">
-
-                                        <!-- ENCABEZADO -->
-                                        <div class="d-flex justify-content-between align-items-center mb-4">
-                                            <div>
-                                                <p class="mb-0">Tienes 1 item en el carrito</p>
-                                            </div>
-                                            <div>
-                                                <p class="mb-0"><span class="text-muted">Ordenar por:</span> <a
-                                                        href="#!" class="text-body">precio <i
-                                                            class="fas fa-angle-down mt-1"></i></a></p>
-                                            </div>
-                                        </div>
-
-                                        <!-- CART ITEM -->
-                                        <div class="card-body">
-                                            <div class="d-flex justify-content-between" v-for="cart_item in cart_items">
-                                                <div class="d-flex flex-row align-items-start">
-                                                    <div class="ms-3">
-                                                        <h6>[[ cart_item.name ]]: [[ cart_item.info ]]</h6>
-                                                        <p class="small mb-0">$ [[ cart_item.price ]] / [[
-                                                            cart_item.unit ]]</p>
-                                                    </div>
-                                                </div>
-                                                <div class="d-flex flex-row align-items-start">
-                                                    <div style="width: 150px;">
-                                                        <h5 class="fw-normal mb-0">x [[ cart_item.quantity ]]</h5>
-                                                        <!--CAMBIAR POR INPUT-->
-                                                    </div>
-                                                    <div style="width: 80px;">
-                                                        <h5 class="mb-0">$ [[ cart_item.price * cart_item.quantity ]]
-                                                        </h5>
-                                                    </div>
-                                                    <a href="#!" class="btn__del_cart_item"
-                                                        :data-item_id='[[ item.id ]]' style="color: #cecece;"><i
-                                                            class="fas fa-trash-alt"></i></a>
-                                                </div>
-                                            </div>
-                                        </div>
+                                        <div id="header_cart"></div>
+                                        <div id="items_cart"></div>
+                                        <div id="footer_cart"></div>
                                     </div>
                                 </span>
                             </div>
 
+                            <!--TEMPLATE HEADER CART-->
+                            <template id="template-header_cart">
+                                <div class="d-flex justify-content-between align-items-center mb-4">
+                                    <div>
+                                        <p class="mb-0">Tienes 1 item en el carrito</p>
+                                    </div>
+                                    <div>
+                                        <p class="mb-0"><span class="text-muted">Ordenar por:</span> <a href="#!"
+                                                class="text-body">precio <i class="fas fa-angle-down mt-1"></i></a></p>
+                                    </div>
+                                </div>
+                            </template>
 
+                            <!--TEMPLATE ITEM CART-->
+                            <template id="template-item_cart">
+                                    <!-- <div class="d-flex justify-content-between"> -->
+                                    <div class="row mt-2 d-flex justify-content-between align-items-center">
+                                        <!-- <div class="d-flex flex-row align-items-start"> -->
+                                        <div class="col-md-7 col-lg-7 col-xl-7">
+                                            <div class="ms-3 cart_id" title="ID">
+                                                <div><span class="cart_name">NAME</span> <span
+                                                        class="cart_info">INFO</span></div>
+                                                <div class="small mb-0 cart_price-unit">PRICE BY UNIT</div>
+                                            </div>
+                                        </div>
+                                        <!-- <div class="d-flex flex-row align-items-start"> -->
+                                        <div class="col-md-2 col-lg-2 col-xl-2 d-flex">
+                                            <div class="d-inline-flex col-xs-1">
+                                                <button class="btn btn-link px-2 btn_minus">
+                                                    <i class="fas fa-minus"></i>
+                                                </button>
+                                                <!-- <div type="number" class="fw-normal mb-0 px-2 cart_quantity"
+                                                    contenteditable="true">QUANTITY</div> -->
+                                                <input type="number" class="fw-normal mb-0 px-2 cart_quantity"
+                                                value="QUANTITY">
+                                                <button class="btn btn-link px-2 btn_plus">
+                                                    <i class="fas fa-plus"></i>
+                                                </button>
+                                            </div>
+
+                                            <!--<div style="width: 150px;" class="d-inline-flex">
+                                                <button class="btn btn-outline-success btn-sm">+</button>
+                                                <div type="number" class="fw-normal mb-0 cart_quantity"
+                                                    contenteditable="true">QUANTITY</div>
+                                                <button class="btn btn-outline-danger btn-sm">-</button>
+                                            </div> -->
+                                        </div>
+
+                                        <div class="col-md-2 col-lg-2 col-xl-2 text-end">
+                                            <div class="mb-0 cart_ppq">PRICE PER QUANTITY</div>
+                                        </div>
+                                        <div class="col-md-1 col-lg-1 col-xl-1 text-end">
+                                            <a href="#!" class="del_item-cart" data-item_id='ID'
+                                                style="color: #cecece;"><i class="fas fa-trash-alt"></i></a>
+                                        </div>
+                                    </div>
+                            </template>
+
+                            <!--TEMPLATE FOOTER CART-->
+                            <template id="template-footer_cart">
+                                <hr class="mb-4" style="height: 2px; background-color: #1266f1; opacity: 1;">
+
+                                <div class="d-flex justify-content-between px-x">
+                                    <p class="fw-bold">Discount:</p>
+                                    <p class="fw-bold">95$</p>
+                                </div>
+                                <div class="d-flex justify-content-between p-2 mb-2" style="background-color: #e1f5fe;">
+                                    <h5 class="fw-bold mb-0">Total:</h5>
+                                    <h5 class="fw-bold mb-0">2261$</h5>
+                                </div>
+                            </template>
 
                             <!-- * CALC * -->
                             <div class="btn-toolbar card" role="toolbar" aria-label="Toolbar with button groups">

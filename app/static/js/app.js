@@ -1,5 +1,11 @@
 const itemsPos = document.getElementById('items_pos')
+const headerCart = document.getElementById('header_cart')
+const itemsCart = document.getElementById('items_cart')
+const footerCart = document.getElementById('footer_cart')
 const templateItemPos = document.getElementById('template-item_pos').content
+const templateHeaderCart = document.getElementById('template-header_cart').content
+const templateItemCart = document.getElementById('template-item_cart').content
+const templateFooterCart = document.getElementById('template-footer_cart').content
 const fragment = document.createDocumentFragment()
 const badge = '$'
 let cart = {}
@@ -14,15 +20,15 @@ itemsPos.addEventListener('click', e => {
 
 const fetchData = async () => {
     try {
-        pintarItems_pos(array_items)
+        renderItems_pos(array_items)
     } catch (error) {
         console.log(error)
     }
 }
 
-const pintarItems_pos = array_items => {
+const renderItems_pos = array_items => {
     array_items.forEach(item => {
-        templateItemPos.querySelector('.card__code').textContent = `${item.category.toUpperCase().slice(0, 3)} - ${item.id.toString().padStart(5, 0)}`
+        templateItemPos.querySelector('.card__code').textContent = `${item.category.toUpperCase().slice(0, 3)}-${item.id.toString().padStart(5, 0)}`
         templateItemPos.querySelector('.card__name').textContent = item.name.toUpperCase()
         templateItemPos.querySelector('.card__info').textContent = item.info
         templateItemPos.querySelector('.card__price').textContent = `${badge} ${item.price}`
@@ -37,6 +43,8 @@ const pintarItems_pos = array_items => {
         templateItemPos.querySelector('.add__cart-mask').dataset.item_stock = item.stock
         templateItemPos.querySelector('.add__cart-mask').dataset.item_cost = item.cost
         templateItemPos.querySelector('.add__cart-mask').dataset.item_price = item.price
+        // templateItemPos.querySelector('.add__cart-mask').setAttribute('onclick', selectText(item.id))
+
         const clone = templateItemPos.cloneNode(true)
         fragment.appendChild(clone)
     })
@@ -67,5 +75,30 @@ const setCart = object => {
         item.quantity = cart[item.id].quantity + 1
     }
     cart[item.id] = {...item}
-    console.log(cart)
+    renderItems_cart()
 }
+
+const renderItems_cart = () => {
+    console.log(cart)
+    itemsCart.innerHTML = ''
+    Object.values(cart).forEach(item => {
+        templateItemCart.querySelector('.cart_id').setAttribute('title', `${item.category.toUpperCase().slice(0, 3)} - ${item.id.toString().padStart(5, 0)}`)
+        templateItemCart.querySelector('.cart_name').textContent = item.name.toUpperCase()
+        templateItemCart.querySelector('.cart_info').textContent = item.info
+        templateItemCart.querySelector('.cart_price-unit').textContent = `${badge} ${item.price} / ${item.unit}`
+        templateItemCart.querySelector('.btn_minus').dataset.id = item.id
+        templateItemCart.querySelector('.cart_quantity').setAttribute('value', item.quantity)
+        templateItemCart.querySelector('.btn_plus').dataset.id = item.id
+        templateItemCart.querySelector('.cart_ppq').textContent = `${badge} ${item.price*item.quantity}`
+
+        const clone = templateItemCart.cloneNode(true)
+        fragment.appendChild(clone)
+    })
+    itemsCart.appendChild(fragment)
+}
+
+// function selectText(id) {
+//     const input = document.querySelectorAll('.cart_quantity')[id]
+//     input.focus()
+//     input.select()
+// }
