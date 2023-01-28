@@ -51,7 +51,7 @@
                                         </div>
                                         <div class="mask">
                                             <div class="d-flex justify-content-start align-items-start h-100">
-                                                <span class="badge bg-success m-1 card__stock">STOCK</span>
+                                                <span class="badge m-1 card__stock">STOCK</span>
                                             </div>
                                         </div>
                                         <div class="hover-overlay">
@@ -118,16 +118,12 @@
                                         <!-- <div class="d-flex flex-row align-items-start"> -->
                                         <div class="col-md-2 col-lg-2 col-xl-2 d-flex">
                                             <div class="d-inline-flex col-xs-1">
-                                                <button class="btn btn-link px-2 btn_minus">
-                                                    <i class="fas fa-minus"></i>
-                                                </button>
+                                                <button class="btn btn-link px-2 text-decoration-none btn_minus">-</button>
                                                 <div type="number" class="fw-normal mb-0 px-2 cart_quantity"
-                                                    contenteditable="true">QUANTITY</div>
+                                                    contenteditable="true" id="input_quantity">QUANTITY</div>
                                                 <!-- <input type="number" class="fw-normal mb-0 px-2 cart_quantity"
                                                 value="QUANTITY"> -->
-                                                <button class="btn btn-link px-2 btn_plus">
-                                                    <i class="fas fa-plus"></i>
-                                                </button>
+                                                <button class="btn btn-link px-2 text-decoration-none btn_plus">+</button>
                                             </div>
 
                                             <!--<div style="width: 150px;" class="d-inline-flex">
@@ -142,8 +138,8 @@
                                             <div class="mb-0 cart_ppq">PRICE PER QUANTITY</div>
                                         </div>
                                         <div class="col-md-1 col-lg-1 col-xl-1 text-end">
-                                            <a href="#!" class="del_item-cart" data-item_id='ID'
-                                                style="color: #cecece;"><i class="fas fa-trash-alt"></i></a>
+                                            <a href="#!" class="del_item-cart text-decoration-none" data-item_id='ID'
+                                                style="color: #cecece;">X</a>
                                         </div>
                                     </div>
                             </template>
