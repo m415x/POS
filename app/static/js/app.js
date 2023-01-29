@@ -21,6 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 itemsPos.addEventListener('click', e => {
     addCart(e)
+    stopTime()
 })
 
 itemsCart.addEventListener('click', e => {
@@ -41,18 +42,21 @@ const renderItemsPos = array_items => {
         templateItemPos.querySelector('.card__name').textContent = item.name.toUpperCase()
         templateItemPos.querySelector('.card__info').textContent = item.info
         templateItemPos.querySelector('.card__price').textContent = `${badge} ${item.price}`
-        templateItemPos.querySelector('.card__stock').textContent = item.stock //Agregar if-else con colores y sin stock
-        /*if(item.stock >= 10) {
+        templateItemPos.querySelector('.card__stock').textContent = item.stock
+        if(item.stock >= 10) {
             templateItemPos.querySelector('.card__stock').classList.add('bg-success')
+            templateItemPos.querySelector('.card__stock').classList.remove('bg-warning')
+            templateItemPos.querySelector('.card__stock').classList.remove('bg-danger')
             console.log('VERDE')
-        } else if(item.stock > 0) {
+        } else if(item.stock > 0 && item.stock < 10) {
             templateItemPos.querySelector('.card__stock').classList.add('bg-warning')
+            templateItemPos.querySelector('.card__stock').classList.remove('bg-danger')
             console.log('AMARILLO')
         } else {
             templateItemPos.querySelector('.card__stock').textContent = 'SIN STOCK'
             templateItemPos.querySelector('.card__stock').classList.add('bg-danger')
             console.log('ROJO')
-        }*/
+        }
         templateItemPos.querySelector('.card__img').setAttribute('src', `../../../media/items/${item.img_name}`)
         templateItemPos.querySelector('.add__cart').setAttribute('href', `#${item.id}`)
         templateItemPos.querySelector('.add__cart-mask').dataset.item_id = item.id
@@ -63,7 +67,6 @@ const renderItemsPos = array_items => {
         templateItemPos.querySelector('.add__cart-mask').dataset.item_stock = item.stock
         templateItemPos.querySelector('.add__cart-mask').dataset.item_cost = item.cost
         templateItemPos.querySelector('.add__cart-mask').dataset.item_price = item.price
-
         const clone = templateItemPos.cloneNode(true)
         fragment.appendChild(clone)
     })
@@ -78,7 +81,6 @@ const addCart = e => {
 }
 
 const setCart = object => {
-    // console.log(object)
     const item = {
         id: object.querySelector('.add__cart-mask').dataset.item_id,
         category_id: object.querySelector('.add__cart-mask').dataset.item_category_id,
@@ -110,19 +112,15 @@ const renderItemsCart = () => {
         templateItemCart.querySelector('.btn_plus').dataset.id = item.id
         templateItemCart.querySelector('.cart_ppq').textContent = `${badge} ${item.price*item.quantity}`
         templateItemCart.querySelector('.del_item-cart').dataset.id = item.id
-
         const clone = templateItemCart.cloneNode(true)
         fragment.appendChild(clone)
     })
     itemsCart.appendChild(fragment)
-
     renderHeaderCart()
     renderFooterCart()
-
     /*Object.values(cart).forEach(item => {
     selectText(item.id)
     })*/
-    
     localStorage.setItem('cart', JSON.stringify(cart))
 }
 
@@ -139,9 +137,7 @@ const renderHeaderCart = () => {
         return
     }
     const cartQuantity = Object.values(cart).reduce((acc, {quantity}) => acc + quantity, 0)
-
     templateHeaderCart.querySelector('.cart_quantity').textContent = cartQuantity
-
     const clone = templateHeaderCart.cloneNode(true)
     fragment.appendChild(clone)
     headerCart.appendChild(fragment)
@@ -154,23 +150,33 @@ const renderFooterCart = () => {
         return
     }
     const cartTotal = Object.values(cart).reduce((acc, {quantity, price}) => acc + quantity * price, 0)
-
     templateFooterCart.querySelector('.cart_total').textContent = `${badge} ${Math.round(cartTotal * 100) / 100}`
-
     const clone = templateFooterCart.cloneNode(true)
     fragment.appendChild(clone)
     footerCart.appendChild(fragment)
 }
 
+// Muestra la hora en que se inicia el carrito
+let countClick = 0
+const stopTime = e => {
+    const tabClock = document.querySelector('.tab__clock').textContent
+    if (countClick < 1) {
+    let date = new Date()
+    let hour = `${date.getHours().toString().padStart(2, '0')}:${date.getMinutes().toString().padStart(2, '0')}`
+        document.querySelector('.tab__clock').textContent = hour
+        countClick++
+    }
+}
+
 const btnAction = e => {
-    // Acción de aumentar
+    // Aumenta la cantidad de un item en el carrito
     if(e.target.classList.contains('btn_plus')) {
         const itemCart = cart[e.target.dataset.id]
         itemCart.quantity ++
         cart[e.target.dataset.id] = {...itemCart}
         renderItemsCart()
     }
-    // Acción de disminuir
+    // Disminuye la cantidad de un item en el carrito
     if(e.target.classList.contains('btn_minus')) {
         const itemCart = cart[e.target.dataset.id]
         itemCart.quantity --
@@ -179,7 +185,7 @@ const btnAction = e => {
         }
         renderItemsCart()
     }
-    // Acción de eliminar
+    // Elimina un item del carrito
     if(e.target.classList.contains('del_item-cart')) {
         delete cart[e.target.dataset.id]
         renderItemsCart()
@@ -187,22 +193,6 @@ const btnAction = e => {
     e.stopPropagation()
 }
 
-
-// const colour = document.querySelectorAll('.card__stock').innerHTML
-// console.log(colour)
-/*colour.textContent.forEach(item => {
-    if(item >= 10) {
-        document.querySelector('.card__stock').classList.add('bg-success')
-        console.log('VERDE')
-    } else if(item > 0) {
-        document.querySelector('.card__stock').classList.add('bg-warning')
-        console.log('AMARILLO')
-    } else {
-        document.querySelector('.card__stock').textContent = 'SIN STOCK'
-        document.querySelector('.card__stock').classList.add('bg-danger')
-        console.log('ROJO')
-    }
-})*/
 
 
 /*inputQuantity.addEventListener("input", (e) => {
