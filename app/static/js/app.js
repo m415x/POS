@@ -1,8 +1,8 @@
+const posTab = document.getElementById('pos_tab')
 const itemsPos = document.getElementById('items_pos')
 const headerCart = document.getElementById('header_cart')
 const itemsCart = document.getElementById('items_cart')
 const footerCart = document.getElementById('footer_cart')
-// const inputQuantity = document.getElementById('input_quantity')
 const templateItemPos = document.getElementById('template-item_pos').content
 const templateHeaderCart = document.getElementById('template-header_cart').content
 const templateItemCart = document.getElementById('template-item_cart').content
@@ -10,6 +10,7 @@ const templateFooterCart = document.getElementById('template-footer_cart').conte
 const fragment = document.createDocumentFragment()
 const badge = '$'
 let cart = {}
+
 
 document.addEventListener('DOMContentLoaded', () => {
     fetchData()
@@ -19,9 +20,13 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 })
 
+posTab.addEventListener('click', e => {
+    closeTab(e)
+})
+
 itemsPos.addEventListener('click', e => {
-    addCart(e)
     stopTime()
+    addCart(e)
 })
 
 itemsCart.addEventListener('click', e => {
@@ -47,15 +52,12 @@ const renderItemsPos = array_items => {
             templateItemPos.querySelector('.card__stock').classList.add('bg-success')
             templateItemPos.querySelector('.card__stock').classList.remove('bg-warning')
             templateItemPos.querySelector('.card__stock').classList.remove('bg-danger')
-            console.log('VERDE')
         } else if(item.stock > 0 && item.stock < 10) {
             templateItemPos.querySelector('.card__stock').classList.add('bg-warning')
             templateItemPos.querySelector('.card__stock').classList.remove('bg-danger')
-            console.log('AMARILLO')
         } else {
             templateItemPos.querySelector('.card__stock').textContent = 'SIN STOCK'
             templateItemPos.querySelector('.card__stock').classList.add('bg-danger')
-            console.log('ROJO')
         }
         templateItemPos.querySelector('.card__img').setAttribute('src', `../../../media/items/${item.img_name}`)
         templateItemPos.querySelector('.add__cart').setAttribute('href', `#${item.id}`)
@@ -110,7 +112,7 @@ const renderItemsCart = () => {
         templateItemCart.querySelector('.cart_quantity').dataset.id = item.id
         templateItemCart.querySelector('.cart_quantity').textContent = item.quantity
         templateItemCart.querySelector('.btn_plus').dataset.id = item.id
-        templateItemCart.querySelector('.cart_ppq').textContent = `${badge} ${item.price*item.quantity}`
+        templateItemCart.querySelector('.cart_ppq').textContent = `${badge} ${Math.round(item.price * item.quantity * 100) / 100}`
         templateItemCart.querySelector('.del_item-cart').dataset.id = item.id
         const clone = templateItemCart.cloneNode(true)
         fragment.appendChild(clone)
@@ -121,6 +123,7 @@ const renderItemsCart = () => {
     /*Object.values(cart).forEach(item => {
     selectText(item.id)
     })*/
+
     localStorage.setItem('cart', JSON.stringify(cart))
 }
 
@@ -159,10 +162,9 @@ const renderFooterCart = () => {
 // Muestra la hora en que se inicia el carrito
 let countClick = 0
 const stopTime = e => {
-    const tabClock = document.querySelector('.tab__clock').textContent
     if (countClick < 1) {
-    let date = new Date()
-    let hour = `${date.getHours().toString().padStart(2, '0')}:${date.getMinutes().toString().padStart(2, '0')}`
+        let date = new Date()
+        let hour = `${date.getHours().toString().padStart(2, '0')}:${date.getMinutes().toString().padStart(2, '0')}`
         document.querySelector('.tab__clock').textContent = hour
         countClick++
     }
@@ -193,7 +195,16 @@ const btnAction = e => {
     e.stopPropagation()
 }
 
-
+// Elimina el carrito completo
+const closeTab = e => {
+    if(e.target.classList.contains('close_tab')) {
+        cart = {}
+        document.querySelector('.tab__clock').textContent = ''
+        countClick = 0
+        renderItemsCart()
+    }
+    e.stopPropagation()
+}
 
 /*inputQuantity.addEventListener("input", (e) => {
     inputChange(e)
@@ -208,4 +219,28 @@ const inputChange = e => {
         renderItemsCart()
     }
     e.stopPropagation()
+}*/
+
+
+/*const inputQuantity = document.querySelectorAll('.cart_quantity').dataset.id
+// const log = document.getElementById('values')
+
+inputQuantity.addEventListener('input', updateValue)
+
+function updateValue(e) {
+    // log.textContent = e.target.value
+    console.log(e.target.value)
+}
+
+
+console.log(form)
+const updateQuantity = cart => {
+    cart.forEach(item => {
+        if(cart.hasOwnProperty(item.id)) {
+            console.log(item.quantity)
+            // item.quantity = cart[item.id].quantity + 1
+        }
+        // cart[item.id] = {...item}
+        // renderItemsCart()
+    })
 }*/
