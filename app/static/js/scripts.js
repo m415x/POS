@@ -8,14 +8,14 @@ const badge = '$'
 
 $(function () {
 
-    // AGREGAR ITEM AL CARRITO
+    /*// AGREGAR ITEM AL CARRITO
     $(".add__cart").on('click', function () {
         let item = $(this)
         const item_id = item.data('item_id')
 
         // Agregamos al array el id del item seleccionado
         cart_items_id.push(item_id)
-        console.log(cart_items_id) //!LUEGO BORRAR
+        console.log(cart_items_id)
 
         // Renderizamos el carrito
         cartRender()
@@ -29,7 +29,7 @@ $(function () {
 
         //Borramos item del carrito
         delCartItem()
-    })
+    })*/
 
 
     // MOSTRAR EDIT
@@ -83,13 +83,6 @@ $(function () {
         //     $('#pic_up').attr('hidden', false)
     }
 
-    // MOSTRAR HORA DE CARGA POS
-    var date = new Date()
-    var hour = `${date.getHours().toString().padStart(2, '0')}:${date.getMinutes().toString().padStart(2, '0')}`
-    $('.tab__clock').html(hour)
-
-    getCartLocalStorage()
-    cartRender()
 })
 
 
@@ -111,7 +104,7 @@ $("#editFile").change(function () { //Cuando el input cambie (se cargue un nuevo
 })
 
 
-//* FUNCIÓN RENDERIZAR CARRITO 
+/*//* FUNCIÓN RENDERIZAR CARRITO 
 function cartRender() { //!FUNCIONA MAL
 
     // Quitamos los duplicados
@@ -218,4 +211,12 @@ function getCartLocalStorage () {
         carrito = JSON.parse(myLocalStorage.getItem('cart'))
     }
 }
+*/
 
+/*// MOSTRAR HORA DE CARGA POS
+var date = new Date()
+var hour = `${date.getHours().toString().padStart(2, '0')}:${date.getMinutes().toString().padStart(2, '0')}`
+$('.tab__clock').html(hour)
+
+getCartLocalStorage()
+cartRender()*/

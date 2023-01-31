@@ -1,5 +1,5 @@
 from datetime import datetime
-from dataclasses import dataclass
+# from dataclasses import dataclass
 from app import db
 
 
@@ -14,18 +14,20 @@ class Items(db.Model):
     name = db.Column(db.String(20), nullable=False)
     info = db.Column(db.String(256), nullable=False)
     stock = db.Column(db.Float)
+    unit = db.Column(db.String(10))
     cost = db.Column(db.Float)
     price = db.Column(db.Float)
     img_name = db.Column(db.String)
     user = db.relationship('Users', backref='items', lazy=True)
     category = db.relationship('Categories', backref='items', lazy=True)
     
-    def __init__(self, name, info, stock, cost, price, img_name, user_id=None, category_id=None):
+    def __init__(self, name, info, stock, unit, cost, price, img_name, user_id=None, category_id=None):
         self.user_id = user_id
         self.category_id = category_id
         self.name = name.capitalize()
         self.info = info.capitalize()
         self.stock = stock
+        self.unit = unit
         self.cost = cost
         self.price = price
         self.img_name = img_name
@@ -50,6 +52,7 @@ class Items(db.Model):
             "name": self.name,
             "info": self.info,
             "stock": self.stock,
+            "unit": self.unit,
             "cost": self.cost,
             "price": self.price,
             "img_name": self.img_name

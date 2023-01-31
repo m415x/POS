@@ -54,7 +54,7 @@ main {
 }
 
 .card__description,
-.card__price {
+.card__price-unit {
     font-size: x-small;
     letter-spacing: 1px;
 }

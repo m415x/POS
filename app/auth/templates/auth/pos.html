@@ -73,7 +73,7 @@
                                         <p class="text-reset text-decoration-none card__description">
                                             <span class="card__name">NAME</span><br><span class="card__info">INFO</span>
                                         </p>
-                                        <h6 class="mb-1 card__price">PRICE</h6>
+                                        <h6 class="mb-1 card__price-unit"><span class="card__price">PRICE</span> / <span class="card__unit">UNIT</span></h6>
                                     </div>
                                 </div>
                             </div>
@@ -193,6 +193,7 @@
 
 <script>
     const array_items = JSON.parse('{{ json_items|tojson }}')
-    //console.log(array_items)
+    console.log(array_items)
 </script>
+<script src="{{ url_for('static', filename='js/pos.js') }}"></script>
 {% endblock %}

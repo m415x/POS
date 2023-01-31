@@ -59,6 +59,7 @@ const renderItemsPos = array_items => {
             templateItemPos.querySelector('.card__stock').textContent = 'SIN STOCK'
             templateItemPos.querySelector('.card__stock').classList.add('bg-danger')
         }
+        templateItemPos.querySelector('.card__unit').textContent = item.unit
         templateItemPos.querySelector('.card__img').setAttribute('src', `../../../media/items/${item.img_name}`)
         templateItemPos.querySelector('.add__cart').setAttribute('href', `#${item.id}`)
         templateItemPos.querySelector('.add__cart-mask').dataset.item_id = item.id
@@ -67,6 +68,7 @@ const renderItemsPos = array_items => {
         templateItemPos.querySelector('.add__cart-mask').dataset.item_name = item.name
         templateItemPos.querySelector('.add__cart-mask').dataset.item_info = item.info
         templateItemPos.querySelector('.add__cart-mask').dataset.item_stock = item.stock
+        templateItemPos.querySelector('.add__cart-mask').dataset.item_unit = item.unit
         templateItemPos.querySelector('.add__cart-mask').dataset.item_cost = item.cost
         templateItemPos.querySelector('.add__cart-mask').dataset.item_price = item.price
         const clone = templateItemPos.cloneNode(true)
@@ -82,6 +84,19 @@ const addCart = e => {
     e.stopPropagation()
 }
 
+/*const updateQuantity = () => {
+    // let quantity = {}
+    Object.values(cart).forEach(itemCart => {
+        // quantity = itemCart.quantity
+        array_items.forEach(itemPos => {
+            itemPos[itemCart.id].stock -= itemCart.quantity
+            console.log(itemPos.stock)
+            array_items[itemPos.id] = {...itemPos}
+        })
+    })
+    
+}*/
+
 const setCart = object => {
     const item = {
         id: object.querySelector('.add__cart-mask').dataset.item_id,
@@ -96,8 +111,10 @@ const setCart = object => {
     }
     if(cart.hasOwnProperty(item.id)) {
         item.quantity = cart[item.id].quantity + 1
+        
     }
     cart[item.id] = {...item}
+    // updateQuantity()
     renderItemsCart()
 }
 
@@ -120,18 +137,10 @@ const renderItemsCart = () => {
     itemsCart.appendChild(fragment)
     renderHeaderCart()
     renderFooterCart()
-    /*Object.values(cart).forEach(item => {
-    selectText(item.id)
-    })*/
+
 
     localStorage.setItem('cart', JSON.stringify(cart))
 }
-
-/*function selectText(id) {
-    const input = document.querySelectorAll('.cart_quantity')[id]
-    input.focus()
-    input.select()
-}*/
 
 const renderHeaderCart = () => {
     headerCart.innerHTML = ''
@@ -170,6 +179,7 @@ const stopTime = e => {
     }
 }
 
+// Cambia la cantidad de items en el carrito
 const btnAction = e => {
     // Aumenta la cantidad de un item en el carrito
     if(e.target.classList.contains('btn_plus')) {
@@ -202,10 +212,16 @@ const closeTab = e => {
         document.querySelector('.tab__clock').textContent = ''
         countClick = 0
         renderItemsCart()
+        localStorage.removeItem('cart')
     }
     e.stopPropagation()
 }
 
+
+console.log(cart)
+
+
+//! FALLIDOS
 /*inputQuantity.addEventListener("input", (e) => {
     inputChange(e)
 })
@@ -243,4 +259,14 @@ const updateQuantity = cart => {
         // cart[item.id] = {...item}
         // renderItemsCart()
     })
+}*/
+
+    /*Object.values(cart).forEach(item => {
+    selectText(item.id)
+    })*/
+
+    /*function selectText(id) {
+    const input = document.querySelectorAll('.cart_quantity')[id]
+    input.focus()
+    input.select()
 }*/
