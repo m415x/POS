@@ -164,13 +164,13 @@ main {
     -webkit-overflow-scrolling: touch;
 }
 
-/* #inventory__body {
+/* #items_inventory {
     display: block;
     height: 590px;
     overflow: auto;
 }
 
-#inventory__body tr {
+#items_inventory tr {
     display: table;
     table-layout: fixed;
 }

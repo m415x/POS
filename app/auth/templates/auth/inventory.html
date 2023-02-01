@@ -3,6 +3,7 @@
 {% block title %}Inventario{% endblock %}
 
 {% block content %}
+
 <div class="container inventory__cont">
     <div class="card">
         <table class="table table-hover align-middle mb-0" id="table">
@@ -28,54 +29,60 @@
                     </th>
                 </tr>
             </thead>
-            <tbody id="inventory__body">
-
-                {% for item in items %}
-                <tr>
-                    <td class="col-1">
-                        {% if item.img_name != None %}
-                        <img src="{{ url_for('media_items', filename=item.img_name) }}" style="width: 45px; height: 45px" class="rounded-circle">
-                        <!-- img -->
-                        {% endif %}
-                    </td>
-                    <td class="col-1"><div>{{item.category.category[0:3].upper()}}-{{ '%05d' % item.id }}</div></td>
-                    <td class="col-1"><div>{{item.category.category.capitalize()}}</div></td>
-                    <td class="col-2"><div>{{item.name.upper()}}</div></td>
-                    <td class="col-4"><div>{{item.info.capitalize()}}</div></td>
-                
-                    {% if item.stock >= 10 %}
-                        <td class="col-1"><div class="text-success">{{item.stock}}</div></td>
-                    {% elif item.stock > 0 %}
-                        <td class="col-1"><div class="text-warning">{{item.stock}}</div></td>
-                    {% else %}
-                        <td class="col-1"><div class="text-danger">SIN STOCK</div></td>
-                    {% endif %}
-                
-                    <td class="col-1"><div>{{item.cost}}</div></td>
-                    <td class="col-1"><div>{{item.price}}</div></td>
-                    <td>
-                        <!-- <div class="ratio ratio-1x1"> -->
-                            <a href="{{ url_for('auth.edit_item', item_id=item.id) }}" class="btn btn-outline-warning btn-sm btn__edit" data-item_id="{{item.id}}" data-item_category="{{item.category.category}}" data-item_name="{{item.name}}" data-item_info="{{item.info}}" data-item_stock="{{item.stock}}" data-item_cost="{{item.cost}}" data-item_price="{{item.price}}" data-item_img="{{item.img_name}}"><i
-                            class="fa-solid fa-pen-to-square"></i></a>
-                        <!-- </div> -->
-                    </td>
-                    <td>
-                        <!-- <div class="ratio ratio-1x1"> -->
-                            <a type="button" onclick="if(!confirm('¿Desea borrar {{item.category.category[0:3].upper()}}-{{'%05d'%item.id}} -> {{item.name.upper()}}?')) event.preventDefault()"
-                            class="btn btn-outline-danger btn-sm btn__delete" href="{{ url_for('auth.delete_item', item_id=item.id)}}"><i
-                                class="fa-solid fa-trash"></i></a>
-                        <!-- </div>        -->
-                    </td>
-                </tr>
-                {% endfor %}
-
-            </tbody>
+            <div class="overflow__scroll">
+                <tbody id="items_inventory"></tbody> <!--mount template items inventory-->
+            </div>
         </table>
     </div>
 </div>
 
+
+<!-- ===================== TEMPLATES ========================= -->
+
+<!--TEMPLATE ITEM INVENTORY-->
+<template id="template-item_inventory">
+    <tr>
+        <td class="col-1">
+            <img src="IMG" style="width: 45px; height: 45px" class="rounded-circle">
+        </td>
+        <td class="col-1"><div>ID</div></td>
+        <td class="col-1"><div>CATEGORY</div></td>
+        <td class="col-2"><div>NAME</div></td>
+        <td class="col-4"><div>INFO</div></td>
+        <td class="col-1"><div class="text-success">STOCK UNIT</div></td>
+        <td class="col-1"><div>COST</div></td>
+        <td class="col-1"><div>PRICE</div></td>
+        <td>
+            <!-- <div class="ratio ratio-1x1"> -->
+                <a href="{{ url_for('auth.edit_item', item_id=item.id) }}" class="btn btn-outline-warning btn-sm btn__edit" data-item_id="{{item.id}}" data-item_category="{{item.category.category}}" data-item_name="{{item.name}}" data-item_info="{{item.info}}" data-item_stock="{{item.stock}}" data-item_cost="{{item.cost}}" data-item_price="{{item.price}}" data-item_img="{{item.img_name}}"><i
+                class="fa-solid fa-pen-to-square"></i></a>
+            <!-- </div> -->
+        </td>
+        <td>
+            <!-- <div class="ratio ratio-1x1"> -->
+                <a type="button" onclick="if(!confirm('¿Desea borrar {{item.category.category[0:3].upper()}}-{{'%05d'%item.id}} -> {{item.name.upper()}}?')) event.preventDefault()"
+                class="btn btn-outline-danger btn-sm btn__delete" href="{{ url_for('auth.delete_item', item_id=item.id)}}"><i
+                    class="fa-solid fa-trash"></i></a>
+            <!-- </div>        -->
+        </td>
+    </tr>
+</template>
+
+
+<!-- ==================== MODALS ========================= -->
+
 {% include 'auth/add-item.html' %}
 
 {% include 'auth/edit-item.html' %}
+
+
+<!-- ==================== SCRIPTS ====================== -->
+
+<script>
+    const array_items = JSON.parse('{{ json_items|tojson }}')
+    console.log(array_items)
+</script>
+
+<script src="{{ url_for('static', filename='js/inventory.js') }}"></script>
 
 {% endblock %}

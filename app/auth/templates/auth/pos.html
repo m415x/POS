@@ -34,127 +34,30 @@
             <div class="tab-pane fade show active" id="prod" role="tabpanel">
                 <div class="mt-1 mx-2">
 
-
                     <!--* CARDS *-->
                     <div class="row">
                         <div class="col-md-8 card overflow__scroll">
-                            <div class="row mt-2" id="items_pos">
+                            <div class="row mt-2" id="items_pos"> <!--mount template items pos-->
                             </div>
                         </div>
-
-                        <!--TEMPLATE ITEM POS-->
-                        <template id="template-item_pos">
-                            <div class="text-center col-lg-2 col-md-8 mb-4">
-                                <div class="card">
-                                    <div class="bg-image hover-zoom ripple ripple-surface ripple-surface-light"
-                                        data-mdb-ripple-color="light">
-                                        <div>
-                                            <img src="IMG" class="card-img-top card__img" alt="" />
-                                        </div>
-                                        <div class="mask">
-                                            <div class="d-flex justify-content-start align-items-start h-100">
-                                                <span class="badge m-1 opacity-75 card__stock">STOCK</span>
-                                            </div>
-                                        </div>
-                                        <div class="hover-overlay">
-                                            <a href="#ID" class="text-reset text-decoration-none add__cart">
-                                                <div class="mask add__cart-mask"
-                                                    style="background-color: rgba(253, 253, 253, 0.15);"
-                                                    data-item_id='ID' data-item_category_id="CATEGORY_ID"
-                                                    data-item_category="CATEGORY" data-item_name="NAME"
-                                                    data-item_info="INFO" data-item_stock="STOCK" data-item_cost="COST"
-                                                    data-item_price="PRICE">
-                                                </div>
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="card-body">
-                                        <h5 class="card-title mb-2 card__code">ID</h5>
-                                        <p class="text-reset text-decoration-none card__description">
-                                            <span class="card__name">NAME</span><br><span class="card__info">INFO</span>
-                                        </p>
-                                        <h6 class="mb-1 card__price-unit"><span class="card__price">PRICE</span> / <span class="card__unit">UNIT</span></h6>
-                                    </div>
-                                </div>
-                            </div>
-                        </template>
-
 
                         <!--* SHOPPING CART *-->
                         <div class="col-4 ">
                             <div class="card">
                                 <span id="cart">
                                     <div class="overflow__scroll--cart">
-                                        <div id="header_cart"></div>
-                                        <div id="items_cart"></div>
-                                        <div id="footer_cart"></div>
+                                        <div id="header_cart"></div> <!--mount template header cart-->
+                                        <div id="items_cart"></div> <!--mount template items cart-->
+                                        <div id="footer_cart"></div> <!--mount template footer cart-->
                                     </div>
                                 </span>
                             </div>
-
-                            <!--TEMPLATE HEADER CART-->
-                            <template id="template-header_cart">
-                                <div class="d-flex justify-content-between align-items-center mb-4">
-                                    <div>
-                                        <p class="mb-0">Tienes <span class="cart_quantity">ITEMS QUANTITY</span> item en el carrito</p>
-                                    </div>
-                                    <div>
-                                        <p class="mb-0"><span class="text-muted">Ordenar por:</span> <a href="#!"
-                                                class="text-body">precio <i class="fas fa-angle-down mt-1"></i></a></p>
-                                    </div>
-                                </div>
-                            </template>
-
-                            <!--TEMPLATE ITEM CART-->
-                            <template id="template-item_cart">
-                                    <!-- <div class="d-flex justify-content-between"> -->
-                                    <div class="row mt-2 d-flex justify-content-between align-items-center">
-                                        <!-- <div class="d-flex flex-row align-items-start"> -->
-                                        <div class="col-md-7 col-lg-7 col-xl-7">
-                                            <div class="ms-3 cart_id" title="ID">
-                                                <div><span class="cart_name">NAME</span> <span
-                                                        class="cart_info">INFO</span></div>
-                                                <div class="small mb-0 cart_price-unit">PRICE BY UNIT</div>
-                                            </div>
-                                        </div>
-                                        <!-- <div class="d-flex flex-row align-items-start"> -->
-                                        <div class="col-md-2 col-lg-2 col-xl-2 d-flex">
-                                            <div class="d-inline-flex col-xs-1">
-                                                <button class="btn btn-link px-2 text-decoration-none btn_minus">-</button>
-                                                <div type="number" class="fw-normal mb-0 px-2 cart_quantity"
-                                                    contenteditable="true" id="input_quantity" data-id="ID">QUANTITY</div>
-                                                <button class="btn btn-link px-2 text-decoration-none btn_plus">+</button>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-md-2 col-lg-2 col-xl-2 text-end">
-                                            <div class="mb-0 cart_ppq">PRICE PER QUANTITY</div>
-                                        </div>
-                                        <div class="col-md-1 col-lg-1 col-xl-1 text-end">
-                                            <a href="#!" class="del_item-cart text-decoration-none" data-item_id='ID'
-                                                style="color: #cecece;">X</a>
-                                        </div>
-                                    </div>
-                            </template>
-
-                            <!--TEMPLATE FOOTER CART-->
-                            <template id="template-footer_cart">
-                                <hr class="mb-4" style="height: 2px; background-color: #1266f1; opacity: 1;">
-
-                                <div class="d-flex justify-content-between px-x visually-hidden" hidden> <!--DESCUENTO OCULTO, FALTA FUNCION-->
-                                    <p class="fw-bold">Descuento: </p>
-                                    <p class="fw-bold cart_discount">DISCOUNT</p>
-                                </div>
-                                <div class="d-flex justify-content-end p-2 mb-2">
-                                    <h6 class="fw-bold mb-0">Total: <span class="cart_total">TOTAL</span></h6>
-                                </div>
-                            </template>
 
                             <!-- * CALC * -->
                             <div class="btn-toolbar card" role="toolbar" aria-label="Toolbar with button groups">
                                 <div class="btn-group calculator-buttons" role="group" aria-label="First group">
                                     <button class="btn btn-secondary payment__span"><img
-                                            src="{{url_for('media_icons', filename='payment.png')}}" alt="Payment"
+                                            src="../../../../media/icons/payment.png" alt="Payment"
                                             width="100" style="filter: invert();"></button>
                                     <button class="btn btn-secondary">7</button>
                                     <button class="btn btn-secondary">8</button>
@@ -191,9 +94,112 @@
     </div>
 </section>
 
+
+<!-- ===================== TEMPLATES ========================= -->
+
+<!--TEMPLATE ITEM POS-->
+<template id="template-item_pos">
+    <div class="text-center col-lg-2 col-md-8 mb-4">
+        <div class="card">
+            <div class="bg-image hover-zoom ripple ripple-surface ripple-surface-light"
+                data-mdb-ripple-color="light">
+                <div>
+                    <img loading="lazy" src="IMG" class="card-img-top card__img" alt="" />
+                </div>
+                <div class="mask">
+                    <div class="d-flex justify-content-start align-items-start h-100">
+                        <span class="badge m-1 opacity-75 card__stock">STOCK</span>
+                    </div>
+                </div>
+                <div class="hover-overlay">
+                    <a href="#ID" class="text-reset text-decoration-none add__cart">
+                        <div class="mask add__cart-mask"
+                            style="background-color: rgba(253, 253, 253, 0.15);"
+                            data-item_id='ID' data-item_category_id="CATEGORY_ID"
+                            data-item_category="CATEGORY" data-item_name="NAME"
+                            data-item_info="INFO" data-item_stock="STOCK" data-item_cost="COST"
+                            data-item_price="PRICE">
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="card-body">
+                <h5 class="card-title mb-2 card__code">ID</h5>
+                <p class="text-reset text-decoration-none card__description">
+                    <span class="card__name">NAME</span><br><span class="card__info">INFO</span>
+                </p>
+                <h6 class="mb-1 card__price-unit"><span class="card__price">PRICE</span> / <span class="card__unit">UNIT</span></h6>
+            </div>
+        </div>
+    </div>
+</template>
+
+<!--TEMPLATE HEADER CART-->
+<template id="template-header_cart">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <p class="mb-0">Tienes <span class="cart_quantity">ITEMS QUANTITY</span> item en el carrito</p>
+        </div>
+        <div>
+            <p class="mb-0"><span class="text-muted">Ordenar por:</span> <a href="#!"
+                    class="text-body">precio <i class="fas fa-angle-down mt-1"></i></a></p>
+        </div>
+    </div>
+</template>
+
+<!--TEMPLATE ITEM CART-->
+<template id="template-item_cart">
+        <!-- <div class="d-flex justify-content-between"> -->
+        <div class="row mt-2 d-flex justify-content-between align-items-center">
+            <!-- <div class="d-flex flex-row align-items-start"> -->
+            <div class="col-md-7 col-lg-7 col-xl-7">
+                <div class="ms-3 cart_id" title="ID">
+                    <div><span class="cart_name">NAME</span> <span
+                            class="cart_info">INFO</span></div>
+                    <div class="small mb-0 cart_price-unit">PRICE BY UNIT</div>
+                </div>
+            </div>
+            <!-- <div class="d-flex flex-row align-items-start"> -->
+            <div class="col-md-2 col-lg-2 col-xl-2 d-flex">
+                <div class="d-inline-flex col-xs-1">
+                    <button class="btn btn-link px-2 text-decoration-none btn_minus">-</button>
+                    <div type="number" class="fw-normal mb-0 px-2 cart_quantity"
+                        contenteditable="true" id="input_quantity" data-id="ID">QUANTITY</div>
+                    <button class="btn btn-link px-2 text-decoration-none btn_plus">+</button>
+                </div>
+            </div>
+
+            <div class="col-md-2 col-lg-2 col-xl-2 text-end">
+                <div class="mb-0 cart_ppq">PRICE PER QUANTITY</div>
+            </div>
+            <div class="col-md-1 col-lg-1 col-xl-1 text-end">
+                <a href="#!" class="del_item-cart text-decoration-none" data-item_id='ID'
+                    style="color: #cecece;">X</a>
+            </div>
+        </div>
+</template>
+
+<!--TEMPLATE FOOTER CART-->
+<template id="template-footer_cart">
+    <hr class="mb-4" style="height: 2px; background-color: #1266f1; opacity: 1;">
+
+    <div class="d-flex justify-content-between px-x visually-hidden" hidden> <!--DESCUENTO OCULTO, FALTA FUNCION-->
+        <p class="fw-bold">Descuento: </p>
+        <p class="fw-bold cart_discount">DISCOUNT</p>
+    </div>
+    <div class="d-flex justify-content-end p-2 mb-2">
+        <h6 class="fw-bold mb-0">Total: <span class="cart_total">TOTAL</span></h6>
+    </div>
+</template>
+
+
+<!-- ==================== SCRIPTS ====================== -->
+
 <script>
     const array_items = JSON.parse('{{ json_items|tojson }}')
     console.log(array_items)
 </script>
+
 <script src="{{ url_for('static', filename='js/pos.js') }}"></script>
+
 {% endblock %}

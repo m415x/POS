@@ -208,11 +208,14 @@ const btnAction = e => {
 // Elimina el carrito completo
 const closeTab = e => {
     if(e.target.classList.contains('close_tab')) {
-        cart = {}
-        document.querySelector('.tab__clock').textContent = ''
-        countClick = 0
-        renderItemsCart()
-        localStorage.removeItem('cart')
+        if(!confirm('¿Desea borrar ')) {
+            e.preventDefault()
+            cart = {}
+            document.querySelector('.tab__clock').textContent = ''
+            countClick = 0
+            renderItemsCart()
+            localStorage.removeItem('cart')
+        } 
     }
     e.stopPropagation()
 }
