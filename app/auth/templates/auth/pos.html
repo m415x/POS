@@ -29,6 +29,10 @@
                     </span>
                 </a>
             </li>
+            <form class="d-flex">
+                <input class="form-control me-sm-2" id="input_search" type="search" placeholder="Buscar">
+                <!-- <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button> -->
+            </form>
         </ul>
         <div id="myTabContent" class="tab-content">
             <div class="tab-pane fade show active" id="prod" role="tabpanel">
@@ -197,7 +201,25 @@
 
 <script>
     const array_items = JSON.parse('{{ json_items|tojson }}')
-    console.log(array_items)
+    //console.log(array_items)
+
+    const inputSearch = document.querySelector('#input_search')
+    const innerQuery = document.querySelector('#resultado')
+
+    const filterItems = () => {
+        innerQuery.innerHTML = ''
+        const queryText = inputSearch.value.toLowerCase()
+        for(let item of array_items) {
+            let id = item.id.toLowerCase()
+            let name = item.name.toLowerCase()
+            let info = item.info.toLowerCase()
+            if(name.indexOf(queryText) !== -1) {
+                innerQuery.innerHTML += `
+                <li>${item.name}</li>
+                `
+            }
+        }
+    }
 </script>
 
 <script src="{{ url_for('static', filename='js/pos.js') }}"></script>
