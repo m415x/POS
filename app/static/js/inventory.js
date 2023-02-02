@@ -1,3 +1,4 @@
+const inventoryHeader = document.getElementById('inventory_header')
 const itemsInventory = document.getElementById('items_inventory')
 const templateItemInventory = document.getElementById('template-item_inventory').content
 const fragment = document.createDocumentFragment()
@@ -9,9 +10,9 @@ document.addEventListener('DOMContentLoaded', () => {
     fetchData()
 })
 
-// Evento agregar items al inventario
-posTab.addEventListener('click', e => {
-    closeTab(e)
+// Evento agregar items al inventario y filtros
+inventoryHeader.addEventListener('click', e => {
+    btnHeader(e)
 })
 
 // Evento editar item del inventario
@@ -94,17 +95,11 @@ document.addEventListener("keydown", e => {
 })
 
 // Agregar items al inventario
-const closeTab = e => {
-    if(e.target.classList.contains('close_tab')) {
-        if(!confirm('¿Desea borrar el carrito?')) {
-            e.preventDefault()
-        } else {
-            cart = {}
-            document.querySelector('.tab__clock').textContent = ''
-            countClick = 0
-            renderItemsCart()
-            localStorage.removeItem('cart')
-        }
+const btnHeader = e => {
+    if(e.target.classList.contains('btn__add--item')) {
+        e.preventDefault()
+        const modalAdd = document.getElementById('modalAdd')
+        modalAdd.classList.remove('visually-hidden')
     }
     e.stopPropagation()
 }
