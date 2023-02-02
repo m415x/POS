@@ -202,26 +202,6 @@
 <script>
     const array_items = JSON.parse('{{ json_items|tojson }}')
     //console.log(array_items)
-
-    /* const inputSearch = document.querySelector('#input_search')
-    const innerQuery = document.querySelector('#resultado')
-
-    const filterItems = () => {
-        //innerQuery.innerHTML = ''
-        const queryText = inputSearch.value.toLowerCase()
-        console.log(queryText)
-        for(let item of array_items) {
-            let id = item.id.toLowerCase()
-            let name = item.name.toLowerCase()
-            let info = item.info.toLowerCase()
-            if(name.indexOf(queryText) !== -1) {
-                innerQuery.innerHTML += `
-                <li>${item.name}</li>
-                `
-            }
-        }
-    }
-    inputSearch.addEventListener('keyup', renderItemsPos(array_items))*/
 </script>
 
 <script src="{{ url_for('static', filename='js/pos.js') }}"></script>

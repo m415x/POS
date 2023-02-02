@@ -1,5 +1,4 @@
 const posTab = document.getElementById('pos_tab')
-// const inputSearch = document.getElementById('input_search')
 const itemsPos = document.getElementById('items_pos')
 const headerCart = document.getElementById('header_cart')
 const itemsCart = document.getElementById('items_cart')
@@ -12,28 +11,33 @@ const fragment = document.createDocumentFragment()
 const badge = '$'
 let cart = {}
 
-
+// Evento cargar el DOM
 document.addEventListener('DOMContentLoaded', () => {
     fetchData()
+    // Cargar items almacenados en localStorage en el carrito 
     if(localStorage.getItem('cart')) {
         cart = JSON.parse(localStorage.getItem('cart'))
         renderItemsCart()
     }
 })
 
-posTab.addEventListener('click', e => {
-    closeTab(e)
-})
-
+// Evento agregar item al carrito
 itemsPos.addEventListener('click', e => {
     stopTime()
     addCart(e)
 })
 
+// Evento editar item del carrito
 itemsCart.addEventListener('click', e => {
     btnAction(e)
 })
 
+// Evento borrar carrito
+posTab.addEventListener('click', e => {
+    closeTab(e)
+})
+
+// Leer array de objetos de DB
 const fetchData = async () => {
     try {
         renderItemsPos(array_items)
@@ -42,7 +46,7 @@ const fetchData = async () => {
     }
 }
 
-
+// Cargar items en POS
 const renderItemsPos = array_items => {
     array_items.forEach(item => {
         templateItemPos.querySelector('.filter_item').dataset.item_id = item.id
@@ -82,9 +86,11 @@ const renderItemsPos = array_items => {
     itemsPos.appendChild(fragment)
 }
 
-// Búsqueda dinámica
+
+// Busquedar dinámicamente items
 document.addEventListener("keyup", e => {
     if (e.target.matches("#input_search")) {
+        // "ESC" => Borrar el input
         if (e.key === "Escape") e.target.value = ""
         document.querySelectorAll(".filter_item").forEach(item => {
             item.dataset.item_id.includes(e.target.value.toLowerCase()) 
@@ -96,15 +102,17 @@ document.addEventListener("keyup", e => {
     }
 })
 
+// "Ctrl + B" => Hacer foco en buscar 
 document.addEventListener("keydown", e => {
     if (e.ctrlKey || e.metaKey) {
-        // Analizar las combinaciones permitidas en el proyecto
+        // Analizar las combinaciones permitidas en el proyecto (reemplazar which por key ó code)
         if (String.fromCharCode(e.which).toLowerCase() === 'b') {
             document.querySelector("#input_search").focus()
         }
     }
 })
 
+// Evento agregar item al carrito
 const addCart = e => {
     if(e.target.classList.contains('add__cart-mask')) {
         setCart(e.target.parentElement)
@@ -112,19 +120,7 @@ const addCart = e => {
     e.stopPropagation()
 }
 
-/*const updateQuantity = () => {
-    // let quantity = {}
-    Object.values(cart).forEach(itemCart => {
-        // quantity = itemCart.quantity
-        array_items.forEach(itemPos => {
-            itemPos[itemCart.id].stock -= itemCart.quantity
-            console.log(itemPos.stock)
-            array_items[itemPos.id] = {...itemPos}
-        })
-    })
-    
-}*/
-
+// Crear item de carrito
 const setCart = object => {
     const item = {
         id: object.querySelector('.add__cart-mask').dataset.item_id,
@@ -142,10 +138,10 @@ const setCart = object => {
         
     }
     cart[item.id] = {...item}
-    // updateQuantity()
     renderItemsCart()
 }
 
+// Cargar item al carrito
 const renderItemsCart = () => {
     itemsCart.innerHTML = ''
     Object.values(cart).forEach(item => {
@@ -165,11 +161,10 @@ const renderItemsCart = () => {
     itemsCart.appendChild(fragment)
     renderHeaderCart()
     renderFooterCart()
-
-
     localStorage.setItem('cart', JSON.stringify(cart))
 }
 
+// Cargar header del carrito
 const renderHeaderCart = () => {
     headerCart.innerHTML = ''
     if(Object.keys(cart).length === 0) {
@@ -183,6 +178,7 @@ const renderHeaderCart = () => {
     headerCart.appendChild(fragment)
 }
 
+// Cargar footer del carrito
 const renderFooterCart = () => {
     footerCart.innerHTML = ''
     if(Object.keys(cart).length === 0) {
@@ -196,7 +192,8 @@ const renderFooterCart = () => {
     footerCart.appendChild(fragment)
 }
 
-// Muestra la hora en que se inicia el carrito
+
+// Mostrar la hora en que se inicia el carrito
 let countClick = 0
 const stopTime = e => {
     if (countClick < 1) {
@@ -207,16 +204,17 @@ const stopTime = e => {
     }
 }
 
-// Cambia la cantidad de items en el carrito
+
+// Cambiar la cantidad de items en el carrito
 const btnAction = e => {
-    // Aumenta la cantidad de un item en el carrito
+    // Aumentar la cantidad de un item en el carrito
     if(e.target.classList.contains('btn_plus')) {
         const itemCart = cart[e.target.dataset.id]
         itemCart.quantity ++
         cart[e.target.dataset.id] = {...itemCart}
         renderItemsCart()
     }
-    // Disminuye la cantidad de un item en el carrito
+    // Disminuir la cantidad de un item en el carrito
     if(e.target.classList.contains('btn_minus')) {
         const itemCart = cart[e.target.dataset.id]
         itemCart.quantity --
@@ -225,7 +223,7 @@ const btnAction = e => {
         }
         renderItemsCart()
     }
-    // Elimina un item del carrito
+    // Eliminar un item del carrito
     if(e.target.classList.contains('del_item-cart')) {
         delete cart[e.target.dataset.id]
         renderItemsCart()
@@ -233,7 +231,8 @@ const btnAction = e => {
     e.stopPropagation()
 }
 
-// Elimina el carrito completo
+
+// Eliminar el carrito completo
 const closeTab = e => {
     if(e.target.classList.contains('close_tab')) {
         if(!confirm('¿Desea borrar el carrito?')) {

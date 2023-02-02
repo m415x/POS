@@ -29,8 +29,10 @@
                     </th>
                 </tr>
             </thead>
-            <div class="overflow__scroll">
-                <tbody id="items_inventory"></tbody> <!--mount template items inventory-->
+            <div class="row">
+                <div class="col-md-8 card overflow__scroll">
+                    <tbody class="row mt-2" id="items_inventory"></tbody> <!--mount template items inventory-->
+                </div>
             </div>
         </table>
     </div>
@@ -43,7 +45,7 @@
 <template id="template-item_inventory">
     <tr>
         <td class="col-1">
-            <img src="IMG" style="width: 45px; height: 45px" class="rounded-circle">
+            <img loading="lazy" src="IMG" style="width: 45px; height: 45px" class="rounded-circle">
         </td>
         <td class="col-1"><div>ID</div></td>
         <td class="col-1"><div>CATEGORY</div></td>
