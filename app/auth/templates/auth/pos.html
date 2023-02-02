@@ -30,7 +30,7 @@
                 </a>
             </li>
             <form class="d-flex">
-                <input class="form-control me-sm-2" id="input_search" type="search" placeholder="Buscar">
+                <input class="form-control me-sm-2" id="input_search" type="text" placeholder="Buscar">
                 <!-- <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button> -->
             </form>
         </ul>
@@ -103,7 +103,7 @@
 
 <!--TEMPLATE ITEM POS-->
 <template id="template-item_pos">
-    <div class="text-center col-lg-2 col-md-8 mb-4">
+    <div class="text-center col-lg-2 col-md-8 mb-4 filter_item">
         <div class="card">
             <div class="bg-image hover-zoom ripple ripple-surface ripple-surface-light"
                 data-mdb-ripple-color="light">
@@ -121,7 +121,7 @@
                             style="background-color: rgba(253, 253, 253, 0.15);"
                             data-item_id='ID' data-item_category_id="CATEGORY_ID"
                             data-item_category="CATEGORY" data-item_name="NAME"
-                            data-item_info="INFO" data-item_stock="STOCK" data-item_cost="COST"
+                            data-item_info="INFO" data-item_stock="STOCK" data-item_unit="UNIT" data-item_cost="COST"
                             data-item_price="PRICE">
                         </div>
                     </a>
@@ -203,12 +203,13 @@
     const array_items = JSON.parse('{{ json_items|tojson }}')
     //console.log(array_items)
 
-    const inputSearch = document.querySelector('#input_search')
+    /* const inputSearch = document.querySelector('#input_search')
     const innerQuery = document.querySelector('#resultado')
 
     const filterItems = () => {
-        innerQuery.innerHTML = ''
+        //innerQuery.innerHTML = ''
         const queryText = inputSearch.value.toLowerCase()
+        console.log(queryText)
         for(let item of array_items) {
             let id = item.id.toLowerCase()
             let name = item.name.toLowerCase()
@@ -220,6 +221,7 @@
             }
         }
     }
+    inputSearch.addEventListener('keyup', renderItemsPos(array_items))*/
 </script>
 
 <script src="{{ url_for('static', filename='js/pos.js') }}"></script>

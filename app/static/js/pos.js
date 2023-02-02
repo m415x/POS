@@ -1,4 +1,5 @@
 const posTab = document.getElementById('pos_tab')
+// const inputSearch = document.getElementById('input_search')
 const itemsPos = document.getElementById('items_pos')
 const headerCart = document.getElementById('header_cart')
 const itemsCart = document.getElementById('items_cart')
@@ -41,8 +42,12 @@ const fetchData = async () => {
     }
 }
 
+
 const renderItemsPos = array_items => {
     array_items.forEach(item => {
+        templateItemPos.querySelector('.filter_item').dataset.item_id = item.id
+        templateItemPos.querySelector('.filter_item').dataset.item_name = item.name
+        templateItemPos.querySelector('.filter_item').dataset.item_info = item.info
         templateItemPos.querySelector('.card__code').textContent = `${item.category.toUpperCase().slice(0, 3)}-${item.id.toString().padStart(5, 0)}`
         templateItemPos.querySelector('.card__name').textContent = item.name.toUpperCase()
         templateItemPos.querySelector('.card__info').textContent = item.info
@@ -76,6 +81,29 @@ const renderItemsPos = array_items => {
     })
     itemsPos.appendChild(fragment)
 }
+
+// Búsqueda dinámica
+document.addEventListener("keyup", e => {
+    if (e.target.matches("#input_search")) {
+        if (e.key === "Escape") e.target.value = ""
+        document.querySelectorAll(".filter_item").forEach(item => {
+            item.dataset.item_id.includes(e.target.value.toLowerCase()) 
+            || item.dataset.item_name.toLowerCase().includes(e.target.value.toLowerCase()) 
+            || item.dataset.item_info.toLowerCase().includes(e.target.value.toLowerCase())
+                ? item.classList.remove("visually-hidden")
+                : item.classList.add("visually-hidden")
+        })
+    }
+})
+
+document.addEventListener("keydown", e => {
+    if (e.ctrlKey || e.metaKey) {
+        // Analizar las combinaciones permitidas en el proyecto
+        if (String.fromCharCode(e.which).toLowerCase() === 'b') {
+            document.querySelector("#input_search").focus()
+        }
+    }
+})
 
 const addCart = e => {
     if(e.target.classList.contains('add__cart-mask')) {
@@ -208,20 +236,19 @@ const btnAction = e => {
 // Elimina el carrito completo
 const closeTab = e => {
     if(e.target.classList.contains('close_tab')) {
-        if(!confirm('¿Desea borrar ')) {
+        if(!confirm('¿Desea borrar el carrito?')) {
             e.preventDefault()
+        } else {
             cart = {}
             document.querySelector('.tab__clock').textContent = ''
             countClick = 0
             renderItemsCart()
             localStorage.removeItem('cart')
-        } 
+        }
     }
     e.stopPropagation()
 }
 
-
-console.log(cart)
 
 
 //! FALLIDOS
