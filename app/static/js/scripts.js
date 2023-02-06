@@ -1,36 +1,11 @@
 // $(document).ready(function () {
 let cart_items_id = []
 let cart_items = []
-const myLocalStorage = window.localStorage
 
 const badge = '$'
 
 
 $(function () {
-
-    /*// AGREGAR ITEM AL CARRITO
-    $(".add__cart").on('click', function () {
-        let item = $(this)
-        const item_id = item.data('item_id')
-
-        // Agregamos al array el id del item seleccionado
-        cart_items_id.push(item_id)
-        console.log(cart_items_id)
-
-        // Renderizamos el carrito
-        cartRender()
-
-        // Guardamos el carrito en Local Storage
-        saveCartLocalStorage()
-    })
-    
-    // BORRAR ITEM DEL CARRITO
-    $(".btn__del_cart_item").on('click', function () {
-
-        //Borramos item del carrito
-        delCartItem()
-    })*/
-
 
     // MOSTRAR EDIT
     $(".btn__edit").on('click', function (event) {
@@ -68,11 +43,28 @@ $(function () {
         console.log(src)
     })
 
+
+
+    
     // MOSTRAR ADD
     $("#btn__add--item").click(function (event) {
         event.preventDefault()
         $('#modalAdd').modal('show')
     })
+
+    var myModal = document.getElementById('myModal')
+
+myModal.addEventListener('show.bs.modal', function (event) {
+    if (!data) {
+        return event.preventDefault() // stops modal from being shown
+    }
+})
+
+
+
+
+
+
 
     // OCULTAR IMG SIN SRC
     var src = $('#pic_up').attr('src')
