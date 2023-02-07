@@ -50,6 +50,7 @@ def add_item():
     name = request.form['addName']
     info = request.form['addInfo']
     stock = request.form['addStock']
+    unit = request.form['addUnit']
     cost = request.form['addCost']
     price = request.form['addPrice']
     file = request.files['addFile']

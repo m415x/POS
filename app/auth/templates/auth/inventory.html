@@ -30,8 +30,10 @@
                 </tr>
             </thead>
             <div class="row">
-                <div class="col-md-8 card overflow__scroll">
-                    <tbody class="row mt-2" id="items_inventory"></tbody> <!--mount template items inventory-->
+                <div class="col-md-12 card overflow__scroll">
+                    <tbody class="row mt-2" id="items_inventory">
+                        <!--mount template items inventory-->
+                    </tbody>
                 </div>
             </div>
         </table>
@@ -51,20 +53,14 @@
         <td class="col-1"><div class="inventory__category">CATEGORY</div></td>
         <td class="col-2"><div class="inventory__name">NAME</div></td>
         <td class="col-4"><div class="inventory__info">INFO</div></td>
-        <td class="col-1"><div class="inventory__stock">STOCK UNIT</div> <span class="inventory__unit">UNIT</span></td>
+        <td class="col-1"><div class="inventory__stock">STOCK</div> <span class="inventory__unit">UNIT</span></td>
         <td class="col-1"><div class="inventory__cost">COST</div></td>
         <td class="col-1"><div class="inventory__price">PRICE</div></td>
         <td>
-            <!-- <div class="ratio ratio-1x1"> -->
-                <a href="" class="btn btn-outline-warning btn-sm btn__edit" data-item_id="ID" data-item_category_id="CATEGORY ID" data-item_category="CATEGORY" data-item_name="NAME" data-item_info="INFO" data-item_stock="STOCK" data-item_unit="UNIT" data-item_cost="COST" data-item_price="PRICE" data-item_img="IMG"><i class="fa-solid fa-pen-to-square"></i></a>
-            <!-- </div>
+            <a class="btn btn-outline-warning btn-sm btn__edit" href="" data-item_id="ID" data-item_category_id="CATEGORY ID" data-item_category="CATEGORY" data-item_name="NAME" data-item_info="INFO" data-item_stock="STOCK" data-item_unit="UNIT" data-item_cost="COST" data-item_price="PRICE" data-item_img="IMG"><i class="fa-solid fa-pen-to-square"></i></a>
         </td>
         <td>
-            <!-- <div class="ratio ratio-1x1"> -->
-                <a type="button" onclick="if(!confirm('¿Desea borrar?')) event.preventDefault()"
-                class="btn btn-outline-danger btn-sm btn__delete" href=""><i
-                    class="fa-solid fa-trash"></i></a>
-            <!-- </div>        -->
+            <a class="btn btn-outline-danger btn-sm btn__delete" href=""><i class="fa-solid fa-trash"></i></a>
         </td>
     </tr>
 </template>
@@ -85,6 +81,6 @@
 </script>
 
 <script src="{{ url_for('static', filename='js/inventory.js') }}"></script>
-<script src="{{ url_for('static', filename='js/bootstrap.js') }}"></script>
+<script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>
 
 {% endblock %}

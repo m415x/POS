@@ -1,6 +1,7 @@
 const inventoryHeader = document.getElementById('inventory_header')
 const itemsInventory = document.getElementById('items_inventory')
 const templateItemInventory = document.getElementById('template-item_inventory').content
+const modalEdit = document.getElementById('modalEdit').content
 const fragment = document.createDocumentFragment()
 const badge = '$'
 
@@ -17,7 +18,7 @@ inventoryHeader.addEventListener('click', e => {
 
 // Evento editar item del inventario
 itemsInventory.addEventListener('click', e => {
-    btnAction(e)
+    btnEdit(e)
 })
 
 
@@ -41,18 +42,21 @@ const renderitemsInventory = array_items => {
         templateItemInventory.querySelector('.inventory__info').textContent = item.info
         templateItemInventory.querySelector('.inventory__price').textContent = `${badge} ${item.price}`
         templateItemInventory.querySelector('.inventory__stock').textContent = item.stock
+        templateItemInventory.querySelector('.inventory__unit').textContent = item.unit
         if(item.stock >= 10) {
             templateItemInventory.querySelector('.inventory__stock').classList.add('text-success')
             templateItemInventory.querySelector('.inventory__stock').classList.remove('text-warning')
             templateItemInventory.querySelector('.inventory__stock').classList.remove('text-danger')
+            templateItemInventory.querySelector('.inventory__unit').classList.remove('visually-hidden')
         } else if(item.stock > 0 && item.stock < 10) {
             templateItemInventory.querySelector('.inventory__stock').classList.add('text-warning')
             templateItemInventory.querySelector('.inventory__stock').classList.remove('text-danger')
+            templateItemInventory.querySelector('.inventory__unit').classList.remove('visually-hidden')
         } else {
             templateItemInventory.querySelector('.inventory__stock').textContent = 'SIN STOCK'
             templateItemInventory.querySelector('.inventory__stock').classList.add('text-danger')
+            templateItemInventory.querySelector('.inventory__unit').classList.add('visually-hidden')
         }
-        templateItemInventory.querySelector('.inventory__unit').textContent = item.unit
         templateItemInventory.querySelector('.inventory__img').setAttribute('src', `../../../media/items/${item.img_name}`)
         templateItemInventory.querySelector('.btn__edit').setAttribute('href', `#${item.id}`)
         templateItemInventory.querySelector('.btn__edit').dataset.item_id = item.id
@@ -64,6 +68,7 @@ const renderitemsInventory = array_items => {
         templateItemInventory.querySelector('.btn__edit').dataset.item_unit = item.unit
         templateItemInventory.querySelector('.btn__edit').dataset.item_cost = item.cost
         templateItemInventory.querySelector('.btn__edit').dataset.item_price = item.price
+        templateItemInventory.querySelector('.btn__delete').setAttribute('onclick', `if(!confirm('¿Desea borrar ${item.category.toUpperCase().slice(0, 3)}-${item.id.toString().padStart(5, 0)}?')) event.preventDefault()`)
         templateItemInventory.querySelector('.btn__delete').setAttribute('href', `/delete/${item.id}`)
         const clone = templateItemInventory.cloneNode(true)
         fragment.appendChild(clone)
@@ -102,31 +107,24 @@ const btnHeader = e => {
         e.preventDefault()
         const modalAdd = document.getElementById('modalAdd')
         modalAdd.classList.remove('visually-hidden')
+        const selectCategory = document.querySelector("#addUnit")
+        const addItem = () => {
+            const option = document.createElement('option')
+            const valor = 'algo'
+            option.value = valor;
+            option.text = valor;
+            $select.appendChild(option);
+          };
     }
     e.stopPropagation()
 }
 
-// Editar-Eliminar item del inventario
-const btnAction = e => {
-    // Aumenta la cantidad de un item en el carrito
-    if(e.target.classList.contains('btn_plus')) {
-        const itemCart = cart[e.target.dataset.id]
-        itemCart.quantity ++
-        cart[e.target.dataset.id] = {...itemCart}
-        renderItemsCart()
-    }
-    // Disminuye la cantidad de un item en el carrito
-    if(e.target.classList.contains('btn_minus')) {
-        const itemCart = cart[e.target.dataset.id]
-        itemCart.quantity --
-        if(itemCart.quantity === 0) {
-            delete cart[e.target.dataset.id]
-        }
-        renderItemsCart()
-    }
-    // Elimina un item del carrito
-    if(e.target.classList.contains('del_item-cart')) {
-        delete cart[e.target.dataset.id]
+// Editar item del inventario
+const btnEdit = e => {
+    if(e.target.classList.contains('btn__edit')) {
+        const itemInventory = array_items[e.target.dataset.item_id]
+        modalEdit.querySelector('#formLetters').textContent = itemInventory.category.toUpperCase().slice(0, 3)
+        
         renderItemsCart()
     }
     e.stopPropagation()

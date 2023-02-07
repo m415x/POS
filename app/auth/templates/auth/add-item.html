@@ -15,7 +15,7 @@
                                     <select class="form-select" name="addCategory" id="addCategory">
 
                                         {% for category in categories %}
-                                            <option value="{{category.id}}">{{category.category}}</option> <!--CAMBIAR A VUE-->
+                                            <option value="{{category.id}}">{{category.category}}</option>
                                         {% endfor %}
 
                                     </select>
@@ -36,6 +36,16 @@
                                     <label class="form-label mt-4" for="addStock">Cantidad</label>
                                     <input class="form-control" type="number" step=".5" name="addStock" id="addStock" value="0"
                                         required>
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <label class="form-label mt-4" for="addUnit">Unidad</label>
+                                    <select class="form-select" type="text" name="addUnit" id="addUnit" required>
+
+                                        {% for category in categories %}
+                                            <option value="UNID">{{category.category}}</option>
+                                        {% endfor %}
+                                        
+                                    </select>
                                 </div>
                                 <div class="form-group col-md-3">
                                     <label class="form-label mt-4" for="addCost">Costo</label>
