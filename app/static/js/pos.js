@@ -52,7 +52,7 @@ const renderItemsPos = array_items => {
         templateItemPos.querySelector('.filter_item').dataset.item_id = item.id
         templateItemPos.querySelector('.filter_item').dataset.item_name = item.name
         templateItemPos.querySelector('.filter_item').dataset.item_info = item.info
-        templateItemPos.querySelector('.card__code').textContent = `${item.category.toUpperCase().slice(0, 3)}-${item.id.toString().padStart(5, 0)}`
+        templateItemPos.querySelector('.card__id').textContent = `${item.category.toUpperCase().slice(0, 3)}-${item.id.toString().padStart(5, 0)}`
         templateItemPos.querySelector('.card__name').textContent = item.name.toUpperCase()
         templateItemPos.querySelector('.card__info').textContent = item.info
         templateItemPos.querySelector('.card__price').textContent = `${badge} ${item.price}`

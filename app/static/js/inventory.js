@@ -57,6 +57,7 @@ const renderitemsInventory = array_items => {
             templateItemInventory.querySelector('.inventory__stock').classList.add('text-danger')
             templateItemInventory.querySelector('.inventory__unit').classList.add('visually-hidden')
         }
+        templateItemInventory.querySelector('.inventory__cost').textContent = item.cost
         templateItemInventory.querySelector('.inventory__img').setAttribute('src', `../../../media/items/${item.img_name}`)
         templateItemInventory.querySelector('.btn__edit').setAttribute('href', `#${item.id}`)
         templateItemInventory.querySelector('.btn__edit').dataset.item_id = item.id
@@ -77,7 +78,7 @@ const renderitemsInventory = array_items => {
 }
 
 // Busquedar dinámicamente items
-document.addEventListener("keyup", e => {
+/*document.addEventListener("keyup", e => {
     if (e.target.matches("#input_search")) {
         // "ESC" => Borrar el input
         if (e.key === "Escape") e.target.value = ""
@@ -129,3 +130,4 @@ const btnEdit = e => {
     }
     e.stopPropagation()
 }
+*/
