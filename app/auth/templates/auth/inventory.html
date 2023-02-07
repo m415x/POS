@@ -19,12 +19,12 @@
                     <th class="col-1">Precio Venta</th>
                     <th class="col-1">
                         <div class="">
-                            <a href="#" class="btn btn-outline-success btn-sm" id="btn__add--item" data-bs-toggle="modal" data-bs-target="#modalAdd"><i class="fa-solid fa-plus"></i></a>
+                            <a href="#" class="btn btn-outline-success btn-sm" id="btn_add_item" data-bs-toggle="modal" data-bs-target="#modalAdd"><i class="fa-solid fa-plus"></i></a>
                         </div>
                     </th>
                     <th class="col-1">
                         <div class="ratio ratio-1x1">
-                            <a href="{ url_for(auth.add_item) }}" class="btn btn-outline-primary btn-sm"  id="btn__add--items"><i class="fa-solid fa-file-circle-plus"></i></a>
+                            <a href="{ url_for(auth.add_item) }}" class="btn btn-outline-primary btn-sm"  id="btn_add_items"><i class="fa-solid fa-file-circle-plus"></i></a>
                         </div>
                     </th>
                 </tr>
@@ -43,27 +43,26 @@
 
 <!--TEMPLATE ITEM INVENTORY-->
 <template id="template-item_inventory">
-    <tr>
+    <tr class="filter_inventory">
         <td class="col-1">
-            <img loading="lazy" src="IMG" style="width: 45px; height: 45px" class="rounded-circle">
+            <img loading="lazy" src="IMG" style="width: 45px; height: 45px" class="rounded-circle inventory__img">
         </td>
-        <td class="col-1"><div>ID</div></td>
-        <td class="col-1"><div>CATEGORY</div></td>
-        <td class="col-2"><div>NAME</div></td>
-        <td class="col-4"><div>INFO</div></td>
-        <td class="col-1"><div class="text-success">STOCK UNIT</div></td>
-        <td class="col-1"><div>COST</div></td>
-        <td class="col-1"><div>PRICE</div></td>
+        <td class="col-1"><div class="inventory__id">ID</div></td>
+        <td class="col-1"><div class="inventory__category">CATEGORY</div></td>
+        <td class="col-2"><div class="inventory__name">NAME</div></td>
+        <td class="col-4"><div class="inventory__info">INFO</div></td>
+        <td class="col-1"><div class="inventory__stock">STOCK UNIT</div> <span class="inventory__unit">UNIT</span></td>
+        <td class="col-1"><div class="inventory__cost">COST</div></td>
+        <td class="col-1"><div class="inventory__price">PRICE</div></td>
         <td>
             <!-- <div class="ratio ratio-1x1"> -->
-                <a href="{{ url_for('auth.edit_item', item_id=item.id) }}" class="btn btn-outline-warning btn-sm btn__edit" data-item_id="{{item.id}}" data-item_category="{{item.category.category}}" data-item_name="{{item.name}}" data-item_info="{{item.info}}" data-item_stock="{{item.stock}}" data-item_cost="{{item.cost}}" data-item_price="{{item.price}}" data-item_img="{{item.img_name}}"><i
-                class="fa-solid fa-pen-to-square"></i></a>
-            <!-- </div> -->
+                <a href="" class="btn btn-outline-warning btn-sm btn__edit" data-item_id="ID" data-item_category_id="CATEGORY ID" data-item_category="CATEGORY" data-item_name="NAME" data-item_info="INFO" data-item_stock="STOCK" data-item_unit="UNIT" data-item_cost="COST" data-item_price="PRICE" data-item_img="IMG"><i class="fa-solid fa-pen-to-square"></i></a>
+            <!-- </div>
         </td>
         <td>
             <!-- <div class="ratio ratio-1x1"> -->
-                <a type="button" onclick="if(!confirm('¿Desea borrar {{item.category.category[0:3].upper()}}-{{'%05d'%item.id}} -> {{item.name.upper()}}?')) event.preventDefault()"
-                class="btn btn-outline-danger btn-sm btn__delete" href="{{ url_for('auth.delete_item', item_id=item.id)}}"><i
+                <a type="button" onclick="if(!confirm('¿Desea borrar?')) event.preventDefault()"
+                class="btn btn-outline-danger btn-sm btn__delete" href=""><i
                     class="fa-solid fa-trash"></i></a>
             <!-- </div>        -->
         </td>

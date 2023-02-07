@@ -33,22 +33,13 @@ def show_pos():
 @auth_bp.route("/inventory/")
 @login_required
 def show_inventory():
-    #! Idem POS
-    # Guardamos los datos de la petición en una variable
-    items = Items.get_all()
     
-    # Leemos argumentos de la petición
-    field = request.args.get('field')
-    order = request.args.get('order')
-    if field != None and order != None:
-        items = Items.get_order_by(field, order)
-        
-    # Guardamos los datos de la petición en una variable
-    categories = Categories.get_all()
+    # Serializamos los items y los convertimos a json
+    json_items = [ item.json() for item in Items.get_all() ]
     
-    return render_template("auth/inventory.html", items=items, categories=categories)
+    return render_template("auth/inventory.html", json_items=json_items)
 
-
+#!REVISAR TODO HACIA ABAJO, BORRA NO_IMG.PNG
 #* ADD ITEM -----------------------------------------------------------------------
 @auth_bp.route("/inventory/add/", methods=['POST'])
 @login_required
@@ -157,7 +148,7 @@ def edit_item():
 
 
 #* DELETE ITEM --------------------------------------------------------------------
-@auth_bp.route("/inventory/delete/<int:item_id>/", methods=['GET', 'POST'])
+@auth_bp.route("/delete/<int:item_id>/", methods=['GET', 'POST'])
 @login_required
 def delete_item(item_id):
     
@@ -172,7 +163,7 @@ def delete_item(item_id):
     
     image_name = item.img_name
     images_dir = current_app.config['ITEMS_IMAGES_DIR']
-    if image_name != 'no_image.jpg':
+    if image_name != 'no_image.png':
         try:
             os.remove(os.path.join(images_dir, image_name))
         except:

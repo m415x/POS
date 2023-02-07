@@ -32,37 +32,39 @@ const fetchData = async () => {
 // Cargar items en INVENTORY
 const renderitemsInventory = array_items => {
     array_items.forEach(item => {
-        templateItemInventory.querySelector('.filter_item').dataset.item_id = item.id
-        templateItemInventory.querySelector('.filter_item').dataset.item_name = item.name
-        templateItemInventory.querySelector('.filter_item').dataset.item_info = item.info
-        templateItemInventory.querySelector('.card__code').textContent = `${item.category.toUpperCase().slice(0, 3)}-${item.id.toString().padStart(5, 0)}`
-        templateItemInventory.querySelector('.card__name').textContent = item.name.toUpperCase()
-        templateItemInventory.querySelector('.card__info').textContent = item.info
-        templateItemInventory.querySelector('.card__price').textContent = `${badge} ${item.price}`
-        templateItemInventory.querySelector('.card__stock').textContent = item.stock
+        templateItemInventory.querySelector('.filter_inventory').dataset.item_id = item.id
+        templateItemInventory.querySelector('.filter_inventory').dataset.item_name = item.name
+        templateItemInventory.querySelector('.filter_inventory').dataset.item_info = item.info
+        templateItemInventory.querySelector('.inventory__id').textContent = `${item.category.toUpperCase().slice(0, 3)}-${item.id.toString().padStart(5, 0)}`
+        templateItemInventory.querySelector('.inventory__category').textContent = item.category
+        templateItemInventory.querySelector('.inventory__name').textContent = item.name.toUpperCase()
+        templateItemInventory.querySelector('.inventory__info').textContent = item.info
+        templateItemInventory.querySelector('.inventory__price').textContent = `${badge} ${item.price}`
+        templateItemInventory.querySelector('.inventory__stock').textContent = item.stock
         if(item.stock >= 10) {
-            templateItemInventory.querySelector('.card__stock').classList.add('bg-success')
-            templateItemInventory.querySelector('.card__stock').classList.remove('bg-warning')
-            templateItemInventory.querySelector('.card__stock').classList.remove('bg-danger')
+            templateItemInventory.querySelector('.inventory__stock').classList.add('text-success')
+            templateItemInventory.querySelector('.inventory__stock').classList.remove('text-warning')
+            templateItemInventory.querySelector('.inventory__stock').classList.remove('text-danger')
         } else if(item.stock > 0 && item.stock < 10) {
-            templateItemInventory.querySelector('.card__stock').classList.add('bg-warning')
-            templateItemInventory.querySelector('.card__stock').classList.remove('bg-danger')
+            templateItemInventory.querySelector('.inventory__stock').classList.add('text-warning')
+            templateItemInventory.querySelector('.inventory__stock').classList.remove('text-danger')
         } else {
-            templateItemInventory.querySelector('.card__stock').textContent = 'SIN STOCK'
-            templateItemInventory.querySelector('.card__stock').classList.add('bg-danger')
+            templateItemInventory.querySelector('.inventory__stock').textContent = 'SIN STOCK'
+            templateItemInventory.querySelector('.inventory__stock').classList.add('text-danger')
         }
-        templateItemInventory.querySelector('.card__unit').textContent = item.unit
-        templateItemInventory.querySelector('.card__img').setAttribute('src', `../../../media/items/${item.img_name}`)
-        templateItemInventory.querySelector('.add__cart').setAttribute('href', `#${item.id}`)
-        templateItemInventory.querySelector('.add__cart-mask').dataset.item_id = item.id
-        templateItemInventory.querySelector('.add__cart-mask').dataset.item_category_id = item.category_id
-        templateItemInventory.querySelector('.add__cart-mask').dataset.item_category = item.category
-        templateItemInventory.querySelector('.add__cart-mask').dataset.item_name = item.name
-        templateItemInventory.querySelector('.add__cart-mask').dataset.item_info = item.info
-        templateItemInventory.querySelector('.add__cart-mask').dataset.item_stock = item.stock
-        templateItemInventory.querySelector('.add__cart-mask').dataset.item_unit = item.unit
-        templateItemInventory.querySelector('.add__cart-mask').dataset.item_cost = item.cost
-        templateItemInventory.querySelector('.add__cart-mask').dataset.item_price = item.price
+        templateItemInventory.querySelector('.inventory__unit').textContent = item.unit
+        templateItemInventory.querySelector('.inventory__img').setAttribute('src', `../../../media/items/${item.img_name}`)
+        templateItemInventory.querySelector('.btn__edit').setAttribute('href', `#${item.id}`)
+        templateItemInventory.querySelector('.btn__edit').dataset.item_id = item.id
+        templateItemInventory.querySelector('.btn__edit').dataset.item_category_id = item.category_id
+        templateItemInventory.querySelector('.btn__edit').dataset.item_category = item.category
+        templateItemInventory.querySelector('.btn__edit').dataset.item_name = item.name
+        templateItemInventory.querySelector('.btn__edit').dataset.item_info = item.info
+        templateItemInventory.querySelector('.btn__edit').dataset.item_stock = item.stock
+        templateItemInventory.querySelector('.btn__edit').dataset.item_unit = item.unit
+        templateItemInventory.querySelector('.btn__edit').dataset.item_cost = item.cost
+        templateItemInventory.querySelector('.btn__edit').dataset.item_price = item.price
+        templateItemInventory.querySelector('.btn__delete').setAttribute('href', `/delete/${item.id}`)
         const clone = templateItemInventory.cloneNode(true)
         fragment.appendChild(clone)
     })
@@ -74,7 +76,7 @@ document.addEventListener("keyup", e => {
     if (e.target.matches("#input_search")) {
         // "ESC" => Borrar el input
         if (e.key === "Escape") e.target.value = ""
-        document.querySelectorAll(".filter_item").forEach(item => {
+        document.querySelectorAll(".filter_inventory").forEach(item => {
             item.dataset.item_id.includes(e.target.value.toLowerCase()) 
             || item.dataset.item_name.toLowerCase().includes(e.target.value.toLowerCase()) 
             || item.dataset.item_info.toLowerCase().includes(e.target.value.toLowerCase())
@@ -96,7 +98,7 @@ document.addEventListener("keydown", e => {
 
 // Agregar items al inventario
 const btnHeader = e => {
-    if(e.target.classList.contains('btn__add--item')) {
+    if(e.target.classList.contains('btn_add_item')) {
         e.preventDefault()
         const modalAdd = document.getElementById('modalAdd')
         modalAdd.classList.remove('visually-hidden')
