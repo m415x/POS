@@ -254,8 +254,9 @@ class Categories(db.Model):
 
     @staticmethod
     def get_all():
-        return Categories.query.all()
-        
+        # return Categories.query.all()
+        return Categories.query.order_by(Categories.category).all()
+    
     @staticmethod
     def get_by_id(id):
         return Categories.query.get(id)

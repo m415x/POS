@@ -52,7 +52,7 @@
         </div>
         <div class="row col-6">
             <div class="col-4 inventory__info">INFO</div>
-            <div class="col-2"><span class="inventory__stock">STOCK UNIT</span> <span
+            <div class="col-2"><span class="inventory__stock">STOCK</span> <span
                     class="inventory__unit">UNIT</span></div>
             <div class="col-2 inventory__cost">COST</div>
             <div class="col-2 inventory__price">PRICE</div>
@@ -69,6 +69,11 @@
     </div>
 </template>
 
+<!--TEMPLATE CATEGORY-->
+<template id="template-categories">
+    <option value="CATEGORY ID">CATEGORY</option>
+</template>
+
 
 <!-- ==================== MODALS ========================= -->
 
@@ -81,7 +86,9 @@
 
 <script>
     const array_items = JSON.parse('{{ json_items|tojson }}')
+    const array_categories = JSON.parse('{{ json_categories|tojson }}')
     console.log(array_items)
+    console.log(array_categories)
 </script>
 
 <script src="{{ url_for('static', filename='js/inventory.js') }}"></script>

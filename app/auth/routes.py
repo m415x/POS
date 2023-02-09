@@ -8,6 +8,7 @@ from datetime import datetime
 
 from app import login_manager
 from app.common.mail import send_email
+from PIL import Image
 from . import auth_bp
 # from .forms import ItemForm
 from app.models import Users
@@ -23,7 +24,7 @@ logger = logging.getLogger(__name__)
 @login_required
 def show_pos():
     
-    # Serializamos los items y los convertimos a json
+    # Se serializan los items y se convierten a json
     json_items = [ item.json() for item in Items.get_all() ]
 
     return render_template("auth/pos.html", json_items=json_items)
@@ -34,10 +35,13 @@ def show_pos():
 @login_required
 def show_inventory():
     
-    # Serializamos los items y los convertimos a json
+    # Se serializan los items y se convierten a json
     json_items = [ item.json() for item in Items.get_all() ]
     
-    return render_template("auth/inventory.html", json_items=json_items)
+    # Se serializan las categorías y se convierten a json
+    json_categories = [ category.json() for category in Categories.get_all() ]
+    
+    return render_template("auth/inventory.html", json_items=json_items, json_categories=json_categories)
 
 #!REVISAR TODO HACIA ABAJO, BORRA NO_IMG.PNG
 #* ADD ITEM -----------------------------------------------------------------------
@@ -45,7 +49,7 @@ def show_inventory():
 @login_required
 def add_item():
     
-    # Leemos los campos del formulario
+    # Leer los campos del formulario
     category = request.form['addCategory']
     name = request.form['addName']
     info = request.form['addInfo']
@@ -56,25 +60,33 @@ def add_item():
     file = request.files['addFile']
     image_name = None
     
-    # Comprueba si la petición contiene la parte del fichero
+    # Comprobar si la petición contiene la parte del fichero
     if file:
         image_name = secure_filename(file.filename)
         images_dir = current_app.config['ITEMS_IMAGES_DIR']
         os.makedirs(images_dir, exist_ok=True)
         now = datetime.now().strftime('%Y%m%d%H%M%S%f')
-        image_name = f"{now}.jpg"
+        
+        # Convertir a JPG
+        im = Image.open(image_name) #!Verificar funcionamiento
+        if not im.mode == 'RGB':
+            im = im.convert('RGB')
+        image_name = im.save(f"{now}.jpg", quality=95)
+        
+        # Guardar fichero
         file_path = os.path.join(images_dir, image_name)
         file.save(file_path)
     else:
-        # Si no tiene fichero, se le asigna esta imagen
+        
+        # Asignar no_image.png si no existe fichero
         image_name = 'no_image.png'
     
-    # Si algun campo está vacío, no se crea
+    # Si algun campo está vacío, no se crea #!No funciona validacion de campos
     if name == '' or info == '' or stock == '' or cost == '' or price == '':
         return redirect(url_for('auth.show_inventory'))
     
-    # Guardamos los datos de la petición en una variable
-    item = Items(user_id=current_user.id, category_id=category, name=name, info=info, stock=stock, cost=cost, price=price, img_name=image_name)
+    # Guardar los datos de la petición en una variable
+    item = Items(user_id=current_user.id, category_id=category, name=name, info=info, stock=stock, unit=unit, cost=cost, price=price, img_name=image_name)
     item.save()
     logger.info(f'Guardando nuevo item {name}')
     

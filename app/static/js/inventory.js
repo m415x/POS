@@ -1,6 +1,8 @@
 const inventoryHeader = document.getElementById('inventory_header')
 const itemsInventory = document.getElementById('items_inventory')
+const categories = document.getElementById('addCategory')
 const templateItemInventory = document.getElementById('template-item_inventory').content
+const templateCategories = document.getElementById('template-categories').content
 const modalEdit = document.getElementById('modalEdit').content
 const fragment = document.createDocumentFragment()
 const badge = '$'
@@ -24,14 +26,14 @@ itemsInventory.addEventListener('click', e => {
 
 const fetchData = async () => {
     try {
-        renderitemsInventory(array_items)
+        renderItemsInventory(array_items)
     } catch (error) {
         console.log(error)
     }
 }
 
 // Cargar items en INVENTORY
-const renderitemsInventory = array_items => {
+const renderItemsInventory = array_items => {
     array_items.forEach(item => {
         templateItemInventory.querySelector('.filter_inventory').dataset.item_id = item.id
         templateItemInventory.querySelector('.filter_inventory').dataset.item_name = item.name
@@ -42,7 +44,13 @@ const renderitemsInventory = array_items => {
         templateItemInventory.querySelector('.inventory__info').textContent = item.info
         templateItemInventory.querySelector('.inventory__price').textContent = `${badge} ${item.price}`
         templateItemInventory.querySelector('.inventory__stock').textContent = item.stock
-        templateItemInventory.querySelector('.inventory__unit').textContent = item.unit
+        if(item.stock == 1) {
+            templateItemInventory.querySelector('.inventory__unit').textContent = item.unit
+        } else if(item.unit === 'unidad'){
+            templateItemInventory.querySelector('.inventory__unit').textContent = `${item.unit}es`
+        } else {
+            templateItemInventory.querySelector('.inventory__unit').textContent = `${item.unit}s`
+        }
         if(item.stock >= 10) {
             templateItemInventory.querySelector('.inventory__stock').classList.add('text-success')
             templateItemInventory.querySelector('.inventory__stock').classList.remove('text-warning')
@@ -131,3 +139,14 @@ const btnEdit = e => {
     e.stopPropagation()
 }
 */
+
+// Cargar categorías en modal
+const renderCategories = array_categories => {
+    array_categories.forEach(category => {
+        templateCategories.querySelector('.inventory__img').setAttribute('src', `../../../media/items/${item.img_name}`)
+        templateCategories.querySelector('.btn__edit').setAttribute('href', `#${item.id}`)
+        const clone = templateCategories.cloneNode(true)
+        fragment.appendChild(clone)
+    })
+    itemsInventory.appendChild(fragment)
+}
