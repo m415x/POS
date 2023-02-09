@@ -221,7 +221,7 @@ class Cards(db.Model):
     def delete(self):
         db.session.delete(self)
         db.session.commit()
-
+        
     @staticmethod
     def get_all():
         return Cards.query.all()
@@ -252,6 +252,12 @@ class Categories(db.Model):
         db.session.delete(self)
         db.session.commit()
 
+    def json(self):
+        return {
+            "id": self.id,
+            "category": self.category
+        }
+        
     @staticmethod
     def get_all():
         # return Categories.query.all()

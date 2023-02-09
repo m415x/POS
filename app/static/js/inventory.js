@@ -1,6 +1,7 @@
 const inventoryHeader = document.getElementById('inventory_header')
 const itemsInventory = document.getElementById('items_inventory')
-const categories = document.getElementById('addCategory')
+const addCategories = document.getElementById('addCategory')
+const editCategories = document.getElementById('editCategory')
 const templateItemInventory = document.getElementById('template-item_inventory').content
 const templateCategories = document.getElementById('template-categories').content
 const modalEdit = document.getElementById('modalEdit').content
@@ -27,6 +28,7 @@ itemsInventory.addEventListener('click', e => {
 const fetchData = async () => {
     try {
         renderItemsInventory(array_items)
+        renderCategories(array_categories)
     } catch (error) {
         console.log(error)
     }
@@ -44,7 +46,7 @@ const renderItemsInventory = array_items => {
         templateItemInventory.querySelector('.inventory__info').textContent = item.info
         templateItemInventory.querySelector('.inventory__price').textContent = `${badge} ${item.price}`
         templateItemInventory.querySelector('.inventory__stock').textContent = item.stock
-        if(item.stock == 1) {
+        if(item.stock === 1) {
             templateItemInventory.querySelector('.inventory__unit').textContent = item.unit
         } else if(item.unit === 'unidad'){
             templateItemInventory.querySelector('.inventory__unit').textContent = `${item.unit}es`
@@ -143,10 +145,11 @@ const btnEdit = e => {
 // Cargar categorías en modal
 const renderCategories = array_categories => {
     array_categories.forEach(category => {
-        templateCategories.querySelector('.inventory__img').setAttribute('src', `../../../media/items/${item.img_name}`)
-        templateCategories.querySelector('.btn__edit').setAttribute('href', `#${item.id}`)
+        templateCategories.querySelector('.option-category').setAttribute('value', category.id)
+        templateCategories.querySelector('.option-category').textContent = category.category
         const clone = templateCategories.cloneNode(true)
         fragment.appendChild(clone)
     })
-    itemsInventory.appendChild(fragment)
+    addCategories.appendChild(fragment)
+    editCategories.appendChild(fragment)
 }
