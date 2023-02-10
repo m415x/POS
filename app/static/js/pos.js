@@ -38,10 +38,10 @@ posTab.addEventListener('click', e => {
 })
 
 // Leer array de objetos de DB
-const fetchData = async () => {
+const fetchData = async() => {
     try {
         renderItemsPos(array_items)
-    } catch (error) {
+    } catch(error) {
         console.log(error)
     }
 }
@@ -89,9 +89,9 @@ const renderItemsPos = array_items => {
 
 // Busquedar dinámicamente items
 document.addEventListener("keyup", e => {
-    if (e.target.matches("#input_search")) {
-        // "ESC" => Borrar el input
-        if (e.key === "Escape") e.target.value = ""
+    if(e.target.matches("#input_search")) {
+        // "ESC" => Borrar contenido del input
+        if(e.key === "Escape") e.target.value = ""
         document.querySelectorAll(".filter_item").forEach(item => {
             item.dataset.item_id.includes(e.target.value.toLowerCase()) 
             || item.dataset.item_name.toLowerCase().includes(e.target.value.toLowerCase()) 
@@ -104,9 +104,9 @@ document.addEventListener("keyup", e => {
 
 // "Ctrl + B" => Hacer foco en buscar 
 document.addEventListener("keydown", e => {
-    if (e.ctrlKey || e.metaKey) {
+    if(e.ctrlKey || e.metaKey) {
         // Analizar las combinaciones permitidas en el proyecto (reemplazar which por key ó code)
-        if (String.fromCharCode(e.which).toLowerCase() === 'b') {
+        if(String.fromCharCode(e.which).toLowerCase() === 'b') {
             document.querySelector("#input_search").focus()
         }
     }
@@ -196,7 +196,7 @@ const renderFooterCart = () => {
 // Mostrar la hora en que se inicia el carrito
 let countClick = 0
 const stopTime = e => {
-    if (countClick < 1) {
+    if(countClick < 1) {
         let date = new Date()
         let hour = `${date.getHours().toString().padStart(2, '0')}:${date.getMinutes().toString().padStart(2, '0')}`
         document.querySelector('.tab__clock').textContent = hour

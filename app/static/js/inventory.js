@@ -25,11 +25,11 @@ itemsInventory.addEventListener('click', e => {
 })
 
 
-const fetchData = async () => {
+const fetchData = async() => {
     try {
         renderItemsInventory(array_items)
         renderCategories(array_categories)
-    } catch (error) {
+    } catch(error) {
         console.log(error)
     }
 }
@@ -47,7 +47,7 @@ const renderItemsInventory = array_items => {
         templateItemInventory.querySelector('.inventory__price').textContent = `${badge} ${item.price}`
         templateItemInventory.querySelector('.inventory__stock').textContent = item.stock
         if(item.stock === 1) {
-            templateItemInventory.querySelector('.inventory__unit').textContent = item.unit
+            templateItemInventory.querySelector('.inventory__unit').textContent = item.unit //!No funciona cuando es igual a 1
         } else if(item.unit === 'unidad'){
             templateItemInventory.querySelector('.inventory__unit').textContent = `${item.unit}es`
         } else {
@@ -87,11 +87,11 @@ const renderItemsInventory = array_items => {
     itemsInventory.appendChild(fragment)
 }
 
-// Busquedar dinámicamente items
-/*document.addEventListener("keyup", e => {
+// Buscar dinámicamente items
+document.addEventListener("keyup", e => {
     if (e.target.matches("#input_search")) {
-        // "ESC" => Borrar el input
-        if (e.key === "Escape") e.target.value = ""
+        // "ESC" => Borrar contenido del input
+        if(e.key === "Escape") e.target.value = ""
         document.querySelectorAll(".filter_inventory").forEach(item => {
             item.dataset.item_id.includes(e.target.value.toLowerCase()) 
             || item.dataset.item_name.toLowerCase().includes(e.target.value.toLowerCase()) 
@@ -104,14 +104,14 @@ const renderItemsInventory = array_items => {
 
 // "Ctrl + B" => Hacer foco en buscar 
 document.addEventListener("keydown", e => {
-    if (e.ctrlKey || e.metaKey) {
+    if(e.ctrlKey || e.metaKey) {
         // Analizar las combinaciones permitidas en el proyecto (reemplazar which por key ó code)
-        if (String.fromCharCode(e.which).toLowerCase() === 'b') {
+        if(String.fromCharCode(e.which).toLowerCase() === 'b') {
             document.querySelector("#input_search").focus()
         }
     }
 })
-
+/*
 // Agregar items al inventario
 const btnHeader = e => {
     if(e.target.classList.contains('btn_add_item')) {
@@ -142,7 +142,7 @@ const btnEdit = e => {
 }
 */
 
-// Cargar categorías en modal
+// Cargar categorías en MODALS
 const renderCategories = array_categories => {
     array_categories.forEach(category => {
         templateCategories.querySelector('.option-category').setAttribute('value', category.id)

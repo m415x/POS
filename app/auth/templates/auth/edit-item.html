@@ -21,11 +21,7 @@
                                 <div class="form-group col-md-3">
                                     <label class="form-label mt-4" for="editCategory">Categoría</label>
                                     <select class="form-select" name="editCategory" id="editCategory">
-
-                                        {% for category in categories %}
-                                            <option value="{{category.id}}">{{category.category}}</option> <!--CAMBIAR A VUE-->
-                                        {% endfor %}
-
+                                        <!-- mount template categories -->
                                     </select>
                                 </div>
                                 <div class="form-group col-md">
@@ -44,8 +40,18 @@
                             <div class="row">
                                 <div class="form-group col-md-3">
                                     <label class="form-label mt-4" for="editStock">Cantidad</label>
-                                    <input class="form-control" type="number" step=".5" name="editStock" id="editStock""
+                                    <input class="form-control" type="number" step=".5" name="editStock" id="editStock"
                                         required>
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <label class="form-label mt-4" for="addUnit">Unidad</label>
+                                    <select class="form-select" type="text" name="editUnit" id="editUnit" required>
+                                        <option value="unidad" selected>unidad</option>
+                                        <option value="metro">metro</option>
+                                        <option value="litro">litro</option>
+                                        <option value="gramo">gramo</option>
+                                        <option value="kg">kg</option>
+                                    </select>
                                 </div>
                                 <div class=" form-group col-md-3">
                                     <label class="form-label mt-4" for="editCost">Costo</label>
