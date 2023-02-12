@@ -7,30 +7,30 @@
 <div class="container inventory__cont">
     <div class="card">
         <div class="card-header" id="inventory_header">
-            <div class="row ms-4">
-                <div class="row col-6">
+            <div class="row ms-4 align-items-center justify-content-center">
+                <div class="row col-5 align-items-center justify-content-center">
                     <div class="col-2"></div>
-                    <div class="col-3">Código</div>
-                    <div class="col-3">Categoría</div>
-                    <div class="col-4">Artículo</div>
+                    <div class="col-3 sorted_button" id="sort-id">Código</div>
+                    <div class="col-3 sorted_button" id="sort-category">Categoría</div>
+                    <div class="col-4 sorted_button" id="sort-name">Artículo</div>
                 </div>
-                <div class="row col-6">
-                    <div class="col-4">Descripción</div>
-                    <div class="col-2">Stock</div>
-                    <div class="col-2">Costo</div>
-                    <div class="col-2">Precio Venta</div>
-                    <div class="col-1">
+                <div class="row col-7 align-items-center justify-content-center">
+                    <div class="col-4 sorted_button" id="sort-info">Descripción</div>
+                    <div class="col-2 sorted_button" id="sort-stock">Stock</div>
+                    <div class="col-2 sorted_button" id="sort-cost">Costo</div>
+                    <div class="col-2 sorted_button" id="sort-price">Precio Venta</div>
+                    <div class="col-1 align-items-center">
                         <a href="#" class="btn btn-outline-success btn-sm" id="btn_add_item" data-bs-toggle="modal"
                             data-bs-target="#modalAdd"><i class="fa-solid fa-plus"></i></a>
                     </div>
-                    <div class="col-1">
+                    <div class="col-1 align-items-center">
                         <a href="{ url_for(auth.add_item) }}" class="btn btn-outline-primary btn-sm"
                             id="btn_add_items"><i class="fa-solid fa-file-circle-plus"></i></a>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="card-group overflow-scroll">
+        <div class="card overflow__scroll--inventory">
             <div class="row mt-2 ms-4" id="items_inventory">
                 <!--mount template items inventory-->
             </div>
@@ -43,8 +43,8 @@
 
 <!--TEMPLATE ITEM INVENTORY-->
 <template id="template-item_inventory">
-    <div class="row filter_inventory mb-2">
-        <div class="row col-6">
+    <div class="row filter_inventory mb-2 align-items-center justify-content-center">
+        <div class="row col-5 align-items-center justify-content-center">
             <div class="col-2">
                 <img loading="lazy" src="IMG" style="width: 45px; height: 45px" class="rounded-circle inventory__img">
             </div>
@@ -52,19 +52,19 @@
             <div class="col-3 inventory__category">CATEGORY</div>
             <div class="col-4 inventory__name">NAME</div>
         </div>
-        <div class="row col-6">
+        <div class="row col-7 align-items-center justify-content-center">
             <div class="col-4 inventory__info">INFO</div>
             <div class="col-2"><span class="inventory__stock">STOCK</span> <span class="inventory__unit">UNIT</span>
             </div>
             <div class="col-2 inventory__cost">COST</div>
             <div class="col-2 inventory__price">PRICE</div>
             <div class="col-1">
-                <a href="" class="btn btn-outline-warning btn-sm btn__edit" data-item_id="ID"
+                <a href="" class="btn btn-outline-warning btn-sm btn__edit align-items-center" data-item_id="ID"
                     data-item_category_id="CATEGORY ID" data-item_category="CATEGORY" data-item_name="NAME"
                     data-item_info="INFO" data-item_stock="STOCK" data-item_unit="UNIT" data-item_cost="COST"
                     data-item_price="PRICE" data-item_img="IMG"><i class="fa-solid fa-pen-to-square"></i></a>
             </div>
-            <div class="col-1">
+            <div class="col-1 align-items-center">
                 <a href="" class="btn btn-outline-danger btn-sm btn__delete"><i class="fa-solid fa-trash"></i></a>
             </div>
         </div>

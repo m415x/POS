@@ -24,7 +24,7 @@ itemsInventory.addEventListener('click', e => {
     btnEdit(e)
 })
 
-
+// Renderizar JSON
 const fetchData = async() => {
     try {
         renderItemsInventory(array_items)
@@ -44,10 +44,9 @@ const renderItemsInventory = array_items => {
         templateItemInventory.querySelector('.inventory__category').textContent = item.category
         templateItemInventory.querySelector('.inventory__name').textContent = item.name.toUpperCase()
         templateItemInventory.querySelector('.inventory__info').textContent = item.info
-        templateItemInventory.querySelector('.inventory__price').textContent = `${badge} ${item.price}`
         templateItemInventory.querySelector('.inventory__stock').textContent = item.stock
         if(item.stock === 1) {
-            templateItemInventory.querySelector('.inventory__unit').textContent = item.unit //!No funciona cuando es igual a 1
+            templateItemInventory.querySelector('.inventory__unit').textContent = item.unit
         } else if(item.unit === 'unidad'){
             templateItemInventory.querySelector('.inventory__unit').textContent = `${item.unit}es`
         } else {
@@ -67,8 +66,16 @@ const renderItemsInventory = array_items => {
             templateItemInventory.querySelector('.inventory__stock').classList.add('text-danger')
             templateItemInventory.querySelector('.inventory__unit').classList.add('visually-hidden')
         }
-        templateItemInventory.querySelector('.inventory__cost').textContent = item.cost
+        templateItemInventory.querySelector('.inventory__cost').textContent = `${badge} ${item.cost}`
+        templateItemInventory.querySelector('.inventory__price').textContent = `${badge} ${item.price}`
         templateItemInventory.querySelector('.inventory__img').setAttribute('src', `../../../media/items/${item.img_name}`)
+        templateItemInventory.querySelector('.inventory__id').dataset.attr = 'sort-id'
+        templateItemInventory.querySelector('.inventory__category').dataset.attr = 'sort-category'
+        templateItemInventory.querySelector('.inventory__name').dataset.attr = 'sort-name'
+        templateItemInventory.querySelector('.inventory__info').dataset.attr = 'sort-info'
+        templateItemInventory.querySelector('.inventory__stock').dataset.attr = 'sort-stock'
+        templateItemInventory.querySelector('.inventory__cost').dataset.attr = 'sort-cost'
+        templateItemInventory.querySelector('.inventory__price').dataset.attr = 'sort-price'
         templateItemInventory.querySelector('.btn__edit').setAttribute('href', `#${item.id}`)
         templateItemInventory.querySelector('.btn__edit').dataset.item_id = item.id
         templateItemInventory.querySelector('.btn__edit').dataset.item_category_id = item.category_id
@@ -102,15 +109,68 @@ document.addEventListener("keyup", e => {
     }
 })
 
-// "Ctrl + B" => Hacer foco en buscar 
+// "Ctrl + B" => Hacer foco en input buscar 
 document.addEventListener("keydown", e => {
-    if(e.ctrlKey || e.metaKey) {
-        // Analizar las combinaciones permitidas en el proyecto (reemplazar which por key ó code)
-        if(String.fromCharCode(e.which).toLowerCase() === 'b') {
-            document.querySelector("#input_search").focus()
-        }
+    if((e.ctrlKey || e.metaKey) && e.code == 'KeyB') {
+        document.querySelector("#input_search").focus()
     }
 })
+
+/*// Ordenar items
+// const tableContent = document.getElementById("table-content")
+const tableButtons = document.querySelectorAll(".sorted_button")
+const sortItems = (data, param, direction = "asc") => {
+    // tableContent.innerHTML = ''
+    const sortedItems =
+        direction == "asc"
+            ? [...data].sort(function (a, b) {
+                if (a[param] < b[param]) {
+                    return -1
+                }
+                if (a[param] > b[param]) {
+                    return 1
+                }
+                return 0
+            })
+            : [...data].sort(function (a, b) {
+                if (b[param] < a[param]) {
+                    return -1
+                }
+                if (b[param] > a[param]) {
+                    return 1
+                }
+                return 0
+            })
+    // getTableContent(sortedItems)
+    renderItemsInventory(sortedItems)
+}
+
+const resetButtons = (event) => {
+    [...tableButtons].map((button) => {
+        if (button !== event.target) {
+            button.removeAttribute("data-sort")
+        }
+    })
+}
+
+window.addEventListener("load", () => {
+    renderItemsInventory(array_items);
+
+    [...tableButtons].map((button) => {
+        button.addEventListener("click", (e) => {
+            resetButtons(e)
+            if (e.target.getAttribute("data-sort") == "desc") {
+                sortItems(array_items, e.target.id, "desc")
+                e.target.setAttribute("data-sort", "asc")
+            } else {
+                sortItems(array_items, e.target.id, "asc")
+                e.target.setAttribute("data-sort", "desc")
+            }
+        })
+    })
+})*/
+
+
 /*
 // Agregar items al inventario
 const btnHeader = e => {
@@ -125,7 +185,7 @@ const btnHeader = e => {
             option.value = valor;
             option.text = valor;
             $select.appendChild(option);
-          };
+        };
     }
     e.stopPropagation()
 }

@@ -90,9 +90,10 @@ main {
     opacity: 1
 }
 
-.overflow__scroll {
-    height: 590px !important;
-    /*! bootstrap impone height*/
+.overflow__scroll--pos {
+    height: calc(100vh - 130px) !important;
+    height: -webkit-calc(100vh - 130px);
+    height: -moz-calc(100vh - 130px);
     overflow-x: hidden;
     overflow-y: scroll;
 }
@@ -105,7 +106,10 @@ main {
 }
 
 .overflow__scroll--cart {
-    height: 434px;
+    /* height: 434px; */
+    height: calc(100vh - 284px) !important;
+    height: -webkit-calc(100vh - 284px);
+    height: -moz-calc(100vh - 284px);
     overflow-x: hidden;
     overflow-y: scroll;
 }
@@ -134,6 +138,32 @@ main {
     font-size: 12px;
 }
 
+#inventory_header {
+    padding-right: 43px;
+}
+
+.overflow__scroll--inventory {
+    height: calc(100vh - 130px) !important;
+    height: -webkit-calc(100vh - 130px);
+    height: -moz-calc(100vh - 130px);
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
+
+.btn__edit,
+.btn__delete,
+#btn_add_item,
+#btn_add_items {
+    width: 33.4px !important;
+    max-width: 100% !important;
+    max-height: 100% !important;
+    height: 33.4px !important;
+    /* text-align: center; */
+    /* align-items: center; */
+    /* padding: 0px; */
+}
+
+/* * MODALS * */
 #div_file,
 #div_up {
     position: relative;

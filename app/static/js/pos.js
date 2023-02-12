@@ -87,7 +87,7 @@ const renderItemsPos = array_items => {
 }
 
 
-// Busquedar dinámicamente items
+// Buscar dinámicamente items
 document.addEventListener("keyup", e => {
     if(e.target.matches("#input_search")) {
         // "ESC" => Borrar contenido del input
@@ -102,13 +102,10 @@ document.addEventListener("keyup", e => {
     }
 })
 
-// "Ctrl + B" => Hacer foco en buscar 
+// "Ctrl + B" => Hacer foco en input buscar 
 document.addEventListener("keydown", e => {
-    if(e.ctrlKey || e.metaKey) {
-        // Analizar las combinaciones permitidas en el proyecto (reemplazar which por key ó code)
-        if(String.fromCharCode(e.which).toLowerCase() === 'b') {
-            document.querySelector("#input_search").focus()
-        }
+    if((e.ctrlKey || e.metaKey) && e.code == 'KeyB') {
+        document.querySelector("#input_search").focus()
     }
 })
 
