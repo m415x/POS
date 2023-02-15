@@ -134,7 +134,7 @@ const setCart = object => {
         item.quantity = cart[item.id].quantity + 1
         array_items.forEach(itemUpdate => {
             itemUpdate[item.id].stock -= item.quantity
-            array_items[item.id] = { ...itemUpdate }
+            // array_items[item.id] = { ...itemUpdate }
         })
     }
     cart[item.id] = { ...item }
