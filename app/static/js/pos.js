@@ -3,6 +3,8 @@ const itemsPos = document.getElementById('items_pos')
 const headerCart = document.getElementById('header_cart')
 const itemsCart = document.getElementById('items_cart')
 const footerCart = document.getElementById('footer_cart')
+const calcBtns = document.getElementById('calc_btns')
+const paymentBtn = document.getElementById('payment_btn')
 const templateItemPos = document.getElementById('template-item_pos').content
 const templateHeaderCart = document.getElementById('template-header_cart').content
 const templateItemCart = document.getElementById('template-item_cart').content
@@ -35,6 +37,11 @@ itemsCart.addEventListener('click', e => {
 // Evento borrar carrito
 posTab.addEventListener('click', e => {
     closeTab(e)
+})
+
+// Evento botones calculadora
+calcBtns.addEventListener('click', e => {
+    calcAction(e)
 })
 
 // Leer array de objetos de DB
@@ -249,6 +256,18 @@ const closeTab = e => {
     e.stopPropagation()
 }
 
+
+// Funciones de botones de calculadora
+/*const calcAction = e => {
+    // Aumentar la cantidad de un item en el carrito
+    if (e.target.classList.contains('btn_plus')) {
+        const itemCart = cart[e.target.dataset.id]
+        itemCart.quantity++
+        cart[e.target.dataset.id] = { ...itemCart }
+        renderItemsCart()
+    }
+    e.stopPropagation()
+}*/
 
 
 //! FALLIDOS
