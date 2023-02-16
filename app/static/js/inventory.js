@@ -171,13 +171,26 @@ window.addEventListener("load", () => {
 })*/
 
 
-/*
 // Agregar items al inventario
 const btnHeader = e => {
-    if(e.target.classList.contains('btn_add_item')) {
+    if(e.target.id.contains('btn_add_item')) {
         e.preventDefault()
-        const modalAdd = document.getElementById('modalAdd')
-        modalAdd.classList.remove('visually-hidden')
+        // const modalAdd = document.getElementById('modalAdd')
+        // modalAdd.classList.remove('visually-hidden')
+        var modalAdd = new bootstrap.Modal(document.getElementById("modalAdd"), {})
+        document.onreadystatechange = function () {
+        modalAdd.show()
+        }
+    }
+    e.stopPropagation()
+}
+
+/*
+// Editar item del inventario
+const btnEdit = e => {
+    if(e.target.classList.contains('btn__edit')) {
+        const itemInventory = array_items[e.target.dataset.item_id]
+        modalEdit.querySelector('#formLetters').textContent = itemInventory.category.toUpperCase().slice(0, 3)
         const selectCategory = document.querySelector("#addUnit")
         const addItem = () => {
             const option = document.createElement('option')
@@ -186,16 +199,6 @@ const btnHeader = e => {
             option.text = valor;
             $select.appendChild(option);
         };
-    }
-    e.stopPropagation()
-}
-
-// Editar item del inventario
-const btnEdit = e => {
-    if(e.target.classList.contains('btn__edit')) {
-        const itemInventory = array_items[e.target.dataset.item_id]
-        modalEdit.querySelector('#formLetters').textContent = itemInventory.category.toUpperCase().slice(0, 3)
-        
         renderItemsCart()
     }
     e.stopPropagation()
