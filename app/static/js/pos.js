@@ -133,16 +133,17 @@ const setCart = object => {
         name: object.querySelector('.add__cart-mask').dataset.item_name,
         info: object.querySelector('.add__cart-mask').dataset.item_info,
         stock: object.querySelector('.add__cart-mask').dataset.item_stock,
+        unit: object.querySelector('.add__cart-mask').dataset.item_unit,
         cost: object.querySelector('.add__cart-mask').dataset.item_cost,
         price: object.querySelector('.add__cart-mask').dataset.item_price,
         quantity: 1
     }
     if (cart.hasOwnProperty(item.id)) {
         item.quantity = cart[item.id].quantity + 1
-        array_items.forEach(itemUpdate => {
+        /*array_items.forEach(itemUpdate => {
             itemUpdate[item.id].stock -= item.quantity
             // array_items[item.id] = { ...itemUpdate }
-        })
+        })*/
     }
     cart[item.id] = { ...item }
     renderItemsCart()
