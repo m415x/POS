@@ -124,7 +124,7 @@ const addCart = e => {
     e.stopPropagation()
 }
 
-// Crear item de carrito
+//* Crear item de carrito
 const setCart = object => {
     const item = {
         id: object.querySelector('.add__cart-mask').dataset.item_id,
@@ -147,7 +147,7 @@ const setCart = object => {
     }
     cart[item.id] = { ...item }
     renderItemsCart()
-    renderItemsPos()
+    // renderItemsPos()
 }
 
 // Cargar item al carrito

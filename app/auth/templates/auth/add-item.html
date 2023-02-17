@@ -1,9 +1,9 @@
-<div class="modal" id="modalAdd" tabindex="-1" aria-labelledby="modalAddLabel" aria-hidden="true">
+<div class="modal visually-hidden" id="modalAdd">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
                 <h1 class="modal-title fs-5" id="modalAddLabel">Agregar Artículo</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <button type="button" class="btn-close" id="btn_close_add"></button>
             </div>
             <div class="modal-body">
                 <form action="/inventory/add" method="post" enctype="multipart/form-data" novalidate>
@@ -70,7 +70,7 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button class="btn btn-outline-success" type="submit">Agregar</button>
+                        <button class="btn btn-outline-success btn-submit" type="submit">Agregar</button>
                     </div>
                 </form>
             </div>

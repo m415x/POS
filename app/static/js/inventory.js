@@ -4,7 +4,12 @@ const addCategories = document.getElementById('addCategory')
 const editCategories = document.getElementById('editCategory')
 const templateItemInventory = document.getElementById('template-item_inventory').content
 const templateCategories = document.getElementById('template-categories').content
-const modalEdit = document.getElementById('modalEdit').content
+const btnAddItem = document.getElementById('btn_add_item')
+// const btnAddMassiveItems = document.getElementById('btn_add_items')
+const btnEditItem = document.getElementsByClassName('btn__edit')
+const modalAdd = document.getElementById('modalAdd')
+// const modalMassiveAdd = document.getElementById('')
+const modalEdit = document.getElementById('modalEdit')
 const fragment = document.createDocumentFragment()
 const badge = '$'
 
@@ -14,15 +19,32 @@ document.addEventListener('DOMContentLoaded', () => {
     fetchData()
 })
 
-// Evento agregar items al inventario y filtros
-inventoryHeader.addEventListener('click', e => {
-    btnHeader(e)
+// Evento mostrar MODAL ADD
+btnAddItem.addEventListener('click', e => {
+    e.preventDefault
+    modalAdd.classList.remove('visually-hidden')
 })
 
-// Evento editar item del inventario
-itemsInventory.addEventListener('click', e => {
-    btnEdit(e)
+
+// Evento cerrar MODAL ADD
+modalAdd.addEventListener('click', e => {
+    closeModalAdd(e)
 })
+
+
+//! Evento mostrar MODAL EDIT
+btnEditItem.addEventListener('click', e => {
+    e.preventDefault
+    modalAdd.classList.remove('visually-hidden')
+    editItem(e)
+})
+
+
+// Evento cerrar MODAL EDIT
+modalEdit.addEventListener('click', e => {
+    closeModalEdit(e)
+})
+
 
 // Renderizar JSON
 const fetchData = async() => {
@@ -33,6 +55,7 @@ const fetchData = async() => {
         console.log(error)
     }
 }
+
 
 // Cargar items en INVENTORY
 const renderItemsInventory = array_items => {
@@ -94,6 +117,7 @@ const renderItemsInventory = array_items => {
     itemsInventory.appendChild(fragment)
 }
 
+
 // Buscar dinámicamente items
 document.addEventListener("keyup", e => {
     if (e.target.matches("#input_search")) {
@@ -109,12 +133,14 @@ document.addEventListener("keyup", e => {
     }
 })
 
+
 // "Ctrl + B" => Hacer foco en input buscar 
 document.addEventListener("keydown", e => {
     if((e.ctrlKey || e.metaKey) && e.code == 'KeyB') {
         document.querySelector("#input_search").focus()
     }
 })
+
 
 /*// Ordenar items
 // const tableContent = document.getElementById("table-content")
@@ -171,20 +197,6 @@ window.addEventListener("load", () => {
 })*/
 
 
-// Agregar items al inventario
-const btnHeader = e => {
-    if(e.target.id.contains('btn_add_item')) {
-        e.preventDefault()
-        // const modalAdd = document.getElementById('modalAdd')
-        // modalAdd.classList.remove('visually-hidden')
-        var modalAdd = new bootstrap.Modal(document.getElementById("modalAdd"), {})
-        document.onreadystatechange = function () {
-        modalAdd.show()
-        }
-    }
-    e.stopPropagation()
-}
-
 /*
 // Editar item del inventario
 const btnEdit = e => {
@@ -205,6 +217,7 @@ const btnEdit = e => {
 }
 */
 
+
 // Cargar categorías en MODALS
 const renderCategories = array_categories => {
     array_categories.forEach(category => {
@@ -215,4 +228,72 @@ const renderCategories = array_categories => {
     })
     addCategories.appendChild(fragment)
     editCategories.appendChild(fragment)
+}
+
+
+// cerrar MODAL ADD
+const closeModalAdd = e => {
+    if (e.target.classList.contains('btn-close') || e.target.classList.contains('btn-submit')) {
+        modalAdd.classList.add('visually-hidden')
+    }
+    e.stopPropagation()
+}
+//! Revisar para abajo
+//* EDITAR DESDE ACA (EDIT MODAL)
+// Evento agregar item al carrito
+const editItem = e => {
+    let item = document.querySelector(this)
+
+    setEdit(e.target.parentElement)
+    e.stopPropagation()
+}
+
+// Crear item de carrito
+const setEdit = object => {
+    const item = {
+        id: object.btnEditItem.dataset.item_id,
+        category_id: object.btnEditItem.dataset.item_category_id,
+        category: object.btnEditItem.dataset.item_category,
+        name: object.btnEditItem.dataset.item_name,
+        info: object.btnEditItem.dataset.item_info,
+        stock: object.btnEditItem.dataset.item_stock,
+        unit: object.btnEditItem.dataset.item_unit,
+        cost: object.btnEditItem.dataset.item_cost,
+        price: object.btnEditItem.dataset.item_price,
+        image: object.btnEditItem.dataset.item_img
+    }
+    car[item.id] = { ...item }
+    renderItemsCart()
+}
+
+// Cargar item al carrito
+const renderItemsCart = () => {
+    itemsCart.innerHTML = ''
+    Object.values(cart).forEach(item => {
+        templateItemCart.querySelector('.cart_id').setAttribute('title', `${item.category.toUpperCase().slice(0, 3)} - ${item.id.toString().padStart(5, 0)}`)
+        templateItemCart.querySelector('.cart_name').textContent = item.name.toUpperCase()
+        templateItemCart.querySelector('.cart_info').textContent = item.info
+        templateItemCart.querySelector('.cart_price-unit').textContent = `${badge} ${item.price} / ${item.unit}`
+        templateItemCart.querySelector('.btn_minus').dataset.id = item.id
+        templateItemCart.querySelector('.cart_quantity').dataset.id = item.id
+        templateItemCart.querySelector('.cart_quantity').textContent = item.quantity
+        templateItemCart.querySelector('.btn_plus').dataset.id = item.id
+        templateItemCart.querySelector('.cart_ppq').textContent = `${badge} ${Math.round(item.price * item.quantity * 100) / 100}`
+        templateItemCart.querySelector('.del_item-cart').dataset.id = item.id
+        const clone = templateItemCart.cloneNode(true)
+        fragment.appendChild(clone)
+    })
+    itemsCart.appendChild(fragment)
+    renderHeaderCart()
+    renderFooterCart()
+    localStorage.setItem('cart', JSON.stringify(cart))
+}
+//* HASTA ACA
+
+// cerrar MODAL EDIT
+const closeModalEdit = e => {
+    if (e.target.classList.contains('btn-close') || e.target.classList.contains('btn-submit')) {
+        modalEdit.classList.add('visually-hidden')
+    }
+    e.stopPropagation()
 }
